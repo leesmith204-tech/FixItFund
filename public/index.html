@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixItFund — Fixer-Upper Homes + Renovation Loans</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2040;
+    --navy-mid: #1a3560;
+    --gold: #c9862a;
+    --gold-light: #f0b44a;
+    --cream: #fdf8f0;
+    --cream-dark: #f5ede0;
+    --green: #1a6b3c;
+    --green-light: #e8f5ee;
+    --text: #1a1a1a;
+    --text-muted: #5a6270;
+    --border: #e2d9cc;
+    --white: #ffffff;
+    --red-badge: #b83535;
+    --tag-bg: #fff3e0;
+    --tag-text: #7a4a00;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--gold);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.5rem; }
+  .nav-logo span { color: var(--gold-light); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { color: #aab8cc; text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { background: var(--gold); color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(201,134,42,0.04) 40px, rgba(201,134,42,0.04) 80px
+    );
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,134,42,0.2);
+    border: 1px solid rgba(201,134,42,0.5);
+    color: var(--gold-light);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white); font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.15; max-width: 800px; margin: 0 auto 1.25rem;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: normal; }
+  .hero p {
+    color: #aab8cc; font-size: 1.1rem; max-width: 560px;
+    margin: 0 auto 2.5rem; line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 8px; font-size: 1rem;
+    font-weight: 600; text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { background: var(--gold-light); color: var(--navy); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 8px; font-size: 1rem;
+    font-weight: 500; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.3);
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: center; gap: 0;
+  }
+  .stat-item {
+    text-align: center; padding: 1.25rem 2.5rem;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--gold-light); }
+  .stat-label { font-size: 0.75rem; color: #7a8fa8; letter-spacing: 0.04em; margin-top: 2px; }
+
+  /* LOAN TYPES */
+  .section { padding: 4rem 2rem; max-width: 1180px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--navy);
+    margin-bottom: 0.75rem; line-height: 1.2;
+  }
+  .section-sub { color: var(--text-muted); font-size: 1rem; max-width: 580px; line-height: 1.6; }
+
+  .loan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+  .loan-card {
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    cursor: pointer; transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .loan-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--navy); transition: background 0.2s;
+  }
+  .loan-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(15,32,64,0.12); }
+  .loan-card:hover::before { background: var(--gold); }
+  .loan-type-tag {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--navy); color: var(--gold-light);
+    padding: 3px 8px; border-radius: 4px; margin-bottom: 0.75rem;
+  }
+  .loan-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+  .loan-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem; }
+  .loan-limit { font-size: 0.78rem; font-weight: 600; color: var(--green); }
+  .loan-cta {
+    display: block; text-align: center; margin-top: 1rem;
+    background: var(--cream); border: 1px solid var(--border);
+    color: var(--navy); padding: 0.5rem; border-radius: 6px;
+    font-size: 0.82rem; font-weight: 600; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .loan-card:hover .loan-cta { background: var(--gold); color: var(--white); border-color: var(--gold); }
+
+  /* PROPERTY FEED */
+  .feed-section { background: var(--cream-dark); padding: 4rem 2rem; }
+  .feed-inner { max-width: 1180px; margin: 0 auto; }
+  .feed-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff0f0; border: 1px solid #f9c0c0;
+    color: var(--red-badge); font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.06em; padding: 4px 10px; border-radius: 20px;
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--red-badge);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .filter-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .filter-btn {
+    background: var(--white); border: 1.5px solid var(--border);
+    padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.82rem;
+    font-weight: 500; cursor: pointer; transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif; color: var(--text);
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  .property-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .prop-card {
+    background: var(--white); border-radius: 14px;
+    border: 1px solid var(--border); overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .prop-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,32,64,0.14); }
+  .prop-img {
+    height: 185px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #c8d8e8 0%, #a0b8cc 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .prop-img .home-icon { font-size: 4rem; opacity: 0.3; }
+  .prop-img-label {
+    position: absolute; top: 10px; left: 10px;
+    background: rgba(15,32,64,0.85); color: var(--white);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 4px 8px; border-radius: 5px;
+  }
+  .arv-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--green); color: var(--white);
+    font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 5px;
+  }
+  .reno-badge {
+    position: absolute; bottom: 10px; left: 10px;
+    background: var(--gold); color: var(--white);
+    font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 5px;
+  }
+  .prop-body { padding: 1.1rem 1.25rem; }
+  .prop-address { font-weight: 600; font-size: 0.95rem; color: var(--navy); margin-bottom: 2px; }
+  .prop-city { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .prop-price { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); font-weight: 700; }
+  .prop-meta { display: flex; gap: 1rem; margin: 0.6rem 0 1rem; }
+  .prop-meta span { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+  .prop-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .prop-tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    font-size: 0.72rem; font-weight: 600; padding: 3px 8px;
+    border-radius: 4px; letter-spacing: 0.02em;
+  }
+  .prop-tag.green { background: var(--green-light); color: var(--green); }
+  .prop-loans { border-top: 1px solid var(--border); padding-top: 0.85rem; }
+  .prop-loans-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .loan-pills { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .loan-pill {
+    font-size: 0.68rem; font-weight: 700; padding: 3px 7px;
+    border-radius: 4px; background: #e8edf5; color: var(--navy-mid);
+    border: 1px solid #c5cfe0; letter-spacing: 0.02em;
+  }
+  .prop-cta-btn {
+    display: block; width: 100%; margin-top: 1rem;
+    background: var(--navy); color: var(--white);
+    border: none; padding: 0.7rem; border-radius: 8px;
+    font-size: 0.875rem; font-weight: 600; cursor: pointer;
+    text-align: center; transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .prop-cta-btn:hover { background: var(--gold); }
+  .days-badge {
+    position: absolute; bottom: 10px; right: 10px;
+    background: rgba(0,0,0,0.6); color: #fff;
+    font-size: 0.68rem; font-weight: 600; padding: 3px 7px; border-radius: 4px;
+  }
+
+  /* LEAD FORM */
+  .lead-section { background: var(--navy); padding: 5rem 2rem; }
+  .lead-inner { max-width: 860px; margin: 0 auto; }
+  .lead-section .section-label { color: var(--gold-light); }
+  .lead-section .section-title { color: var(--white); }
+  .lead-section .section-sub { color: #8a9bb0; }
+  .form-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 2.5rem; margin-top: 2rem;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.8rem; font-weight: 600; color: #8a9bb0; letter-spacing: 0.04em; text-transform: uppercase; }
+  .form-group input, .form-group select {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+    color: var(--white); padding: 0.75rem 1rem; border-radius: 8px;
+    font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-group input::placeholder { color: #5a6e84; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--gold-light); }
+  .form-group select option { background: var(--navy); }
+  .loan-checkboxes { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; grid-column: 1 / -1; }
+  .loan-check {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.6rem 0.85rem; border-radius: 8px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .loan-check:hover { border-color: var(--gold-light); background: rgba(201,134,42,0.1); }
+  .loan-check input { display: none; }
+  .loan-check.checked { border-color: var(--gold); background: rgba(201,134,42,0.15); }
+  .check-box {
+    width: 16px; height: 16px; border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .loan-check.checked .check-box { background: var(--gold); border-color: var(--gold); }
+  .check-inner { width: 8px; height: 8px; background: white; border-radius: 1px; display: none; }
+  .loan-check.checked .check-inner { display: block; }
+  .loan-check-label { font-size: 0.8rem; font-weight: 500; color: #c0d0e0; }
+  .submit-btn {
+    margin-top: 1.5rem; width: 100%; background: var(--gold);
+    color: var(--white); padding: 1rem; border-radius: 10px;
+    font-size: 1rem; font-weight: 700; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .submit-btn:hover { background: var(--gold-light); color: var(--navy); transform: translateY(-1px); }
+  .form-trust { display: flex; gap: 1.5rem; margin-top: 1.25rem; justify-content: center; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #6a7e94; }
+
+  /* HOW IT WORKS */
+  .how-section { padding: 5rem 2rem; background: var(--white); }
+  .how-inner { max-width: 1000px; margin: 0 auto; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; position: relative; }
+  .step { text-align: center; }
+  .step-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--navy); color: var(--gold-light);
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  .step h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+  .step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* FOOTER */
+  footer {
+    background: #080f1a; color: #4a5a6e;
+    padding: 2rem; text-align: center; font-size: 0.8rem; line-height: 1.8;
+  }
+  footer strong { color: #6a7e94; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 1000;
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 16px; padding: 2rem;
+    max-width: 520px; width: 100%; position: relative;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; font-size: 1.4rem;
+    cursor: pointer; color: var(--text-muted); line-height: 1;
+  }
+  .modal h2 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 0.25rem; }
+  .modal-addr { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .modal-form .form-group { margin-bottom: 0.75rem; }
+  .modal-form label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px; }
+  .modal-form input, .modal-form select {
+    width: 100%; padding: 0.65rem 0.9rem; border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .modal-form input:focus, .modal-form select:focus { border-color: var(--navy); }
+  .modal-submit {
+    width: 100%; background: var(--navy); color: var(--white);
+    padding: 0.85rem; border-radius: 10px; font-size: 1rem;
+    font-weight: 700; border: none; cursor: pointer; margin-top: 1rem;
+    font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+  }
+  .modal-submit:hover { background: var(--gold); }
+  .success-msg { display: none; text-align: center; padding: 2rem 0; }
+  .success-msg h3 { font-family: 'Playfair Display', serif; color: var(--green); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .success-msg p { color: var(--text-muted); font-size: 0.9rem; }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); width: 50%; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Fix<span>It</span>Fund</div>
+  <div class="nav-links">
+    <a href="#listings">Today's Listings</a>
+    <a href="#loan-types">Loan Programs</a>
+    <a href="#how">How It Works</a>
+    <a href="#get-approved" class="nav-cta">Get Pre-Approved</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🏚 Daily Fixer-Upper Listings · Renovation Financing</div>
+  <h1>Find a <em>Fixer-Upper</em><br>We'll Fund the Fix</h1>
+  <p>Browse today's distressed and below-market properties — and get matched with the renovation loan that turns a wreck into your dream home.</p>
+  <div class="hero-actions">
+    <a href="#listings" class="btn-primary">See Today's Listings</a>
+    <a href="#loan-types" class="btn-outline">Explore Loan Programs</a>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num" id="listingCount">247</div><div class="stat-label">Live Listings Today</div></div>
+  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Loan Programs Available</div></div>
+  <div class="stat-item"><div class="stat-num">$35K</div><div class="stat-label">Avg. Below-Market Discount</div></div>
+  <div class="stat-item"><div class="stat-num">48hr</div><div class="stat-label">Pre-Approval Turnaround</div></div>
+</div>
+
+<!-- LOAN TYPES -->
+<section id="loan-types" class="section">
+  <div class="section-label">Renovation Loan Programs</div>
+  <h2 class="section-title">One Loan. Purchase + Repairs.</h2>
+  <p class="section-sub">Each program wraps your purchase price and renovation costs into a single mortgage — no need to come out of pocket for fixes.</p>
+  <div class="loan-grid">
+    <div class="loan-card" onclick="openLeadModal('FHA 203(k)')">
+      <div class="loan-type-tag">FHA</div>
+      <h3>FHA 203(k) Renovation</h3>
+      <p>The original renovation loan. Accepts 3.5% down. Works on almost any structural or cosmetic repair.</p>
+      <div class="loan-limit">✓ Up to $726,200 loan · 3.5% down</div>
+      <a class="loan-cta" href="#" onclick="openLeadModal('FHA 203(k)'); return false;">Get Pre-Qualified →</a>
+    </div>
+    <div class="loan-card" onclick="openLeadModal('HomeStyle')">
+      <div class="loan-type-tag">FANNIE MAE</div>
+      <h3>HomeStyle Renovation</h3>
+      <p>Conventional loan, no mortgage insurance with 20% down. Perfect for higher-end renovations and investment.</p>
+      <div class="loan-limit">✓ Conforming limits · No FHA fees</div>
+      <a class="loan-cta" href="#" onclick="openLeadModal('HomeStyle'); return false;">Get Pre-Qualified →</a>
+    </div>
+    <div class="loan-card" onclick="openLeadModal('CHOICERenovation')">
+      <div class="loan-type-tag">FREDDIE MAC</div>
+      <h3>CHOICERenovation</h3>
+      <p>Freddie Mac's answer to HomeStyle — great rates, flexible repair types, includes resilience upgrades.</p>
+      <div class="loan-limit">✓ Conforming limits · Resilience credit</div>
+      <a class="loan-cta" href="#" onclick="openLeadModal('CHOICERenovation'); return false;">Get Pre-Qualified →</a>
+    </div>
+    <div class="loan-card" onclick="openLeadModal('VA Renovation')">
+      <div class="loan-type-tag">VA</div>
+      <h3>VA Renovation Loan</h3>
+      <p>$0 down for eligible veterans. Bundle purchase + repairs with no PMI. One of the best deals in lending.</p>
+      <div class="loan-limit">✓ $0 down · No PMI · Veterans only</div>
+      <a class="loan-cta" href="#" onclick="openLeadModal('VA Renovation'); return false;">Get Pre-Qualified →</a>
+    </div>
+    <div class="loan-card" onclick="openLeadModal('USDA Renovation')">
+      <div class="loan-type-tag">USDA</div>
+      <h3>USDA Renovation Loan</h3>
+      <p>$0 down in eligible rural and suburban areas. Great for fixer-uppers outside major metros.</p>
+      <div class="loan-limit">✓ $0 down · Rural/suburban areas</div>
+      <a class="loan-cta" href="#" onclick="openLeadModal('USDA Renovation'); return false;">Get Pre-Qualified →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY LISTINGS -->
+<section id="listings" class="feed-section">
+  <div class="feed-inner">
+    <div class="feed-header">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.35rem;">
+          <div class="section-label" style="margin:0;">Today's Fixer-Uppers</div>
+          <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+        </div>
+        <h2 class="section-title" style="color:var(--navy);">Properties Added Today</h2>
+      </div>
+      <div style="font-size:0.82rem; color:var(--text-muted);" id="lastUpdated">Updated 4 minutes ago</div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProps(this, 'all')">All Programs</button>
+      <button class="filter-btn" onclick="filterProps(this, 'fha')">FHA 203k Eligible</button>
+      <button class="filter-btn" onclick="filterProps(this, 'va')">VA Eligible</button>
+      <button class="filter-btn" onclick="filterProps(this, 'usda')">USDA Eligible</button>
+      <button class="filter-btn" onclick="filterProps(this, 'conventional')">Conventional</button>
+    </div>
+
+    <div class="property-grid" id="propGrid"></div>
+
+    <div style="text-align:center; margin-top:2.5rem;">
+      <button class="btn-primary" onclick="loadMore()">Load More Properties</button>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section id="get-approved" class="lead-section">
+  <div class="lead-inner">
+    <div class="section-label">Start Your Pre-Approval</div>
+    <h2 class="section-title" style="color:var(--white);">Get Pre-Approved in 48 Hours</h2>
+    <p class="section-sub">No agent required. Tell us about your goals and we'll match you with the right renovation loan — and the specialist who can close it fast.</p>
+
+    <div class="form-card">
+      <div class="form-grid" id="mainLeadForm">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(555) 555-5555">
+        </div>
+        <div class="form-group">
+          <label>Target Purchase Price</label>
+          <select>
+            <option>Under $150,000</option>
+            <option>$150k – $250k</option>
+            <option>$250k – $400k</option>
+            <option>$400k – $600k</option>
+            <option>Over $600k</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Estimated Reno Budget</label>
+          <select>
+            <option>Under $20,000</option>
+            <option>$20k – $50k</option>
+            <option>$50k – $100k</option>
+            <option>$100k – $200k</option>
+            <option>Over $200k</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Are you a veteran / active military?</label>
+          <select>
+            <option>No</option>
+            <option>Yes – Veteran</option>
+            <option>Yes – Active Duty</option>
+            <option>Surviving Spouse</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Target Location</label>
+          <input type="text" placeholder="City, State or ZIP">
+        </div>
+        <div class="form-group full">
+          <label>I'm interested in these loan programs</label>
+          <div class="loan-checkboxes" id="checkboxes">
+            <label class="loan-check" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-box"><div class="check-inner"></div></div><span class="loan-check-label">FHA 203(k)</span></label>
+            <label class="loan-check" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-box"><div class="check-inner"></div></div><span class="loan-check-label">HomeStyle</span></label>
+            <label class="loan-check" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-box"><div class="check-inner"></div></div><span class="loan-check-label">CHOICERenovation</span></label>
+            <label class="loan-check" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-box"><div class="check-inner"></div></div><span class="loan-check-label">VA Renovation</span></label>
+            <label class="loan-check" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-box"><div class="check-inner"></div></div><span class="loan-check-label">USDA Renovation</span></label>
+            <label class="loan-check" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-box"><div class="check-inner"></div></div><span class="loan-check-label">Not Sure Yet</span></label>
+          </div>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitMainForm()">Request My Pre-Approval →</button>
+      <div class="form-trust">
+        <div class="trust-item">🔒 Your info is never sold</div>
+        <div class="trust-item">📋 Soft credit pull only</div>
+        <div class="trust-item">⚡ Response within 48 hrs</div>
+        <div class="trust-item">✓ No agent required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+  <div class="how-inner" style="text-align:center;">
+    <div class="section-label" style="text-align:center;">Simple Process</div>
+    <h2 class="section-title" style="text-align:center;">From Listing to Keys in 4 Steps</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Browse Daily Listings</h3>
+        <p>We surface fixer-uppers from public MLS data, foreclosures, and distressed sales — updated every morning.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Choose Your Loan</h3>
+        <p>Pick from FHA 203k, HomeStyle, CHOICERenovation, VA Reno, or USDA Reno — we'll guide you to the best fit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Get Pre-Approved</h3>
+        <p>Our renovation specialists process your application in 48 hours. No agent middleman. Direct lender access.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Close & Renovate</h3>
+        <p>Close on your fixer-upper with renovation funds held in escrow, released as work is completed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>FixItFund</strong> · Renovation Mortgage Specialists<br>
+  NMLS #XXXXXXX · Equal Housing Lender<br><br>
+  This website is not affiliated with any real estate agent or brokerage. Property listings are sourced from public records and third-party data providers.<br>
+  Loan programs subject to credit approval, property eligibility, and investor guidelines. Not a commitment to lend.
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 id="modalTitle">Get Pre-Qualified</h2>
+    <p class="modal-addr" id="modalSubtitle">FHA 203(k) Renovation Loan</p>
+    <div id="modalFormWrap">
+      <div class="modal-form">
+        <div class="form-group"><label>Full Name</label><input id="mName" type="text" placeholder="Jane Smith"></div>
+        <div class="form-group"><label>Email</label><input id="mEmail" type="email" placeholder="jane@email.com"></div>
+        <div class="form-group"><label>Phone</label><input id="mPhone" type="tel" placeholder="(555) 555-5555"></div>
+        <div class="form-group"><label>Estimated Credit Score</label>
+          <select id="mCredit">
+            <option>740+</option><option>700-739</option><option>660-699</option>
+            <option>620-659</option><option>580-619</option><option>Below 580</option>
+          </select>
+        </div>
+        <button class="modal-submit" onclick="submitModal()">Send Me Loan Details →</button>
+      </div>
+    </div>
+    <div class="success-msg" id="modalSuccess">
+      <h3>You're on the list! ✓</h3>
+      <p>A renovation loan specialist will contact you within 48 hours with your options and rate estimates.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const props = [
+  { id:1, addr:"1423 Maple Ridge Dr", city:"Columbus, OH 43205", price:139000, beds:3, baths:2, sqft:1480, arv:215000, reno:45000, days:2, tags:["Cosmetic Only","Motivated Seller"], loans:["FHA 203k","HomeStyle","CHOICEReno"], classes:["all","fha","conventional"] },
+  { id:2, addr:"887 Birchwood Ave", city:"Cleveland, OH 44113", price:88500, beds:2, baths:1, sqft:1090, arv:145000, reno:38000, days:1, tags:["Foreclosure","Price Reduced"], loans:["FHA 203k","USDA Reno"], classes:["all","fha","usda"] },
+  { id:3, addr:"2204 Lincoln Blvd", city:"Detroit, MI 48215", price:52000, beds:3, baths:1, sqft:1340, arv:118000, reno:55000, days:3, tags:["REO","Structural Reno"], loans:["FHA 203k","VA Reno"], classes:["all","fha","va"] },
+  { id:4, addr:"315 Ridgecrest Ct", city:"Pittsburgh, PA 15219", price:167000, beds:4, baths:2, sqft:2100, arv:265000, reno:62000, days:1, tags:["Short Sale","Large Lot"], loans:["HomeStyle","CHOICEReno","VA Reno"], classes:["all","va","conventional"] },
+  { id:5, addr:"5511 Elm Street", city:"Peoria, IL 61603", price:74000, beds:3, baths:2, sqft:1620, arv:128000, reno:29000, days:4, tags:["Cosmetic Only","USDA Zone"], loans:["FHA 203k","USDA Reno"], classes:["all","fha","usda"] },
+  { id:6, addr:"728 Orchard Lane", city:"Louisville, KY 40210", price:98000, beds:2, baths:1, sqft:980, arv:155000, reno:41000, days:2, tags:["Investor Owned","Below AVM"], loans:["FHA 203k","HomeStyle"], classes:["all","fha","conventional"] },
+];
+
+function renderProps(list) {
+  const grid = document.getElementById('propGrid');
+  grid.innerHTML = '';
+  list.forEach(p => {
+    const equity = p.arv - p.price - p.reno;
+    const div = document.createElement('div');
+    div.className = 'prop-card';
+    div.setAttribute('data-classes', p.classes.join(' '));
+    div.innerHTML = `
+      <div class="prop-img">
+        <span class="home-icon">🏚</span>
+        <div class="prop-img-label">${p.days === 1 ? '🔥 NEW TODAY' : `Added ${p.days}d ago`}</div>
+        <div class="arv-badge">ARV $${(p.arv/1000).toFixed(0)}K</div>
+        <div class="reno-badge">~$${(p.reno/1000).toFixed(0)}K Reno</div>
+        <div class="days-badge">${p.sqft.toLocaleString()} sqft</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-address">${p.addr}</div>
+        <div class="prop-city">${p.city}</div>
+        <div class="prop-price">$${p.price.toLocaleString()}</div>
+        <div class="prop-meta">
+          <span>🛏 ${p.beds} bd</span>
+          <span>🚿 ${p.baths} ba</span>
+          <span>💰 +$${equity.toLocaleString()} equity</span>
+        </div>
+        <div class="prop-tags">
+          ${p.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}
+        </div>
+        <div class="prop-loans">
+          <div class="prop-loans-label">Eligible Loan Programs</div>
+          <div class="loan-pills">${p.loans.map(l => `<span class="loan-pill">${l}</span>`).join('')}</div>
+        </div>
+        <button class="prop-cta-btn" onclick="openLeadModal('${p.loans[0]}', '${p.addr}, ${p.city}')">Get Financing for This Property →</button>
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+renderProps(props);
+
+function filterProps(btn, cls) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.prop-card');
+  cards.forEach(c => {
+    const classes = c.getAttribute('data-classes');
+    c.style.display = cls === 'all' || classes.includes(cls) ? 'block' : 'none';
+  });
+}
+
+function loadMore() {
+  const extra = [
+    { id:7, addr:"941 Sunset Ave", city:"Kansas City, MO 64127", price:112000, beds:3, baths:2, sqft:1750, arv:178000, reno:33000, days:1, tags:["Price Reduced","Corner Lot"], loans:["FHA 203k","HomeStyle","VA Reno"], classes:["all","fha","va","conventional"] }
+  ];
+  extra.forEach(p => {
+    const equity = p.arv - p.price - p.reno;
+    const grid = document.getElementById('propGrid');
+    const div = document.createElement('div');
+    div.className = 'prop-card';
+    div.setAttribute('data-classes', p.classes.join(' '));
+    div.innerHTML = `
+      <div class="prop-img">
+        <span class="home-icon">🏚</span>
+        <div class="prop-img-label">🔥 NEW TODAY</div>
+        <div class="arv-badge">ARV $${(p.arv/1000).toFixed(0)}K</div>
+        <div class="reno-badge">~$${(p.reno/1000).toFixed(0)}K Reno</div>
+        <div class="days-badge">${p.sqft.toLocaleString()} sqft</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-address">${p.addr}</div>
+        <div class="prop-city">${p.city}</div>
+        <div class="prop-price">$${p.price.toLocaleString()}</div>
+        <div class="prop-meta">
+          <span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>💰 +$${equity.toLocaleString()} equity</span>
+        </div>
+        <div class="prop-tags">${p.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}</div>
+        <div class="prop-loans">
+          <div class="prop-loans-label">Eligible Loan Programs</div>
+          <div class="loan-pills">${p.loans.map(l => `<span class="loan-pill">${l}</span>`).join('')}</div>
+        </div>
+        <button class="prop-cta-btn" onclick="openLeadModal('${p.loans[0]}', '${p.addr}, ${p.city}')">Get Financing for This Property →</button>
+      </div>`;
+    grid.appendChild(div);
+  });
+  document.querySelector('[onclick="loadMore()"]').textContent = '✓ All listings loaded for today';
+  document.querySelector('[onclick="loadMore()"]').disabled = true;
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+function openLeadModal(loanType, addr) {
+  document.getElementById('modalTitle').textContent = addr ? 'Finance This Property' : 'Get Pre-Qualified';
+  document.getElementById('modalSubtitle').textContent = addr ? addr + ' · ' + loanType : loanType + ' Renovation Loan';
+  document.getElementById('modalFormWrap').style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function submitModal() {
+  const name = document.getElementById('mName').value;
+  const email = document.getElementById('mEmail').value;
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+  document.getElementById('modalFormWrap').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+}
+
+function submitMainForm() {
+  const inputs = document.querySelectorAll('#mainLeadForm input');
+  let filled = false;
+  inputs.forEach(i => { if (i.value) filled = true; });
+  if (!filled) { alert('Please fill in at least your name and email.'); return; }
+  alert('Thank you! A renovation loan specialist will contact you within 48 hours.');
+}
+
+setInterval(() => {
+  const mins = Math.floor(Math.random() * 12) + 1;
+  document.getElementById('lastUpdated').textContent = `Updated ${mins} minute${mins > 1 ? 's' : ''} ago`;
+}, 60000);
+</script>
+</body>
+</html>
