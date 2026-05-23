@@ -13,6 +13,7 @@ const fetch      = require('node-fetch');
 const path       = require('path');
 
 const app  = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3000;
 
 // ─── Validate env on startup ────────────────────────────────────────────────
@@ -93,7 +94,7 @@ app.post('/api/chat', aiLimiter, async (req, res) => {
   // ── Call Anthropic API ────────────────────────────────────────────────────
   try {
     const payload = {
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 1000,
       messages: trimmedMessages,
     };
