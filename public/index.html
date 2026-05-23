@@ -7,271 +7,280 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Cabinet+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --forest: #1c3a2a; --forest-mid: #2a5240; --forest-light: #3d7a5a;
-    --amber: #d4822a; --amber-light: #f0a84a; --amber-pale: #fef3e2;
-    --cream: #faf7f2; --cream-dark: #f2ede4; --stone: #e8e0d4;
-    --text: #1a1a18; --text-muted: #6b6560; --border: #ddd6ca;
-    --white: #ffffff; --red: #c0392b; --green: #1c6b3a; --green-light: #e8f5ee;
-    --blue: #1a3a6b; --tag-bg: #fff3e0; --tag-text: #7a4a00;
+    --forest:#1c3a2a;--forest-mid:#2a5240;--forest-light:#3d7a5a;
+    --amber:#d4822a;--amber-light:#f0a84a;--amber-pale:#fef3e2;
+    --cream:#faf7f2;--cream-dark:#f2ede4;--stone:#e8e0d4;
+    --text:#1a1a18;--text-muted:#6b6560;--border:#ddd6ca;
+    --white:#ffffff;--red:#c0392b;--green:#1c6b3a;--green-light:#e8f5ee;
+    --blue:#1a3a6b;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Cabinet Grotesk',sans-serif; background:var(--cream); color:var(--text); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cabinet Grotesk',sans-serif;background:var(--cream);color:var(--text);}
 
   /* NAV */
-  nav { background:var(--forest); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:68px; position:sticky; top:0; z-index:100; border-bottom:3px solid var(--amber); }
-  .nav-logo { display:flex; flex-direction:column; }
-  .nav-logo-main { font-family:'Fraunces',serif; color:var(--white); font-size:1.4rem; line-height:1; }
-  .nav-logo-main span { color:var(--amber-light); }
-  .nav-logo-sub { font-size:0.62rem; color:rgba(255,255,255,0.5); letter-spacing:0.12em; text-transform:uppercase; margin-top:2px; }
-  .nav-links { display:flex; gap:1.5rem; align-items:center; }
-  .nav-links a { color:#aabfb0; text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.2s; }
-  .nav-links a:hover { color:var(--white); }
-  .nav-cta { background:var(--amber); color:var(--white)!important; padding:0.5rem 1.25rem; border-radius:6px; font-weight:700!important; transition:background 0.2s!important; }
-  .nav-cta:hover { background:var(--amber-light)!important; color:var(--forest)!important; }
+  nav{background:var(--forest);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:68px;position:sticky;top:0;z-index:200;border-bottom:3px solid var(--amber);}
+  .nav-logo-main{font-family:'Fraunces',serif;color:var(--white);font-size:1.4rem;line-height:1;}
+  .nav-logo-main span{color:var(--amber-light);}
+  .nav-logo-sub{font-size:0.62rem;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;}
+  .nav-links{display:flex;gap:1.5rem;align-items:center;}
+  .nav-links a{color:#aabfb0;text-decoration:none;font-size:0.85rem;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-cta{background:var(--amber);color:var(--white)!important;padding:0.5rem 1.25rem;border-radius:6px;font-weight:700!important;}
+  .nav-cta:hover{background:var(--amber-light)!important;color:var(--forest)!important;}
 
   /* HERO */
-  .hero { background:var(--forest); padding:5rem 2rem 0; position:relative; overflow:hidden; }
-  .hero-pattern { position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:32px 32px; }
-  .hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:end; position:relative; }
-  .hero-left { padding-bottom:4rem; }
-  .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(212,130,42,0.15); border:1px solid rgba(212,130,42,0.4); color:var(--amber-light); font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.35rem 1rem; border-radius:20px; margin-bottom:1.5rem; }
-  .hero h1 { font-family:'Fraunces',serif; color:var(--white); font-size:clamp(2.4rem,4.5vw,3.6rem); line-height:1.1; margin-bottom:1.25rem; }
-  .hero h1 em { color:var(--amber-light); font-style:italic; }
-  .hero-sub { color:#8aab98; font-size:1.05rem; line-height:1.7; margin-bottom:2rem; max-width:480px; }
-  .hero-stats { display:flex; gap:2rem; margin-bottom:2.5rem; }
-  .hero-stat-num { font-family:'Fraunces',serif; font-size:1.8rem; color:var(--amber-light); line-height:1; }
-  .hero-stat-label { font-size:0.72rem; color:#6a8a78; margin-top:2px; letter-spacing:0.04em; }
-  .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; }
-  .btn-primary { background:var(--amber); color:var(--white); padding:0.9rem 2rem; border-radius:8px; font-size:1rem; font-weight:700; text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,transform 0.1s; font-family:'Cabinet Grotesk',sans-serif; }
-  .btn-primary:hover { background:var(--amber-light); color:var(--forest); transform:translateY(-2px); }
-  .btn-ghost { background:transparent; color:var(--white); padding:0.9rem 2rem; border-radius:8px; font-size:1rem; font-weight:500; text-decoration:none; border:1.5px solid rgba(255,255,255,0.25); cursor:pointer; transition:all 0.2s; font-family:'Cabinet Grotesk',sans-serif; }
-  .btn-ghost:hover { border-color:var(--white); background:rgba(255,255,255,0.08); }
-  .hero-right { position:relative; align-self:end; }
-  .hero-card-stack { position:relative; padding-bottom:0; }
-  .equity-showcase { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:16px 16px 0 0; padding:1.5rem; margin-bottom:0; }
-  .equity-showcase-label { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6a8a78; margin-bottom:1rem; }
-  .equity-bars { display:flex; flex-direction:column; gap:0.75rem; }
-  .equity-bar-row { display:flex; align-items:center; gap:0.75rem; }
-  .equity-bar-label { font-size:0.78rem; color:#8aab98; width:80px; flex-shrink:0; }
-  .equity-bar-track { flex:1; background:rgba(255,255,255,0.08); border-radius:4px; height:8px; overflow:hidden; }
-  .equity-bar-fill { height:100%; border-radius:4px; transition:width 1.5s ease; }
-  .equity-bar-val { font-size:0.82rem; font-weight:700; color:var(--amber-light); width:60px; text-align:right; flex-shrink:0; }
+  .hero{background:var(--forest);padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+  .hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:32px 32px;}
+  .hero-inner{max-width:900px;margin:0 auto;position:relative;text-align:center;}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(212,130,42,0.15);border:1px solid rgba(212,130,42,0.4);color:var(--amber-light);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+  .hero h1{font-family:'Fraunces',serif;color:var(--white);font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.1;margin-bottom:1rem;}
+  .hero h1 em{color:var(--amber-light);font-style:italic;}
+  .hero-sub{color:#8aab98;font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;max-width:600px;margin-left:auto;margin-right:auto;}
+
+  /* SEARCH BOX */
+  .search-box{background:var(--white);border-radius:16px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:820px;margin:0 auto;}
+  .search-box-title{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;text-align:left;}
+  .search-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.75rem;align-items:end;}
+  .search-field label{display:block;font-size:0.72rem;font-weight:700;color:var(--text-muted);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:5px;}
+  .search-field input,.search-field select{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--cream);}
+  .search-field input:focus,.search-field select:focus{border-color:var(--forest);}
+  .search-btn{background:var(--amber);color:var(--white);border:none;padding:0.75rem 1.75rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;white-space:nowrap;height:46px;}
+  .search-btn:hover{background:var(--amber-light);color:var(--forest);}
+  .hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:2rem;}
+  .hero-stat-num{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--amber-light);line-height:1;}
+  .hero-stat-label{font-size:0.72rem;color:#6a8a78;margin-top:2px;letter-spacing:0.04em;}
+
+  /* LEAD GATE MODAL */
+  .gate-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
+  .gate-overlay.open{display:flex;}
+  .gate-modal{background:var(--white);border-radius:20px;padding:2.5rem;max-width:480px;width:100%;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.3);}
+  .gate-modal h2{font-family:'Fraunces',serif;color:var(--forest);font-size:1.6rem;margin-bottom:0.4rem;line-height:1.2;}
+  .gate-modal p{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;}
+  .gate-search-summary{background:var(--cream-dark);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;margin-bottom:1.5rem;font-size:0.85rem;color:var(--forest);font-weight:600;}
+  .gate-form{display:flex;flex-direction:column;gap:0.75rem;}
+  .gate-form input{padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;transition:border-color 0.2s;}
+  .gate-form input:focus{border-color:var(--forest);}
+  .gate-submit{background:var(--forest);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;margin-top:0.25rem;}
+  .gate-submit:hover{background:var(--amber);}
+  .gate-skip{display:block;text-align:center;margin-top:0.75rem;font-size:0.8rem;color:var(--text-muted);cursor:pointer;text-decoration:underline;}
+  .gate-skip:hover{color:var(--forest);}
+  .gate-trust{display:flex;gap:1rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+  .gate-trust span{font-size:0.72rem;color:#aaa;}
 
   /* CATEGORY TABS */
-  .cat-section { background:var(--forest-mid); border-bottom:1px solid rgba(255,255,255,0.08); }
-  .cat-inner { max-width:1180px; margin:0 auto; padding:0 2rem; display:flex; gap:0; }
-  .cat-tab { padding:1.1rem 2rem; cursor:pointer; border-bottom:3px solid transparent; transition:all 0.2s; display:flex; align-items:center; gap:8px; font-size:0.875rem; font-weight:600; color:#7a9a88; white-space:nowrap; }
-  .cat-tab:hover { color:var(--white); }
-  .cat-tab.active { color:var(--white); border-bottom-color:var(--amber); }
-  .cat-tab-icon { font-size:1rem; }
-  .cat-count { background:rgba(212,130,42,0.25); color:var(--amber-light); font-size:0.65rem; font-weight:700; padding:2px 6px; border-radius:10px; }
+  .cat-section{background:var(--forest-mid);border-bottom:1px solid rgba(255,255,255,0.08);}
+  .cat-inner{max-width:1180px;margin:0 auto;padding:0 2rem;display:flex;gap:0;overflow-x:auto;}
+  .cat-tab{padding:1.1rem 2rem;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;display:flex;align-items:center;gap:8px;font-size:0.875rem;font-weight:600;color:#7a9a88;white-space:nowrap;}
+  .cat-tab:hover{color:var(--white);}
+  .cat-tab.active{color:var(--white);border-bottom-color:var(--amber);}
+  .cat-count{background:rgba(212,130,42,0.25);color:var(--amber-light);font-size:0.65rem;font-weight:700;padding:2px 6px;border-radius:10px;}
+
+  /* SEARCH RESULTS BAR */
+  .results-bar{background:var(--cream-dark);border-bottom:1px solid var(--border);padding:0.85rem 2rem;}
+  .results-bar-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}
+  .results-summary{font-size:0.875rem;color:var(--text-muted);}
+  .results-summary strong{color:var(--forest);}
+  .results-clear{font-size:0.8rem;color:var(--amber);cursor:pointer;font-weight:600;text-decoration:underline;}
+  .results-clear:hover{color:var(--forest);}
 
   /* LISTINGS */
-  .listings-section { padding:3rem 2rem; max-width:1180px; margin:0 auto; }
-  .listings-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem; }
-  .listings-title { font-family:'Fraunces',serif; font-size:1.6rem; color:var(--forest); }
-  .live-pill { display:inline-flex; align-items:center; gap:6px; background:#fff0f0; border:1px solid #ffc0c0; color:var(--red); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; padding:4px 10px; border-radius:20px; }
-  .live-dot { width:7px; height:7px; border-radius:50%; background:var(--red); animation:blink 1.5s infinite; }
-  @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.25} }
-  .prop-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; }
-  .prop-card { background:var(--white); border-radius:16px; border:1px solid var(--border); overflow:hidden; transition:transform 0.2s,box-shadow 0.2s; cursor:pointer; }
-  .prop-card:hover { transform:translateY(-5px); box-shadow:0 16px 48px rgba(28,58,42,0.14); }
-  .prop-img { height:190px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-  .prop-img.full-reno { background:linear-gradient(135deg,#c8a882,#a07850); }
-  .prop-img.cosmetic { background:linear-gradient(135deg,#88b8a0,#5a9070); }
-  .prop-img.undervalued { background:linear-gradient(135deg,#8898c8,#5a6898); }
-  .prop-img-icon { font-size:3.5rem; opacity:0.25; }
-  .prop-type-badge { position:absolute; top:10px; left:10px; font-size:0.68rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; padding:4px 10px; border-radius:5px; }
-  .badge-full { background:rgba(180,100,40,0.9); color:#fff; }
-  .badge-cosmetic { background:rgba(28,107,60,0.9); color:#fff; }
-  .badge-under { background:rgba(26,58,107,0.9); color:#fff; }
-  .prop-equity-badge { position:absolute; top:10px; right:10px; background:var(--forest); color:var(--amber-light); font-size:0.7rem; font-weight:800; padding:4px 8px; border-radius:5px; }
-  .prop-days { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.55); color:#fff; font-size:0.65rem; font-weight:600; padding:3px 7px; border-radius:4px; }
-  .prop-body { padding:1.25rem; }
-  .prop-addr { font-weight:700; font-size:0.95rem; color:var(--forest); margin-bottom:2px; }
-  .prop-city { font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem; }
-  .prop-price-row { display:flex; align-items:baseline; gap:0.75rem; margin-bottom:0.5rem; }
-  .prop-price { font-family:'Fraunces',serif; font-size:1.55rem; color:var(--forest); font-weight:700; }
-  .prop-arv { font-size:0.8rem; color:var(--green); font-weight:600; }
-  .prop-meta { display:flex; gap:1rem; margin:0.5rem 0 0.85rem; }
-  .prop-meta span { font-size:0.78rem; color:var(--text-muted); }
-  .prop-equity-bar { margin-bottom:1rem; }
-  .prop-equity-label { display:flex; justify-content:space-between; font-size:0.72rem; margin-bottom:4px; }
-  .prop-equity-label span:first-child { color:var(--text-muted); }
-  .prop-equity-label span:last-child { color:var(--green); font-weight:700; }
-  .equity-track { background:var(--stone); border-radius:4px; height:6px; overflow:hidden; }
-  .equity-fill { height:100%; background:linear-gradient(90deg,var(--forest-light),var(--amber)); border-radius:4px; }
-  .prop-tags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem; }
-  .prop-tag { background:var(--cream-dark); color:var(--text-muted); font-size:0.7rem; font-weight:600; padding:3px 8px; border-radius:4px; }
-  .prop-tag.green { background:var(--green-light); color:var(--green); }
-  .prop-tag.amber { background:var(--amber-pale); color:#7a4a00; }
-  .prop-loans-row { border-top:1px solid var(--border); padding-top:0.85rem; margin-bottom:0.85rem; }
-  .prop-loans-lbl { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:0.4rem; }
-  .loan-pills { display:flex; gap:0.3rem; flex-wrap:wrap; }
-  .loan-pill { font-size:0.66rem; font-weight:700; padding:3px 7px; border-radius:4px; background:#e8edf5; color:var(--blue); border:1px solid #c5cfe0; }
-  .prop-cta { display:block; width:100%; background:var(--forest); color:var(--white); border:none; padding:0.72rem; border-radius:8px; font-size:0.875rem; font-weight:700; cursor:pointer; text-align:center; transition:background 0.2s; font-family:'Cabinet Grotesk',sans-serif; }
-  .prop-cta:hover { background:var(--amber); }
+  .listings-section{padding:3rem 2rem;max-width:1180px;margin:0 auto;}
+  .listings-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+  .listings-title{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--forest);}
+  .live-pill{display:inline-flex;align-items:center;gap:6px;background:#fff0f0;border:1px solid #ffc0c0;color:var(--red);font-size:0.72rem;font-weight:700;letter-spacing:0.06em;padding:4px 10px;border-radius:20px;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.5s infinite;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+  .no-results{text-align:center;padding:4rem 2rem;color:var(--text-muted);}
+  .no-results h3{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem;}
+  .no-results p{font-size:0.9rem;line-height:1.6;}
+  .prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
+  .prop-card{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
+  .prop-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(28,58,42,0.14);}
+  .prop-img{height:190px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .prop-img.full-reno{background:linear-gradient(135deg,#c8a882,#a07850);}
+  .prop-img.cosmetic{background:linear-gradient(135deg,#88b8a0,#5a9070);}
+  .prop-img.undervalued{background:linear-gradient(135deg,#8898c8,#5a6898);}
+  .prop-img-icon{font-size:3.5rem;opacity:0.25;}
+  .prop-type-badge{position:absolute;top:10px;left:10px;font-size:0.68rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:5px;}
+  .badge-full{background:rgba(180,100,40,0.9);color:#fff;}
+  .badge-cosmetic{background:rgba(28,107,60,0.9);color:#fff;}
+  .badge-under{background:rgba(26,58,107,0.9);color:#fff;}
+  .prop-equity-badge{position:absolute;top:10px;right:10px;background:var(--forest);color:var(--amber-light);font-size:0.7rem;font-weight:800;padding:4px 8px;border-radius:5px;}
+  .prop-days{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.55);color:#fff;font-size:0.65rem;font-weight:600;padding:3px 7px;border-radius:4px;}
+  .prop-body{padding:1.25rem;}
+  .prop-addr{font-weight:700;font-size:0.95rem;color:var(--forest);margin-bottom:2px;}
+  .prop-city{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;}
+  .prop-price-row{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:0.5rem;}
+  .prop-price{font-family:'Fraunces',serif;font-size:1.55rem;color:var(--forest);font-weight:700;}
+  .prop-arv{font-size:0.8rem;color:var(--green);font-weight:600;}
+  .prop-meta{display:flex;gap:1rem;margin:0.5rem 0 0.85rem;}
+  .prop-meta span{font-size:0.78rem;color:var(--text-muted);}
+  .prop-equity-bar{margin-bottom:1rem;}
+  .prop-equity-label{display:flex;justify-content:space-between;font-size:0.72rem;margin-bottom:4px;}
+  .prop-equity-label span:first-child{color:var(--text-muted);}
+  .prop-equity-label span:last-child{color:var(--green);font-weight:700;}
+  .equity-track{background:var(--stone);border-radius:4px;height:6px;overflow:hidden;}
+  .equity-fill{height:100%;background:linear-gradient(90deg,var(--forest-light),var(--amber));border-radius:4px;}
+  .prop-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem;}
+  .prop-tag{background:var(--cream-dark);color:var(--text-muted);font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;}
+  .prop-loans-row{border-top:1px solid var(--border);padding-top:0.85rem;margin-bottom:0.85rem;}
+  .prop-loans-lbl{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.4rem;}
+  .loan-pills{display:flex;gap:0.3rem;flex-wrap:wrap;}
+  .loan-pill{font-size:0.66rem;font-weight:700;padding:3px 7px;border-radius:4px;background:#e8edf5;color:var(--blue);border:1px solid #c5cfe0;}
+  .prop-cta{display:block;width:100%;background:var(--forest);color:var(--white);border:none;padding:0.72rem;border-radius:8px;font-size:0.875rem;font-weight:700;cursor:pointer;text-align:center;transition:background 0.2s;font-family:'Cabinet Grotesk',sans-serif;}
+  .prop-cta:hover{background:var(--amber);}
 
   /* EQUITY CALCULATOR */
-  .calc-section { background:var(--forest); padding:5rem 2rem; }
-  .calc-inner { max-width:1060px; margin:0 auto; }
-  .calc-label { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber-light); margin-bottom:0.5rem; }
-  .calc-title { font-family:'Fraunces',serif; color:var(--white); font-size:clamp(1.8rem,3vw,2.6rem); margin-bottom:0.75rem; line-height:1.15; }
-  .calc-sub { color:#7a9a88; font-size:1rem; max-width:560px; line-height:1.6; margin-bottom:2.5rem; }
-  .calc-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
-  .calc-inputs { display:flex; flex-direction:column; gap:1.1rem; }
-  .calc-field label { display:block; font-size:0.75rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#7a9a88; margin-bottom:6px; }
-  .calc-field input, .calc-field select { width:100%; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); color:var(--white); padding:0.75rem 1rem; border-radius:8px; font-size:1rem; font-family:'Cabinet Grotesk',sans-serif; outline:none; transition:border-color 0.2s; }
-  .calc-field input:focus, .calc-field select:focus { border-color:var(--amber-light); }
-  .calc-field input::placeholder { color:#4a6a58; }
-  .calc-field select option { background:var(--forest); }
-  .calc-results { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:2rem; display:flex; flex-direction:column; gap:0; }
-  .calc-results-title { font-family:'Fraunces',serif; color:var(--white); font-size:1.15rem; margin-bottom:1.5rem; }
-  .calc-line { display:flex; justify-content:space-between; align-items:center; padding:0.65rem 0; border-bottom:1px solid rgba(255,255,255,0.07); }
-  .calc-line:last-of-type { border-bottom:none; }
-  .calc-line-lbl { font-size:0.83rem; color:#7a9a88; }
-  .calc-line-val { font-size:0.92rem; font-weight:700; color:var(--white); }
-  .calc-line.highlight { background:rgba(212,130,42,0.12); border:1px solid rgba(212,130,42,0.25); border-radius:10px; padding:0.85rem 1rem; margin:0.4rem 0; }
-  .calc-line.highlight .calc-line-lbl { color:var(--amber-light); font-weight:600; font-size:0.88rem; }
-  .calc-line.highlight .calc-line-val { font-family:'Fraunces',serif; font-size:1.3rem; color:var(--amber-light); }
-  .calc-line.green-line { background:rgba(28,107,60,0.18); border:1px solid rgba(28,107,60,0.35); border-radius:10px; padding:0.85rem 1rem; margin-top:0.4rem; }
-  .calc-line.green-line .calc-line-lbl { color:#6dcfa0; font-weight:600; font-size:0.88rem; }
-  .calc-line.green-line .calc-line-val { font-family:'Fraunces',serif; font-size:1.3rem; color:#6dcfa0; }
-  .calc-equity-visual { margin:1.25rem 0; }
-  .calc-equity-visual-label { display:flex; justify-content:space-between; font-size:0.75rem; color:#7a9a88; margin-bottom:6px; }
-  .calc-equity-track { background:rgba(255,255,255,0.08); border-radius:6px; height:12px; overflow:hidden; }
-  .calc-equity-fill { height:100%; background:linear-gradient(90deg,var(--forest-light),var(--amber-light)); border-radius:6px; transition:width 0.8s ease; }
-  .calc-disclaimer { font-size:0.7rem; color:#4a6a58; margin-top:0.75rem; line-height:1.5; }
-  .calc-cta-btn { width:100%; background:var(--amber); color:var(--white); border:none; padding:0.9rem; border-radius:10px; font-size:0.95rem; font-weight:700; cursor:pointer; margin-top:1.25rem; font-family:'Cabinet Grotesk',sans-serif; transition:background 0.2s; letter-spacing:0.02em; }
-  .calc-cta-btn:hover { background:var(--amber-light); color:var(--forest); }
+  .calc-section{background:var(--forest);padding:5rem 2rem;}
+  .calc-inner{max-width:1060px;margin:0 auto;}
+  .section-label-light{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+  .section-label-dark{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;}
+  .section-title-light{font-family:'Fraunces',serif;color:var(--white);font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0.75rem;line-height:1.15;}
+  .section-title-dark{font-family:'Fraunces',serif;color:var(--forest);font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:0.75rem;line-height:1.2;}
+  .section-sub-light{color:#7a9a88;font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2.5rem;}
+  .section-sub-dark{color:var(--text-muted);font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2.5rem;}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+  .calc-inputs{display:flex;flex-direction:column;gap:1.1rem;}
+  .calc-field label{display:block;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7a9a88;margin-bottom:6px;}
+  .calc-field input,.calc-field select{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:var(--white);padding:0.75rem 1rem;border-radius:8px;font-size:1rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;}
+  .calc-field input:focus,.calc-field select:focus{border-color:var(--amber-light);}
+  .calc-field input::placeholder{color:#4a6a58;}
+  .calc-field select option{background:var(--forest);}
+  .calc-results{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:2rem;}
+  .calc-results-title{font-family:'Fraunces',serif;color:var(--white);font-size:1.15rem;margin-bottom:1.5rem;}
+  .calc-line{display:flex;justify-content:space-between;align-items:center;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .calc-line:last-of-type{border-bottom:none;}
+  .calc-line-lbl{font-size:0.83rem;color:#7a9a88;}
+  .calc-line-val{font-size:0.92rem;font-weight:700;color:var(--white);}
+  .calc-line.highlight{background:rgba(212,130,42,0.12);border:1px solid rgba(212,130,42,0.25);border-radius:10px;padding:0.85rem 1rem;margin:0.4rem 0;}
+  .calc-line.highlight .calc-line-lbl{color:var(--amber-light);font-weight:600;font-size:0.88rem;}
+  .calc-line.highlight .calc-line-val{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--amber-light);}
+  .calc-line.green-line{background:rgba(28,107,60,0.18);border:1px solid rgba(28,107,60,0.35);border-radius:10px;padding:0.85rem 1rem;margin-top:0.4rem;}
+  .calc-line.green-line .calc-line-lbl{color:#6dcfa0;font-weight:600;font-size:0.88rem;}
+  .calc-line.green-line .calc-line-val{font-family:'Fraunces',serif;font-size:1.3rem;color:#6dcfa0;}
+  .calc-equity-visual{margin:1.25rem 0;}
+  .calc-equity-visual-label{display:flex;justify-content:space-between;font-size:0.75rem;color:#7a9a88;margin-bottom:6px;}
+  .calc-equity-track{background:rgba(255,255,255,0.08);border-radius:6px;height:12px;overflow:hidden;}
+  .calc-equity-fill{height:100%;background:linear-gradient(90deg,var(--forest-light),var(--amber-light));border-radius:6px;transition:width 0.8s ease;}
+  .calc-disclaimer{font-size:0.7rem;color:#4a6a58;margin-top:0.75rem;line-height:1.5;}
+  .calc-cta-btn{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:1.25rem;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
+  .calc-cta-btn:hover{background:var(--amber-light);color:var(--forest);}
 
   /* LOAN PROGRAMS */
-  .loans-section { padding:5rem 2rem; background:var(--cream-dark); }
-  .loans-inner { max-width:1180px; margin:0 auto; }
-  .loans-label { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber); margin-bottom:0.5rem; }
-  .loans-title { font-family:'Fraunces',serif; font-size:clamp(1.8rem,3vw,2.4rem); color:var(--forest); margin-bottom:0.75rem; line-height:1.2; }
-  .loans-sub { color:var(--text-muted); font-size:1rem; max-width:560px; line-height:1.6; margin-bottom:2.5rem; }
-  .loan-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
-  .loan-card { background:var(--white); border:1.5px solid var(--border); border-radius:14px; padding:1.5rem; cursor:pointer; transition:border-color 0.2s,transform 0.15s,box-shadow 0.2s; position:relative; overflow:hidden; }
-  .loan-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--forest); transition:background 0.2s; }
-  .loan-card:hover { border-color:var(--amber); transform:translateY(-3px); box-shadow:0 8px 32px rgba(28,58,42,0.12); }
-  .loan-card:hover::before { background:var(--amber); }
-  .loan-tag { display:inline-block; font-size:0.62rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; background:var(--forest); color:var(--amber-light); padding:3px 8px; border-radius:4px; margin-bottom:0.75rem; }
-  .loan-card h3 { font-size:0.95rem; font-weight:700; color:var(--forest); margin-bottom:0.4rem; }
-  .loan-card p { font-size:0.8rem; color:var(--text-muted); line-height:1.55; margin-bottom:0.75rem; }
-  .loan-highlight { font-size:0.76rem; font-weight:700; color:var(--green); margin-bottom:1rem; }
-  .loan-cta-link { display:block; text-align:center; background:var(--cream-dark); border:1px solid var(--border); color:var(--forest); padding:0.5rem; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none; transition:background 0.2s; }
-  .loan-card:hover .loan-cta-link { background:var(--amber); color:var(--white); border-color:var(--amber); }
+  .loans-section{padding:5rem 2rem;background:var(--cream-dark);}
+  .loans-inner{max-width:1180px;margin:0 auto;}
+  .loan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem;}
+  .loan-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,transform 0.15s,box-shadow 0.2s;position:relative;overflow:hidden;}
+  .loan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--forest);transition:background 0.2s;}
+  .loan-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 8px 32px rgba(28,58,42,0.12);}
+  .loan-card:hover::before{background:var(--amber);}
+  .loan-tag{display:inline-block;font-size:0.62rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;background:var(--forest);color:var(--amber-light);padding:3px 8px;border-radius:4px;margin-bottom:0.75rem;}
+  .loan-card h3{font-size:0.95rem;font-weight:700;color:var(--forest);margin-bottom:0.4rem;}
+  .loan-card p{font-size:0.8rem;color:var(--text-muted);line-height:1.55;margin-bottom:0.75rem;}
+  .loan-highlight{font-size:0.76rem;font-weight:700;color:var(--green);margin-bottom:1rem;}
+  .loan-cta-link{display:block;text-align:center;background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);padding:0.5rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:background 0.2s;}
+  .loan-card:hover .loan-cta-link{background:var(--amber);color:var(--white);border-color:var(--amber);}
 
   /* AI ADVISOR */
-  .ai-section { background:var(--white); padding:5rem 2rem; }
-  .ai-inner { max-width:860px; margin:0 auto; }
-  .ai-label { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber); margin-bottom:0.5rem; }
-  .ai-title { font-family:'Fraunces',serif; font-size:clamp(1.8rem,3vw,2.4rem); color:var(--forest); margin-bottom:0.75rem; line-height:1.2; }
-  .ai-sub { color:var(--text-muted); font-size:1rem; max-width:560px; line-height:1.6; margin-bottom:2rem; }
-  .ai-box { background:var(--cream); border:1.5px solid var(--border); border-radius:20px; overflow:hidden; }
-  .ai-header { background:var(--forest); padding:1.1rem 1.5rem; display:flex; align-items:center; gap:12px; }
-  .ai-avatar { width:40px; height:40px; border-radius:50%; background:var(--amber); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
-  .ai-header-info h3 { color:var(--white); font-size:0.95rem; font-weight:700; }
-  .ai-header-info p { color:#6a8a78; font-size:0.75rem; margin-top:1px; }
-  .ai-online { width:8px; height:8px; border-radius:50%; background:#4cdf8a; margin-left:auto; flex-shrink:0; }
-  .ai-messages { padding:1.5rem; display:flex; flex-direction:column; gap:1rem; min-height:260px; max-height:420px; overflow-y:auto; }
-  .msg { display:flex; gap:10px; }
-  .msg.user { flex-direction:row-reverse; }
-  .msg-bubble { max-width:78%; padding:0.75rem 1rem; border-radius:16px; font-size:0.875rem; line-height:1.6; }
-  .msg.bot .msg-bubble { background:var(--white); border:1px solid var(--border); color:var(--text); border-radius:4px 16px 16px 16px; }
-  .msg.user .msg-bubble { background:var(--forest); color:var(--white); border-radius:16px 4px 16px 16px; }
-  .msg-av { width:32px; height:32px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; margin-top:2px; }
-  .msg.bot .msg-av { background:var(--amber); color:var(--white); }
-  .msg.user .msg-av { background:var(--forest-mid); color:#aac; }
-  .typing { display:flex; gap:4px; padding:0.85rem 1rem; }
-  .typing span { width:7px; height:7px; border-radius:50%; background:#aab8a8; animation:ty 1.2s infinite; }
-  .typing span:nth-child(2) { animation-delay:0.2s; }
-  .typing span:nth-child(3) { animation-delay:0.4s; }
-  @keyframes ty { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)} }
-  .ai-quick { padding:0 1.5rem 1rem; display:flex; gap:0.5rem; flex-wrap:wrap; }
-  .ai-qbtn { background:var(--white); border:1px solid var(--border); color:var(--forest); font-size:0.76rem; font-weight:600; padding:0.4rem 0.85rem; border-radius:20px; cursor:pointer; transition:all 0.15s; font-family:'Cabinet Grotesk',sans-serif; }
-  .ai-qbtn:hover { background:var(--forest); color:var(--white); border-color:var(--forest); }
-  .ai-input-row { border-top:1px solid var(--border); padding:1rem 1.25rem; display:flex; gap:0.75rem; }
-  .ai-input { flex:1; background:var(--white); border:1.5px solid var(--border); border-radius:10px; padding:0.7rem 1rem; font-size:0.9rem; font-family:'Cabinet Grotesk',sans-serif; outline:none; transition:border-color 0.2s; color:var(--text); }
-  .ai-input:focus { border-color:var(--forest); }
-  .ai-send { background:var(--forest); color:var(--white); border:none; padding:0.7rem 1.25rem; border-radius:10px; cursor:pointer; font-size:0.9rem; font-weight:700; font-family:'Cabinet Grotesk',sans-serif; transition:background 0.2s; white-space:nowrap; }
-  .ai-send:hover { background:var(--amber); }
-  .ai-send:disabled { background:#b0bfb8; cursor:not-allowed; }
+  .ai-section{background:var(--white);padding:5rem 2rem;}
+  .ai-inner{max-width:860px;margin:0 auto;}
+  .ai-box{background:var(--cream);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;margin-top:2rem;}
+  .ai-header{background:var(--forest);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:12px;}
+  .ai-avatar{width:40px;height:40px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .ai-header-info h3{color:var(--white);font-size:0.95rem;font-weight:700;}
+  .ai-header-info p{color:#6a8a78;font-size:0.75rem;margin-top:1px;}
+  .ai-online{width:8px;height:8px;border-radius:50%;background:#4cdf8a;margin-left:auto;flex-shrink:0;}
+  .ai-messages{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;min-height:260px;max-height:420px;overflow-y:auto;}
+  .msg{display:flex;gap:10px;}
+  .msg.user{flex-direction:row-reverse;}
+  .msg-bubble{max-width:78%;padding:0.75rem 1rem;border-radius:16px;font-size:0.875rem;line-height:1.6;}
+  .msg.bot .msg-bubble{background:var(--white);border:1px solid var(--border);color:var(--text);border-radius:4px 16px 16px 16px;}
+  .msg.user .msg-bubble{background:var(--forest);color:var(--white);border-radius:16px 4px 16px 16px;}
+  .msg-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;margin-top:2px;}
+  .msg.bot .msg-av{background:var(--amber);color:var(--white);}
+  .msg.user .msg-av{background:var(--forest-mid);color:#aac;}
+  .typing{display:flex;gap:4px;padding:0.85rem 1rem;}
+  .typing span{width:7px;height:7px;border-radius:50%;background:#aab8a8;animation:ty 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:0.2s;}
+  .typing span:nth-child(3){animation-delay:0.4s;}
+  @keyframes ty{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+  .ai-quick{padding:0 1.5rem 1rem;display:flex;gap:0.5rem;flex-wrap:wrap;}
+  .ai-qbtn{background:var(--white);border:1px solid var(--border);color:var(--forest);font-size:0.76rem;font-weight:600;padding:0.4rem 0.85rem;border-radius:20px;cursor:pointer;transition:all 0.15s;font-family:'Cabinet Grotesk',sans-serif;}
+  .ai-qbtn:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
+  .ai-input-row{border-top:1px solid var(--border);padding:1rem 1.25rem;display:flex;gap:0.75rem;}
+  .ai-input{flex:1;background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:0.7rem 1rem;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text);}
+  .ai-input:focus{border-color:var(--forest);}
+  .ai-send{background:var(--forest);color:var(--white);border:none;padding:0.7rem 1.25rem;border-radius:10px;cursor:pointer;font-size:0.9rem;font-weight:700;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;white-space:nowrap;}
+  .ai-send:hover{background:var(--amber);}
+  .ai-send:disabled{background:#b0bfb8;cursor:not-allowed;}
 
   /* LEAD FORM */
-  .lead-section { background:var(--forest); padding:5rem 2rem; }
-  .lead-inner { max-width:860px; margin:0 auto; }
-  .lead-label { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber-light); margin-bottom:0.5rem; }
-  .lead-title { font-family:'Fraunces',serif; color:var(--white); font-size:clamp(1.8rem,3vw,2.6rem); margin-bottom:0.75rem; line-height:1.15; }
-  .lead-sub { color:#7a9a88; font-size:1rem; max-width:560px; line-height:1.6; margin-bottom:0; }
-  .form-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:2.5rem; margin-top:2rem; }
-  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-  .fg { display:flex; flex-direction:column; gap:6px; }
-  .fg.full { grid-column:1/-1; }
-  .fg label { font-size:0.75rem; font-weight:700; color:#7a9a88; letter-spacing:0.05em; text-transform:uppercase; }
-  .fg input, .fg select { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); color:var(--white); padding:0.75rem 1rem; border-radius:8px; font-size:0.9rem; font-family:'Cabinet Grotesk',sans-serif; transition:border-color 0.2s; outline:none; }
-  .fg input::placeholder { color:#4a6a58; }
-  .fg input:focus, .fg select:focus { border-color:var(--amber-light); }
-  .fg select option { background:var(--forest); }
-  .loan-checks { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:0.6rem; grid-column:1/-1; }
-  .lcheck { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); padding:0.6rem 0.85rem; border-radius:8px; cursor:pointer; transition:all 0.15s; }
-  .lcheck:hover { border-color:var(--amber-light); background:rgba(212,130,42,0.1); }
-  .lcheck.checked { border-color:var(--amber); background:rgba(212,130,42,0.15); }
-  .lcheck input { display:none; }
-  .chkbox { width:16px; height:16px; border:1.5px solid rgba(255,255,255,0.3); border-radius:4px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-  .lcheck.checked .chkbox { background:var(--amber); border-color:var(--amber); }
-  .chkinner { width:8px; height:8px; background:white; border-radius:1px; display:none; }
-  .lcheck.checked .chkinner { display:block; }
-  .lcheck-lbl { font-size:0.78rem; font-weight:500; color:#c0d8c8; }
-  .submit-btn { margin-top:1.5rem; width:100%; background:var(--amber); color:var(--white); padding:1rem; border-radius:10px; font-size:1rem; font-weight:700; border:none; cursor:pointer; font-family:'Cabinet Grotesk',sans-serif; transition:background 0.2s; letter-spacing:0.02em; }
-  .submit-btn:hover { background:var(--amber-light); color:var(--forest); }
-  .trust-row { display:flex; gap:1.5rem; margin-top:1.25rem; justify-content:center; flex-wrap:wrap; }
-  .trust-item { font-size:0.76rem; color:#5a7a68; }
+  .lead-section{background:var(--forest);padding:5rem 2rem;}
+  .lead-inner{max-width:860px;margin:0 auto;}
+  .form-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:2.5rem;margin-top:2rem;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .fg{display:flex;flex-direction:column;gap:6px;}
+  .fg.full{grid-column:1/-1;}
+  .fg label{font-size:0.75rem;font-weight:700;color:#7a9a88;letter-spacing:0.05em;text-transform:uppercase;}
+  .fg input,.fg select{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:var(--white);padding:0.75rem 1rem;border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;transition:border-color 0.2s;outline:none;}
+  .fg input::placeholder{color:#4a6a58;}
+  .fg input:focus,.fg select:focus{border-color:var(--amber-light);}
+  .fg select option{background:var(--forest);}
+  .loan-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:0.6rem;grid-column:1/-1;}
+  .lcheck{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:0.6rem 0.85rem;border-radius:8px;cursor:pointer;transition:all 0.15s;}
+  .lcheck:hover{border-color:var(--amber-light);background:rgba(212,130,42,0.1);}
+  .lcheck.checked{border-color:var(--amber);background:rgba(212,130,42,0.15);}
+  .lcheck input{display:none;}
+  .chkbox{width:16px;height:16px;border:1.5px solid rgba(255,255,255,0.3);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .lcheck.checked .chkbox{background:var(--amber);border-color:var(--amber);}
+  .chkinner{width:8px;height:8px;background:white;border-radius:1px;display:none;}
+  .lcheck.checked .chkinner{display:block;}
+  .lcheck-lbl{font-size:0.78rem;font-weight:500;color:#c0d8c8;}
+  .submit-btn{margin-top:1.5rem;width:100%;background:var(--amber);color:var(--white);padding:1rem;border-radius:10px;font-size:1rem;font-weight:700;border:none;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
+  .submit-btn:hover{background:var(--amber-light);color:var(--forest);}
+  .trust-row{display:flex;gap:1.5rem;margin-top:1.25rem;justify-content:center;flex-wrap:wrap;}
+  .trust-item{font-size:0.76rem;color:#5a7a68;}
 
-  /* AGENT SECTION */
-  .agent-section { background:var(--cream-dark); padding:3rem 2rem; border-top:1px solid var(--border); }
-  .agent-inner { max-width:860px; margin:0 auto; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; }
-  .agent-avatar { width:80px; height:80px; border-radius:50%; background:var(--forest); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:1.8rem; color:var(--amber-light); flex-shrink:0; border:3px solid var(--amber); }
-  .agent-info h3 { font-family:'Fraunces',serif; font-size:1.3rem; color:var(--forest); margin-bottom:2px; }
-  .agent-info p { font-size:0.85rem; color:var(--text-muted); line-height:1.6; }
-  .agent-info strong { color:var(--forest); }
-  .agent-contact { margin-left:auto; display:flex; flex-direction:column; gap:0.5rem; }
-  .agent-btn { background:var(--forest); color:var(--white); padding:0.6rem 1.5rem; border-radius:8px; text-decoration:none; font-size:0.875rem; font-weight:700; text-align:center; transition:background 0.2s; }
-  .agent-btn:hover { background:var(--amber); }
-  .agent-btn.outline { background:transparent; border:1.5px solid var(--forest); color:var(--forest); }
-  .agent-btn.outline:hover { background:var(--forest); color:var(--white); }
+  /* AGENT */
+  .agent-section{background:var(--cream-dark);padding:3rem 2rem;border-top:1px solid var(--border);}
+  .agent-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+  .agent-avatar{width:80px;height:80px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.8rem;color:var(--amber-light);flex-shrink:0;border:3px solid var(--amber);}
+  .agent-info h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--forest);margin-bottom:2px;}
+  .agent-info p{font-size:0.85rem;color:var(--text-muted);line-height:1.6;}
+  .agent-info strong{color:var(--forest);}
+  .agent-contact{margin-left:auto;display:flex;flex-direction:column;gap:0.5rem;}
+  .agent-btn{background:var(--forest);color:var(--white);padding:0.6rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:700;text-align:center;transition:background 0.2s;}
+  .agent-btn:hover{background:var(--amber);}
+  .agent-btn.outline{background:transparent;border:1.5px solid var(--forest);color:var(--forest);}
+  .agent-btn.outline:hover{background:var(--forest);color:var(--white);}
 
-  /* FOOTER */
-  footer { background:#0d1f16; color:#3a5a48; padding:2rem; text-align:center; font-size:0.78rem; line-height:1.9; }
-  footer strong { color:#5a7a68; }
-  footer a { color:#5a7a68; text-decoration:none; }
+  footer{background:#0d1f16;color:#3a5a48;padding:2rem;text-align:center;font-size:0.78rem;line-height:1.9;}
+  footer strong{color:#5a7a68;}
+  footer a{color:#5a7a68;text-decoration:none;}
 
-  /* MODAL */
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:1000; align-items:center; justify-content:center; padding:1rem; }
-  .modal-overlay.open { display:flex; }
-  .modal { background:var(--white); border-radius:18px; padding:2rem; max-width:520px; width:100%; position:relative; max-height:90vh; overflow-y:auto; }
-  .modal-close { position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-muted); }
-  .modal h2 { font-family:'Fraunces',serif; color:var(--forest); margin-bottom:0.25rem; font-size:1.4rem; }
-  .modal-sub { font-size:0.88rem; color:var(--text-muted); margin-bottom:1.5rem; }
-  .mform .fg { margin-bottom:0.75rem; }
-  .mform label { font-size:0.78rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px; }
-  .mform input, .mform select { width:100%; padding:0.65rem 0.9rem; border:1.5px solid var(--border); border-radius:8px; font-size:0.9rem; font-family:'Cabinet Grotesk',sans-serif; outline:none; transition:border-color 0.2s; color:var(--text); }
-  .mform input:focus, .mform select:focus { border-color:var(--forest); }
-  .modal-submit { width:100%; background:var(--forest); color:var(--white); padding:0.85rem; border-radius:10px; font-size:1rem; font-weight:700; border:none; cursor:pointer; margin-top:1rem; font-family:'Cabinet Grotesk',sans-serif; transition:background 0.2s; }
-  .modal-submit:hover { background:var(--amber); }
-  .success-msg { display:none; text-align:center; padding:2rem 0; }
-  .success-msg h3 { font-family:'Fraunces',serif; color:var(--green); font-size:1.5rem; margin-bottom:0.5rem; }
-  .success-msg p { color:var(--text-muted); font-size:0.9rem; line-height:1.6; }
+  /* GENERAL MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--white);border-radius:18px;padding:2rem;max-width:520px;width:100%;position:relative;max-height:90vh;overflow-y:auto;}
+  .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-muted);}
+  .modal h2{font-family:'Fraunces',serif;color:var(--forest);margin-bottom:0.25rem;font-size:1.4rem;}
+  .modal-sub{font-size:0.88rem;color:var(--text-muted);margin-bottom:1.5rem;}
+  .mform .fg{margin-bottom:0.75rem;}
+  .mform label{font-size:0.78rem;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px;}
+  .mform input,.mform select{width:100%;padding:0.65rem 0.9rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text);}
+  .mform input:focus,.mform select:focus{border-color:var(--forest);}
+  .modal-submit{width:100%;background:var(--forest);color:var(--white);padding:0.85rem;border-radius:10px;font-size:1rem;font-weight:700;border:none;cursor:pointer;margin-top:1rem;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
+  .modal-submit:hover{background:var(--amber);}
+  .success-msg{display:none;text-align:center;padding:2rem 0;}
+  .success-msg h3{font-family:'Fraunces',serif;color:var(--green);font-size:1.5rem;margin-bottom:0.5rem;}
+  .success-msg p{color:var(--text-muted);font-size:0.9rem;line-height:1.6;}
 
   @media(max-width:768px){
-    .nav-links{display:none}
-    .hero-inner{grid-template-columns:1fr}
-    .hero-right{display:none}
-    .calc-grid,.form-grid{grid-template-columns:1fr}
-    .form-card{padding:1.5rem}
-    .cat-inner{overflow-x:auto}
-    .agent-contact{margin-left:0;width:100%}
+    .nav-links{display:none;}
+    .search-row{grid-template-columns:1fr;}
+    .calc-grid,.form-grid{grid-template-columns:1fr;}
+    .form-card{padding:1.5rem;}
+    .agent-contact{margin-left:0;width:100%;}
   }
 </style>
 </head>
@@ -279,9 +288,9 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
+  <div>
     <div class="nav-logo-main">Fixer<span>Upper</span>Finds</div>
-    <div class="nav-logo-sub">by RenovationOne · Lee Smith</div>
+    <div class="nav-logo-sub">by RenovationOne · Lee Smith NMLS #188505</div>
   </div>
   <div class="nav-links">
     <a href="#listings">Today's Finds</a>
@@ -292,66 +301,98 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO WITH SEARCH -->
 <section class="hero">
   <div class="hero-pattern"></div>
   <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-eyebrow">🏡 MD · DC · VA · WV · PA · NJ · NC · DE · MA · NH · IL · TX</div>
-      <h1>Find Undervalued Homes.<br><em>Build Equity</em><br>from Day One.</h1>
-      <p class="hero-sub">Browse daily listings of fixer-uppers, cosmetic updaters, and undervalued homes — then get matched with the renovation financing that makes it possible.</p>
-      <div class="hero-stats">
-        <div><div class="hero-stat-num">340+</div><div class="hero-stat-label">Live Listings Today</div></div>
-        <div><div class="hero-stat-num">$42K</div><div class="hero-stat-label">Avg. Instant Equity</div></div>
-        <div><div class="hero-stat-num">5</div><div class="hero-stat-label">Loan Programs</div></div>
-      </div>
-      <div class="hero-actions">
-        <a href="#listings" class="btn-primary">Browse Today's Finds</a>
-        <a href="#ai-advisor" class="btn-ghost">Ask the AI Advisor</a>
+    <div class="hero-eyebrow">🏡 MD · DC · VA · WV · PA · NJ · NC · DE · MA · NH · IL · TX</div>
+    <h1>Find Undervalued Homes.<br><em>Build Equity</em> from Day One.</h1>
+    <p class="hero-sub">Search daily listings of fixer-uppers, cosmetic updaters, and undervalued homes — then get matched with renovation financing that makes it possible.</p>
+
+    <!-- SEARCH BOX -->
+    <div class="search-box">
+      <div class="search-box-title">🔍 Search Properties by Location</div>
+      <div class="search-row">
+        <div class="search-field">
+          <label>Zip Code or City</label>
+          <input type="text" id="searchLocation" placeholder="e.g. 21701 or Frederick MD">
+        </div>
+        <div class="search-field">
+          <label>State</label>
+          <select id="searchState">
+            <option value="">All States</option>
+            <option value="MD">Maryland</option>
+            <option value="DC">Washington DC</option>
+            <option value="VA">Virginia</option>
+            <option value="WV">West Virginia</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NC">North Carolina</option>
+            <option value="DE">Delaware</option>
+            <option value="MA">Massachusetts</option>
+            <option value="NH">New Hampshire</option>
+            <option value="IL">Illinois</option>
+            <option value="TX">Texas</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>Max Price</label>
+          <select id="searchPrice">
+            <option value="">Any Price</option>
+            <option value="150000">Under $150K</option>
+            <option value="250000">Under $250K</option>
+            <option value="400000">Under $400K</option>
+            <option value="600000">Under $600K</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="doSearch()">Find Properties →</button>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-card-stack">
-        <div class="equity-showcase">
-          <div class="equity-showcase-label">📈 Equity Built at Purchase</div>
-          <div class="equity-bars">
-            <div class="equity-bar-row">
-              <div class="equity-bar-label">Move-in ready</div>
-              <div class="equity-bar-track"><div class="equity-bar-fill" style="width:15%;background:#4a6a58;"></div></div>
-              <div class="equity-bar-val">~3%</div>
-            </div>
-            <div class="equity-bar-row">
-              <div class="equity-bar-label">Cosmetic update</div>
-              <div class="equity-bar-track"><div class="equity-bar-fill" style="width:45%;background:var(--forest-light);"></div></div>
-              <div class="equity-bar-val">~18%</div>
-            </div>
-            <div class="equity-bar-row">
-              <div class="equity-bar-label">Full reno</div>
-              <div class="equity-bar-track"><div class="equity-bar-fill" style="width:85%;background:var(--amber);"></div></div>
-              <div class="equity-bar-val">~35%</div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">340+</div><div class="hero-stat-label">Live Listings Today</div></div>
+      <div><div class="hero-stat-num">$42K</div><div class="hero-stat-label">Avg. Instant Equity</div></div>
+      <div><div class="hero-stat-num">12</div><div class="hero-stat-label">States Covered</div></div>
     </div>
   </div>
 </section>
 
+<!-- LEAD GATE MODAL -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-modal">
+    <h2>Where should we send your matches?</h2>
+    <p>Enter your info and we'll show you properties in your area — plus notify you when new ones hit the market.</p>
+    <div class="gate-search-summary" id="gateSummary">📍 Searching: All States · All Prices</div>
+    <div class="gate-form">
+      <input type="text" id="gateName" placeholder="Your Name" required>
+      <input type="email" id="gateEmail" placeholder="Email Address" required>
+      <input type="tel" id="gatePhone" placeholder="Phone Number (optional)">
+      <button class="gate-submit" onclick="submitGate()">Show Me Properties →</button>
+    </div>
+    <span class="gate-skip" onclick="skipGate()">Skip for now — just show me the listings</span>
+    <div class="gate-trust">
+      <span>🔒 Never sold or spammed</span>
+      <span>⚡ Instant results</span>
+      <span>✓ Free to use</span>
+    </div>
+  </div>
+</div>
+
 <!-- CATEGORY TABS -->
 <div class="cat-section">
   <div class="cat-inner">
-    <div class="cat-tab active" onclick="filterCat(this,'all')">
-      <span class="cat-tab-icon">🏠</span> All Homes <span class="cat-count">340</span>
-    </div>
-    <div class="cat-tab" onclick="filterCat(this,'full-reno')">
-      <span class="cat-tab-icon">🔨</span> Full Renovation <span class="cat-count">124</span>
-    </div>
-    <div class="cat-tab" onclick="filterCat(this,'cosmetic')">
-      <span class="cat-tab-icon">🎨</span> Cosmetic Update <span class="cat-count">138</span>
-    </div>
-    <div class="cat-tab" onclick="filterCat(this,'undervalued')">
-      <span class="cat-tab-icon">💎</span> Undervalued / Outdated <span class="cat-count">78</span>
-    </div>
+    <div class="cat-tab active" onclick="filterCat(this,'all')">🏠 All Homes <span class="cat-count" id="countAll">7</span></div>
+    <div class="cat-tab" onclick="filterCat(this,'full-reno')">🔨 Full Renovation <span class="cat-count" id="countFull">2</span></div>
+    <div class="cat-tab" onclick="filterCat(this,'cosmetic')">🎨 Cosmetic Update <span class="cat-count" id="countCosmetic">3</span></div>
+    <div class="cat-tab" onclick="filterCat(this,'undervalued')">💎 Undervalued / Outdated <span class="cat-count" id="countUnder">2</span></div>
+  </div>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="results-bar" id="resultsBar" style="display:none;">
+  <div class="results-bar-inner">
+    <div class="results-summary" id="resultsSummary">Showing <strong>7 properties</strong></div>
+    <div class="results-clear" onclick="clearSearch()">✕ Clear search — show all listings</div>
   </div>
 </div>
 
@@ -359,47 +400,38 @@
 <section id="listings" class="listings-section">
   <div class="listings-header">
     <div style="display:flex;align-items:center;gap:1rem;">
-      <h2 class="listings-title">Today's Finds</h2>
+      <h2 class="listings-title" id="listingsTitle">Today's Finds</h2>
       <div class="live-pill"><div class="live-dot"></div>LIVE</div>
     </div>
     <div style="font-size:0.8rem;color:var(--text-muted);" id="lastUpdated">Updated 3 minutes ago</div>
   </div>
   <div class="prop-grid" id="propGrid"></div>
-  <div style="text-align:center;margin-top:2.5rem;">
-    <button class="btn-primary" onclick="loadMore()">Load More Finds</button>
+  <div id="noResults" class="no-results" style="display:none;">
+    <h3>No properties found</h3>
+    <p>We don't have listings in that area yet — but we're adding new properties daily.<br>
+    Leave your info and Lee will notify you the moment something comes up in your market.</p>
+    <br>
+    <button class="search-btn" style="margin:0 auto;display:block;" onclick="openModal('Property Alert')">Notify Me When Available →</button>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;" id="loadMoreBtn">
+    <button class="btn-primary" style="background:var(--amber);color:var(--white);padding:0.9rem 2rem;border-radius:8px;font-size:1rem;font-weight:700;border:none;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;" onclick="loadMore()">Load More Finds</button>
   </div>
 </section>
 
 <!-- EQUITY CALCULATOR -->
 <section id="calculator" class="calc-section">
   <div class="calc-inner">
-    <div class="calc-label">Equity Calculator</div>
-    <h2 class="calc-title">See Your Equity Before You Buy</h2>
-    <p class="calc-sub">Enter the purchase price and estimated update cost — see your total loan, monthly payment, and instant equity position at closing.</p>
+    <div class="section-label-light">Equity Calculator</div>
+    <h2 class="section-title-light">See Your Equity Before You Buy</h2>
+    <p class="section-sub-light">Enter the purchase price and estimated update cost — see your total loan, monthly payment, and instant equity position at closing.</p>
     <div class="calc-grid">
       <div class="calc-inputs">
-        <div class="calc-field">
-          <label>Purchase Price ($)</label>
-          <input type="number" id="cPurchase" value="185000" oninput="calcUpdate()">
-        </div>
-        <div class="calc-field">
-          <label>Update / Renovation Cost ($)</label>
-          <input type="number" id="cReno" value="35000" oninput="calcUpdate()">
-        </div>
-        <div class="calc-field">
-          <label>After Renovation Value — ARV ($)</label>
-          <input type="number" id="cARV" value="280000" oninput="calcUpdate()">
-        </div>
-        <div class="calc-field">
-          <label>Down Payment (%)</label>
-          <input type="number" id="cDown" value="3.5" step="0.5" oninput="calcUpdate()">
-        </div>
-        <div class="calc-field">
-          <label>Interest Rate (%)</label>
-          <input type="number" id="cRate" value="7.25" step="0.125" oninput="calcUpdate()">
-        </div>
-        <div class="calc-field">
-          <label>Loan Program</label>
+        <div class="calc-field"><label>Purchase Price ($)</label><input type="number" id="cPurchase" value="185000" oninput="calcUpdate()"></div>
+        <div class="calc-field"><label>Update / Renovation Cost ($)</label><input type="number" id="cReno" value="35000" oninput="calcUpdate()"></div>
+        <div class="calc-field"><label>After Renovation Value — ARV ($) <span style="font-size:0.65rem;color:#4a6a58;font-weight:400;">Tip: search Zillow for nearby updated homes</span></label><input type="number" id="cARV" value="280000" oninput="calcUpdate()"></div>
+        <div class="calc-field"><label>Down Payment (%)</label><input type="number" id="cDown" value="3.5" step="0.5" oninput="calcUpdate()"></div>
+        <div class="calc-field"><label>Interest Rate (%)</label><input type="number" id="cRate" value="7.25" step="0.125" oninput="calcUpdate()"></div>
+        <div class="calc-field"><label>Loan Program</label>
           <select id="cProgram" onchange="calcUpdate()">
             <option value="fha">FHA 203(k)</option>
             <option value="conv">HomeStyle / CHOICEReno (Conventional)</option>
@@ -407,8 +439,7 @@
             <option value="usda">USDA Renovation ($0 down)</option>
           </select>
         </div>
-        <div class="calc-field">
-          <label>Loan Term</label>
+        <div class="calc-field"><label>Loan Term</label>
           <select id="cTerm" onchange="calcUpdate()">
             <option value="360">30-Year Fixed</option>
             <option value="240">20-Year Fixed</option>
@@ -427,15 +458,12 @@
         <div class="calc-line highlight"><span class="calc-line-lbl">= Total Loan Amount</span><span class="calc-line-val" id="rLoan">$216,015</span></div>
         <div class="calc-line green-line"><span class="calc-line-lbl">≈ Est. Monthly Payment</span><span class="calc-line-val" id="rPayment">$1,594/mo</span></div>
         <div class="calc-equity-visual">
-          <div class="calc-equity-visual-label">
-            <span>Instant Equity at Closing</span>
-            <span id="rEquityPct" style="color:var(--amber-light);font-weight:700;">21%</span>
-          </div>
+          <div class="calc-equity-visual-label"><span>Instant Equity at Closing</span><span id="rEquityPct" style="color:var(--amber-light);font-weight:700;">21%</span></div>
           <div class="calc-equity-track"><div class="calc-equity-fill" id="rEquityBar" style="width:21%"></div></div>
         </div>
         <div class="calc-line green-line"><span class="calc-line-lbl">🏆 Instant Equity (ARV − Total Cost)</span><span class="calc-line-val" id="rEquity">$60,000</span></div>
-        <div class="calc-disclaimer" id="rDisclaimer">FHA 203(k) estimate includes 1.75% upfront MIP and 0.55% annual MIP. Does not include taxes, insurance, or HOA. For illustration only.</div>
-        <button class="calc-cta-btn" onclick="openModal('Calculator Lead','Run my numbers — get pre-approved')">Lock In This Rate — Get Pre-Approved →</button>
+        <div class="calc-disclaimer" id="rDisclaimer">FHA 203(k): includes 1.75% upfront MIP and 0.55% annual MIP. Does not include taxes or insurance. For illustration only.</div>
+        <button class="calc-cta-btn" onclick="openModal('Calculator Lead')">Lock In This Rate — Get Pre-Approved →</button>
       </div>
     </div>
   </div>
@@ -444,45 +472,15 @@
 <!-- LOAN PROGRAMS -->
 <section id="loan-programs" class="loans-section">
   <div class="loans-inner">
-    <div class="loans-label">Renovation Loan Programs</div>
-    <h2 class="loans-title">One Loan. Purchase + Updates.</h2>
-    <p class="loans-sub">Every program rolls your purchase price and renovation cost into one mortgage. No second loan. No out-of-pocket repair costs.</p>
+    <div class="section-label-dark">Renovation Loan Programs</div>
+    <h2 class="section-title-dark">One Loan. Purchase + Updates.</h2>
+    <p class="section-sub-dark">Every program rolls your purchase price and renovation cost into one mortgage. No second loan. No out-of-pocket repair costs.</p>
     <div class="loan-grid">
-      <div class="loan-card" onclick="openModal('FHA 203(k)')">
-        <div class="loan-tag">FHA</div>
-        <h3>FHA 203(k) Renovation</h3>
-        <p>3.5% down, works on full gut jobs or cosmetic updates. Most flexible for first-time buyers.</p>
-        <div class="loan-highlight">✓ 3.5% down · 580+ credit · Any repair type</div>
-        <a class="loan-cta-link" href="#" onclick="openModal('FHA 203(k)');return false;">Get Pre-Qualified →</a>
-      </div>
-      <div class="loan-card" onclick="openModal('HomeStyle')">
-        <div class="loan-tag">FANNIE MAE</div>
-        <h3>HomeStyle Renovation</h3>
-        <p>Conventional loan with no FHA fees. No monthly PMI at 20% down. Great for higher-value homes.</p>
-        <div class="loan-highlight">✓ 3% down · No FHA fees · Investment props OK</div>
-        <a class="loan-cta-link" href="#" onclick="openModal('HomeStyle');return false;">Get Pre-Qualified →</a>
-      </div>
-      <div class="loan-card" onclick="openModal('CHOICERenovation')">
-        <div class="loan-tag">FREDDIE MAC</div>
-        <h3>CHOICERenovation</h3>
-        <p>Freddie Mac's flexible renovation loan. Covers resilience upgrades like storm and flood protection.</p>
-        <div class="loan-highlight">✓ 3% down · Resilience credit · Investment props OK</div>
-        <a class="loan-cta-link" href="#" onclick="openModal('CHOICERenovation');return false;">Get Pre-Qualified →</a>
-      </div>
-      <div class="loan-card" onclick="openModal('VA Renovation')">
-        <div class="loan-tag">VA</div>
-        <h3>VA Renovation Loan</h3>
-        <p>$0 down for eligible veterans and active duty. No PMI. One of the most powerful loans available.</p>
-        <div class="loan-highlight">✓ $0 down · No PMI · Veterans &amp; active duty</div>
-        <a class="loan-cta-link" href="#" onclick="openModal('VA Renovation');return false;">Get Pre-Qualified →</a>
-      </div>
-      <div class="loan-card" onclick="openModal('USDA Renovation')">
-        <div class="loan-tag">USDA</div>
-        <h3>USDA Renovation Loan</h3>
-        <p>$0 down in eligible rural and suburban areas. Great for undervalued homes outside major metros.</p>
-        <div class="loan-highlight">✓ $0 down · Rural/suburban · Low fees</div>
-        <a class="loan-cta-link" href="#" onclick="openModal('USDA Renovation');return false;">Get Pre-Qualified →</a>
-      </div>
+      <div class="loan-card" onclick="openModal('FHA 203(k)')"><div class="loan-tag">FHA</div><h3>FHA 203(k) Renovation</h3><p>3.5% down, works on full gut jobs or cosmetic updates. Most flexible for first-time buyers.</p><div class="loan-highlight">✓ 3.5% down · 580+ credit · Any repair type</div><a class="loan-cta-link" href="#" onclick="openModal('FHA 203(k)');return false;">Get Pre-Qualified →</a></div>
+      <div class="loan-card" onclick="openModal('HomeStyle')"><div class="loan-tag">FANNIE MAE</div><h3>HomeStyle Renovation</h3><p>Conventional loan with no FHA fees. No monthly PMI at 20% down.</p><div class="loan-highlight">✓ 3% down · No FHA fees · Investment props OK</div><a class="loan-cta-link" href="#" onclick="openModal('HomeStyle');return false;">Get Pre-Qualified →</a></div>
+      <div class="loan-card" onclick="openModal('CHOICERenovation')"><div class="loan-tag">FREDDIE MAC</div><h3>CHOICERenovation</h3><p>Covers resilience upgrades like storm and flood protection. Investment properties OK.</p><div class="loan-highlight">✓ 3% down · Resilience credit · Investment props OK</div><a class="loan-cta-link" href="#" onclick="openModal('CHOICERenovation');return false;">Get Pre-Qualified →</a></div>
+      <div class="loan-card" onclick="openModal('VA Renovation')"><div class="loan-tag">VA</div><h3>VA Renovation Loan</h3><p>$0 down for eligible veterans and active duty. No PMI. Most powerful loan available.</p><div class="loan-highlight">✓ $0 down · No PMI · Veterans &amp; active duty</div><a class="loan-cta-link" href="#" onclick="openModal('VA Renovation');return false;">Get Pre-Qualified →</a></div>
+      <div class="loan-card" onclick="openModal('USDA Renovation')"><div class="loan-tag">USDA</div><h3>USDA Renovation Loan</h3><p>$0 down in eligible rural and suburban areas. Great for undervalued homes outside major metros.</p><div class="loan-highlight">✓ $0 down · Rural/suburban · Low fees</div><a class="loan-cta-link" href="#" onclick="openModal('USDA Renovation');return false;">Get Pre-Qualified →</a></div>
     </div>
   </div>
 </section>
@@ -490,16 +488,13 @@
 <!-- AI ADVISOR -->
 <section id="ai-advisor" class="ai-section">
   <div class="ai-inner">
-    <div class="ai-label">AI-Powered Home &amp; Equity Advisor</div>
-    <h2 class="ai-title">Not Sure Where to Start?</h2>
-    <p class="ai-sub">Ask our AI advisor about equity building, loan programs, renovation budgets, or which type of home makes the most financial sense for you.</p>
+    <div class="section-label-dark">AI-Powered Home &amp; Equity Advisor</div>
+    <h2 class="section-title-dark">Not Sure Where to Start?</h2>
+    <p class="section-sub-dark">Ask our AI advisor about equity building, loan programs, renovation budgets, or which type of home makes the most financial sense for you.</p>
     <div class="ai-box">
       <div class="ai-header">
         <div class="ai-avatar">🏡</div>
-        <div class="ai-header-info">
-          <h3>FixerUpperFinds AI Advisor</h3>
-          <p>Equity &amp; renovation mortgage specialist · Powered by Claude AI</p>
-        </div>
+        <div class="ai-header-info"><h3>FixerUpperFinds AI Advisor</h3><p>Equity &amp; renovation mortgage specialist · Powered by Claude AI</p></div>
         <div class="ai-online"></div>
       </div>
       <div class="ai-messages" id="aiMessages">
@@ -509,11 +504,11 @@
         </div>
       </div>
       <div class="ai-quick" id="quickBtns">
-        <button class="ai-qbtn" onclick="quickAsk('What is the difference between a fixer upper and a cosmetic update home?')">Fixer upper vs cosmetic update?</button>
+        <button class="ai-qbtn" onclick="quickAsk('What is the difference between a fixer upper and a cosmetic update home?')">Fixer upper vs cosmetic?</button>
         <button class="ai-qbtn" onclick="quickAsk('I am a first time buyer with $10,000 saved and a 650 credit score. What is my best option?')">First time buyer</button>
-        <button class="ai-qbtn" onclick="quickAsk('I am a veteran. What is the best renovation loan for me and how much equity could I build?')">I am a veteran</button>
-        <button class="ai-qbtn" onclick="quickAsk('How much equity can I realistically build buying a home that needs a kitchen and bathroom update?')">Kitchen &amp; bath update equity?</button>
-        <button class="ai-qbtn" onclick="quickAsk('What credit score do I need and how much down payment for a renovation loan?')">Credit &amp; down payment?</button>
+        <button class="ai-qbtn" onclick="quickAsk('I am a veteran. What is the best renovation loan for me?')">I am a veteran</button>
+        <button class="ai-qbtn" onclick="quickAsk('How much equity can I build buying a home that just needs a kitchen and bathroom update?')">Kitchen &amp; bath equity?</button>
+        <button class="ai-qbtn" onclick="quickAsk('What credit score and down payment do I need for a renovation loan?')">Credit &amp; down payment?</button>
       </div>
       <div class="ai-input-row">
         <input class="ai-input" id="aiInput" type="text" placeholder="Ask about equity, loan programs, renovation budgets..." onkeydown="if(event.key==='Enter')sendAI()">
@@ -526,33 +521,21 @@
 <!-- LEAD FORM -->
 <section id="get-started" class="lead-section">
   <div class="lead-inner">
-    <div class="lead-label">Start Building Equity</div>
-    <h2 class="lead-title">Get Pre-Approved in 48 Hours</h2>
-    <p class="lead-sub">No real estate agent required. Tell us what you're looking for and Lee will match you with the right loan program and properties in your area.</p>
+    <div class="section-label-light">Start Building Equity</div>
+    <h2 class="section-title-light">Get Pre-Approved in 48 Hours</h2>
+    <p class="section-sub-light">No real estate agent required. Tell us what you're looking for and Lee will match you with the right loan program and properties in your area.</p>
     <div class="form-card">
       <div class="form-grid">
-        <div class="fg"><label>First Name</label><input type="text" placeholder="Jane"></div>
-        <div class="fg"><label>Last Name</label><input type="text" placeholder="Smith"></div>
-        <div class="fg"><label>Email Address</label><input type="email" placeholder="jane@email.com"></div>
-        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="(555) 555-5555"></div>
-        <div class="fg"><label>Target Purchase Price</label>
-          <select><option>Under $150,000</option><option>$150k–$250k</option><option>$250k–$400k</option><option>$400k–$600k</option><option>Over $600k</option></select>
-        </div>
-        <div class="fg"><label>Update / Reno Budget</label>
-          <select><option>Under $20,000</option><option>$20k–$50k</option><option>$50k–$100k</option><option>$100k–$200k</option><option>Over $200k</option></select>
-        </div>
-        <div class="fg"><label>Home Type I'm Looking For</label>
-          <select><option>Full Renovation</option><option>Cosmetic Update</option><option>Undervalued / Outdated</option><option>Any — show me the best equity deal</option></select>
-        </div>
-        <div class="fg"><label>Target State</label>
-          <select><option>Maryland</option><option>Washington DC</option><option>Virginia</option><option>West Virginia</option><option>Pennsylvania</option><option>New Jersey</option><option>North Carolina</option><option>Delaware</option><option>Massachusetts</option><option>New Hampshire</option><option>Illinois</option><option>Texas</option></select>
-        </div>
-        <div class="fg"><label>Veteran / Active Military?</label>
-          <select><option>No</option><option>Yes – Veteran</option><option>Yes – Active Duty</option><option>Surviving Spouse</option></select>
-        </div>
-        <div class="fg"><label>Estimated Credit Score</label>
-          <select><option>740+</option><option>700–739</option><option>660–699</option><option>620–659</option><option>580–619</option><option>Below 580</option></select>
-        </div>
+        <div class="fg"><label>First Name</label><input type="text" id="f_fname" placeholder="Jane"></div>
+        <div class="fg"><label>Last Name</label><input type="text" id="f_lname" placeholder="Smith"></div>
+        <div class="fg"><label>Email Address</label><input type="email" id="f_email" placeholder="jane@email.com"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" id="f_phone" placeholder="(555) 555-5555"></div>
+        <div class="fg"><label>Target Purchase Price</label><select id="f_price"><option>Under $150,000</option><option>$150k–$250k</option><option>$250k–$400k</option><option>$400k–$600k</option><option>Over $600k</option></select></div>
+        <div class="fg"><label>Update / Reno Budget</label><select><option>Under $20,000</option><option>$20k–$50k</option><option>$50k–$100k</option><option>$100k–$200k</option><option>Over $200k</option></select></div>
+        <div class="fg"><label>Home Type I'm Looking For</label><select><option>Full Renovation</option><option>Cosmetic Update</option><option>Undervalued / Outdated</option><option>Any — show me the best equity deal</option></select></div>
+        <div class="fg"><label>Target State</label><select id="f_state"><option>Maryland</option><option>Washington DC</option><option>Virginia</option><option>West Virginia</option><option>Pennsylvania</option><option>New Jersey</option><option>North Carolina</option><option>Delaware</option><option>Massachusetts</option><option>New Hampshire</option><option>Illinois</option><option>Texas</option></select></div>
+        <div class="fg"><label>Veteran / Active Military?</label><select><option>No</option><option>Yes – Veteran</option><option>Yes – Active Duty</option><option>Surviving Spouse</option></select></div>
+        <div class="fg"><label>Estimated Credit Score</label><select><option>740+</option><option>700–739</option><option>660–699</option><option>620–659</option><option>580–619</option><option>Below 580</option></select></div>
         <div class="fg full"><label>Interested Loan Programs</label>
           <div class="loan-checks">
             <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">FHA 203(k)</span></label>
@@ -564,7 +547,7 @@
           </div>
         </div>
       </div>
-      <button class="submit-btn" onclick="submitForm()">Start Building Equity — Request Pre-Approval →</button>
+      <button class="submit-btn" onclick="submitMainForm()">Start Building Equity — Request Pre-Approval →</button>
       <div class="trust-row">
         <div class="trust-item">🔒 Info never sold</div>
         <div class="trust-item">📋 Soft credit pull only</div>
@@ -575,17 +558,15 @@
   </div>
 </section>
 
-<!-- AGENT BIO -->
+<!-- AGENT -->
 <section class="agent-section">
   <div class="agent-inner">
     <div class="agent-avatar">LS</div>
     <div class="agent-info">
       <h3>Lee Smith</h3>
-      <p>
-        <strong>RenovationOne</strong> · NMLS #188505<br>
-        Licensed in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX<br>
-        Renovation mortgage specialist helping buyers build equity through smart home purchases since day one.
-      </p>
+      <p><strong>RenovationOne</strong> · NMLS #188505<br>
+      Licensed in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX<br>
+      Renovation mortgage specialist helping buyers build equity through smart home purchases.</p>
     </div>
     <div class="agent-contact">
       <a href="tel:3015099437" class="agent-btn">📞 (301) 509-9437</a>
@@ -594,7 +575,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <strong>FixerUpperFinds.com</strong> · Powered by <strong>RenovationOne</strong><br>
   Lee Smith · NMLS #188505 · <a href="tel:3015099437">(301) 509-9437</a><br>
@@ -609,102 +589,204 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h2 id="modalTitle">Get Pre-Qualified</h2>
-    <p class="modal-sub" id="modalSub">Renovation Loan · RenovationOne · Lee Smith NMLS #188505</p>
+    <p class="modal-sub" id="modalSub">RenovationOne · Lee Smith NMLS #188505</p>
     <div id="modalFormWrap">
       <div class="mform">
         <div class="fg"><label>Full Name</label><input id="mName" type="text" placeholder="Jane Smith"></div>
         <div class="fg"><label>Email</label><input id="mEmail" type="email" placeholder="jane@email.com"></div>
         <div class="fg"><label>Phone</label><input id="mPhone" type="tel" placeholder="(555) 555-5555"></div>
-        <div class="fg"><label>Estimated Credit Score</label>
-          <select id="mCredit"><option>740+</option><option>700-739</option><option>660-699</option><option>620-659</option><option>580-619</option><option>Below 580</option></select>
-        </div>
-        <div class="fg"><label>I am interested in</label>
-          <select id="mType"><option>FHA 203(k)</option><option>HomeStyle</option><option>CHOICERenovation</option><option>VA Renovation</option><option>USDA Renovation</option><option>Not sure — help me decide</option></select>
-        </div>
+        <div class="fg"><label>Interested In</label><select id="mType"><option>FHA 203(k)</option><option>HomeStyle</option><option>CHOICERenovation</option><option>VA Renovation</option><option>USDA Renovation</option><option>Not sure — help me decide</option></select></div>
         <button class="modal-submit" onclick="submitModal()">Send My Request to Lee →</button>
         <p style="font-size:0.72rem;color:#aaa;margin-top:0.75rem;text-align:center;">Lee Smith · NMLS #188505 · (301) 509-9437 · RenovationOne</p>
       </div>
     </div>
     <div class="success-msg" id="modalSuccess">
       <h3>Request Sent! ✓</h3>
-      <p>Lee Smith will contact you within 48 hours with your loan options and rate estimates.<br><br>
-      Questions now? Call <strong>(301) 509-9437</strong></p>
+      <p>Lee Smith will contact you within 48 hours.<br><br>Questions now? Call <strong>(301) 509-9437</strong></p>
     </div>
   </div>
 </div>
 
+<!-- HUBSPOT FORMS SDK -->
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+
 <script>
+// ===== HUBSPOT CONFIG =====
+const HS_PORTAL_ID = '246283164';
+const HS_FORM_ID   = '1abc34dc-caa7-4a8a-a64a-32b41cd93133';
+
+function submitToHubSpot(fields){
+  const data = {
+    portalId: HS_PORTAL_ID,
+    formGuid: HS_FORM_ID,
+    fields: fields,
+    context: { pageUri: window.location.href, pageName: 'FixerUpperFinds' }
+  };
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(e => console.log('HubSpot submit error:', e));
+}
+
 // ===== PROPERTIES =====
-const props = [
-  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD 20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",tags:["New Floors Needed","Kitchen Update","Great Location"],loans:["FHA 203k","HomeStyle","CHOICEReno"]},
-  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA 23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",tags:["Foreclosure","Priced to Sell","Structural Updates"],loans:["FHA 203k","VA Reno"]},
-  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA 15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",tags:["REO","Below Market","Motivated Seller"],loans:["FHA 203k","USDA Reno"]},
-  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC 27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",tags:["Outdated Interior","Priced Below AVM","No Structural Issues"],loans:["HomeStyle","CHOICEReno","VA Reno"]},
-  {id:5,addr:"5511 Oak Street",city:"Frederick, MD 21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",tags:["Cosmetic Only","Great Bones","USDA Zone"],loans:["FHA 203k","USDA Reno","HomeStyle"]},
-  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV 25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",tags:["Dated But Solid","Below Market","$0 Down USDA Zone"],loans:["FHA 203k","USDA Reno"]},
+const allProps = [
+  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",tags:["New Floors Needed","Kitchen Update","Great Location"],loans:["FHA 203k","HomeStyle","CHOICEReno"]},
+  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",tags:["Foreclosure","Priced to Sell","Structural Updates"],loans:["FHA 203k","VA Reno"]},
+  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA",state:"PA",zip:"15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",tags:["REO","Below Market","Motivated Seller"],loans:["FHA 203k","USDA Reno"]},
+  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC",state:"NC",zip:"27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",tags:["Outdated Interior","Below AVM","No Structural Issues"],loans:["HomeStyle","CHOICEReno","VA Reno"]},
+  {id:5,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",tags:["Cosmetic Only","Great Bones","USDA Zone"],loans:["FHA 203k","USDA Reno","HomeStyle"]},
+  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",tags:["Dated But Solid","Below Market","$0 Down USDA Zone"],loans:["FHA 203k","USDA Reno"]},
+  {id:7,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",tags:["Dated Kitchen","New Roof 2022","Walk to Water"],loans:["FHA 203k","HomeStyle","VA Reno"]},
 ];
 
-const typeLabel = { 'full-reno':'🔨 Full Renovation', 'cosmetic':'🎨 Cosmetic Update', 'undervalued':'💎 Undervalued / Outdated' };
-const typeBadge = { 'full-reno':'badge-full', 'cosmetic':'badge-cosmetic', 'undervalued':'badge-under' };
-const typeImgClass = { 'full-reno':'full-reno', 'cosmetic':'cosmetic', 'undervalued':'undervalued' };
+const typeLabel={'full-reno':'🔨 Full Renovation','cosmetic':'🎨 Cosmetic Update','undervalued':'💎 Undervalued / Outdated'};
+const typeBadge={'full-reno':'badge-full','cosmetic':'badge-cosmetic','undervalued':'badge-under'};
+const typeImgClass={'full-reno':'full-reno','cosmetic':'cosmetic','undervalued':'undervalued'};
+
+let currentFilter='all';
+let currentSearch={location:'',state:'',price:''};
 
 function renderProps(list){
-  const grid=document.getElementById('propGrid'); grid.innerHTML='';
+  const grid=document.getElementById('propGrid');
+  grid.innerHTML='';
+  if(list.length===0){
+    document.getElementById('noResults').style.display='block';
+    document.getElementById('loadMoreBtn').style.display='none';
+    return;
+  }
+  document.getElementById('noResults').style.display='none';
+  document.getElementById('loadMoreBtn').style.display='block';
   list.forEach(p=>{
     const equity=p.arv-p.price-p.reno;
     const equityPct=Math.round((equity/p.arv)*100);
-    const div=document.createElement('div'); div.className='prop-card'; div.setAttribute('data-type',p.type);
+    const div=document.createElement('div');div.className='prop-card';
+    div.setAttribute('data-type',p.type);div.setAttribute('data-state',p.state);div.setAttribute('data-zip',p.zip);div.setAttribute('data-price',p.price);
     div.innerHTML=`<div class="prop-img ${typeImgClass[p.type]}">
-        <div class="prop-img-icon">🏠</div>
-        <div class="prop-type-badge ${typeBadge[p.type]}">${typeLabel[p.type]}</div>
-        <div class="prop-equity-badge">+$${Math.round(equity/1000)}K equity</div>
-        <div class="prop-days">${p.days===1?'🔥 New Today':'Added '+p.days+'d ago'}</div>
+      <div class="prop-img-icon">🏠</div>
+      <div class="prop-type-badge ${typeBadge[p.type]}">${typeLabel[p.type]}</div>
+      <div class="prop-equity-badge">+$${Math.round(equity/1000)}K equity</div>
+      <div class="prop-days">${p.days===1?'🔥 New Today':'Added '+p.days+'d ago'}</div>
+    </div>
+    <div class="prop-body">
+      <div class="prop-addr">${p.addr}</div>
+      <div class="prop-city">${p.city} · ${p.zip}</div>
+      <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">ARV $${p.arv.toLocaleString()}</div></div>
+      <div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div>
+      <div class="prop-equity-bar">
+        <div class="prop-equity-label"><span>Instant Equity at Closing</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
+        <div class="equity-track"><div class="equity-fill" style="width:${Math.min(equityPct*2,100)}%"></div></div>
       </div>
-      <div class="prop-body">
-        <div class="prop-addr">${p.addr}</div>
-        <div class="prop-city">${p.city}</div>
-        <div class="prop-price-row">
-          <div class="prop-price">$${p.price.toLocaleString()}</div>
-          <div class="prop-arv">ARV $${p.arv.toLocaleString()}</div>
-        </div>
-        <div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div>
-        <div class="prop-equity-bar">
-          <div class="prop-equity-label"><span>Instant Equity at Closing</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
-          <div class="equity-track"><div class="equity-fill" style="width:${Math.min(equityPct*2,100)}%"></div></div>
-        </div>
-        <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
-        <div class="prop-loans-row"><div class="prop-loans-lbl">Eligible Loan Programs</div><div class="loan-pills">${p.loans.map(l=>'<span class="loan-pill">'+l+'</span>').join('')}</div></div>
-        <button class="prop-cta" onclick="loadCalc(${p.price},${p.reno},${p.arv})">Run My Numbers for This Home →</button>
-      </div>`;
+      <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
+      <div class="prop-loans-row"><div class="prop-loans-lbl">Eligible Loan Programs</div><div class="loan-pills">${p.loans.map(l=>'<span class="loan-pill">'+l+'</span>').join('')}</div></div>
+      <button class="prop-cta" onclick="loadCalc(${p.price},${p.reno},${p.arv})">Run My Numbers for This Home →</button>
+    </div>`;
     grid.appendChild(div);
   });
+  updateCounts(list);
 }
-renderProps(props);
 
-function filterCat(tab, type){
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
-  tab.classList.add('active');
-  document.querySelectorAll('.prop-card').forEach(c=>{
-    c.style.display = type==='all' || c.getAttribute('data-type')===type ? 'block' : 'none';
+function updateCounts(list){
+  document.getElementById('countAll').textContent=list.length;
+  document.getElementById('countFull').textContent=list.filter(p=>p.type==='full-reno').length;
+  document.getElementById('countCosmetic').textContent=list.filter(p=>p.type==='cosmetic').length;
+  document.getElementById('countUnder').textContent=list.filter(p=>p.type==='undervalued').length;
+}
+
+function getFilteredProps(){
+  return allProps.filter(p=>{
+    const matchType=currentFilter==='all'||p.type===currentFilter;
+    const matchState=!currentSearch.state||p.state===currentSearch.state;
+    const matchLocation=!currentSearch.location||
+      p.zip.includes(currentSearch.location)||
+      p.city.toLowerCase().includes(currentSearch.location.toLowerCase());
+    const matchPrice=!currentSearch.price||p.price<=parseInt(currentSearch.price);
+    return matchType&&matchState&&matchLocation&&matchPrice;
   });
 }
 
-function loadCalc(price,reno,arv){
-  document.getElementById('cPurchase').value=price;
-  document.getElementById('cReno').value=reno;
-  document.getElementById('cARV').value=arv;
-  calcUpdate();
-  document.getElementById('calculator').scrollIntoView({behavior:'smooth'});
+renderProps(allProps);
+
+function filterCat(tab,type){
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  currentFilter=type;
+  renderProps(getFilteredProps());
+}
+
+// ===== SEARCH =====
+function doSearch(){
+  const loc=document.getElementById('searchLocation').value.trim();
+  const state=document.getElementById('searchState').value;
+  const price=document.getElementById('searchPrice').value;
+  currentSearch={location:loc,state:state,price:price};
+
+  // Show lead gate
+  let summary='📍 Searching: ';
+  if(loc) summary+=loc+' ';
+  if(state) summary+=state+' ';
+  if(price) summary+='· Under $'+parseInt(price).toLocaleString();
+  if(!loc&&!state&&!price) summary+='All States · All Prices';
+  document.getElementById('gateSummary').textContent=summary;
+  document.getElementById('gateOverlay').classList.add('open');
+}
+
+function showResults(){
+  const filtered=getFilteredProps();
+  document.getElementById('gateOverlay').classList.remove('open');
+  const bar=document.getElementById('resultsBar');
+  const loc=currentSearch.location;
+  const state=currentSearch.state;
+  const price=currentSearch.price;
+  if(loc||state||price){
+    bar.style.display='block';
+    let summary=`Showing <strong>${filtered.length} properties</strong>`;
+    if(loc) summary+=` near <strong>${loc}</strong>`;
+    if(state) summary+=` in <strong>${state}</strong>`;
+    if(price) summary+=` under <strong>$${parseInt(price).toLocaleString()}</strong>`;
+    document.getElementById('resultsSummary').innerHTML=summary;
+    document.getElementById('listingsTitle').textContent='Search Results';
+  }
+  renderProps(filtered);
+  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
+}
+
+function clearSearch(){
+  currentSearch={location:'',state:'',price:''};
+  document.getElementById('searchLocation').value='';
+  document.getElementById('searchState').value='';
+  document.getElementById('searchPrice').value='';
+  document.getElementById('resultsBar').style.display='none';
+  document.getElementById('listingsTitle').textContent="Today's Finds";
+  renderProps(getFilteredProps());
+}
+
+// ===== LEAD GATE =====
+function submitGate(){
+  const name=document.getElementById('gateName').value.trim();
+  const email=document.getElementById('gateEmail').value.trim();
+  const phone=document.getElementById('gatePhone').value.trim();
+  if(!name||!email){alert('Please enter your name and email.');return;}
+
+  // Submit to HubSpot
+  submitToHubSpot([
+    {name:'firstname',value:name.split(' ')[0]},
+    {name:'lastname',value:name.split(' ').slice(1).join(' ')||''},
+    {name:'email',value:email},
+    {name:'phone',value:phone},
+    {name:'message',value:'Search gate lead · '+document.getElementById('gateSummary').textContent}
+  ]);
+  showResults();
+}
+
+function skipGate(){
+  showResults();
 }
 
 function loadMore(){
-  const p={id:7,addr:"941 Sunset Ave",city:"Annapolis, MD 21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",tags:["Dated Kitchen","New Roof 2022","Walk to Water"],loans:["FHA 203k","HomeStyle","VA Reno"]};
-  const equity=p.arv-p.price-p.reno; const equityPct=Math.round((equity/p.arv)*100);
-  const grid=document.getElementById('propGrid');
-  const div=document.createElement('div'); div.className='prop-card'; div.setAttribute('data-type',p.type);
-  div.innerHTML=`<div class="prop-img ${typeImgClass[p.type]}"><div class="prop-img-icon">🏠</div><div class="prop-type-badge ${typeBadge[p.type]}">${typeLabel[p.type]}</div><div class="prop-equity-badge">+$${Math.round(equity/1000)}K equity</div><div class="prop-days">🔥 New Today</div></div><div class="prop-body"><div class="prop-addr">${p.addr}</div><div class="prop-city">${p.city}</div><div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">ARV $${p.arv.toLocaleString()}</div></div><div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div><div class="prop-equity-bar"><div class="prop-equity-label"><span>Instant Equity at Closing</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div><div class="equity-track"><div class="equity-fill" style="width:${Math.min(equityPct*2,100)}%"></div></div></div><div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div><div class="prop-loans-row"><div class="prop-loans-lbl">Eligible Loan Programs</div><div class="loan-pills">${p.loans.map(l=>'<span class="loan-pill">'+l+'</span>').join('')}</div></div><button class="prop-cta" onclick="loadCalc(${p.price},${p.reno},${p.arv})">Run My Numbers for This Home →</button></div>`;
-  grid.appendChild(div);
-  const btn=document.querySelector('[onclick="loadMore()"]'); btn.textContent='✓ All listings loaded for today'; btn.disabled=true;
+  const btn=document.querySelector('[onclick="loadMore()"]');
+  btn.textContent='✓ All listings loaded for today';
+  btn.disabled=true;
 }
 
 // ===== CALCULATOR =====
@@ -717,7 +799,7 @@ function calcUpdate(){
   const rate=parseFloat(document.getElementById('cRate').value)||7.25;
   const term=parseInt(document.getElementById('cTerm').value)||360;
   let downPct=parseFloat(document.getElementById('cDown').value)||3.5;
-  if(prog==='va'||prog==='usda'){ downPct=0; document.getElementById('cDown').value=0; }
+  if(prog==='va'||prog==='usda'){downPct=0;document.getElementById('cDown').value=0;}
   const total=purchase+reno;
   const downAmt=total*(downPct/100);
   const base=total-downAmt;
@@ -732,7 +814,6 @@ function calcUpdate(){
   else if(prog==='usda') monthlyMI=(loanAmt*0.0035)/12;
   const r=rate/100/12;
   const pi=r>0?loanAmt*(r*Math.pow(1+r,term))/(Math.pow(1+r,term)-1):loanAmt/term;
-  const totalPmt=pi+monthlyMI;
   const equity=arv-total;
   const equityPct=arv>0?Math.round((equity/arv)*100):0;
   document.getElementById('rPurchase').textContent=fmt(purchase);
@@ -742,103 +823,119 @@ function calcUpdate(){
   document.getElementById('rBase').textContent=fmt(base);
   document.getElementById('rMIP').textContent=upfront>0?fmt(upfront):'$0';
   document.getElementById('rLoan').textContent=fmt(loanAmt);
-  document.getElementById('rPayment').textContent='~'+fmt(totalPmt)+'/mo';
+  document.getElementById('rPayment').textContent='~'+fmt(pi+monthlyMI)+'/mo';
   document.getElementById('rEquity').textContent=fmt(equity);
   document.getElementById('rEquityPct').textContent=equityPct+'%';
   document.getElementById('rEquityBar').style.width=Math.min(Math.max(equityPct,0),100)+'%';
-  const disclaimers={fha:'FHA 203(k): 1.75% upfront MIP + 0.55% annual MIP included. Does not include taxes or insurance.',conv:'Conventional: PMI included if LTV > 80%. Does not include taxes or insurance.',va:'VA Renovation: 2.3% funding fee included. No monthly MI. Does not include taxes or insurance.',usda:'USDA: 1% upfront + 0.35% annual fee included. Does not include taxes or insurance.'};
-  document.getElementById('rDisclaimer').textContent=disclaimers[prog]||'';
+  const d={fha:'FHA 203(k): 1.75% upfront MIP + 0.55% annual MIP. Does not include taxes or insurance.',conv:'Conventional: PMI if LTV > 80%. Does not include taxes or insurance.',va:'VA: 2.3% funding fee. No monthly MI. Does not include taxes or insurance.',usda:'USDA: 1% upfront + 0.35% annual fee. Does not include taxes or insurance.'};
+  document.getElementById('rDisclaimer').textContent=d[prog]||'';
 }
 calcUpdate();
+
+function loadCalc(price,reno,arv){
+  document.getElementById('cPurchase').value=price;
+  document.getElementById('cReno').value=reno;
+  document.getElementById('cARV').value=arv;
+  calcUpdate();
+  document.getElementById('calculator').scrollIntoView({behavior:'smooth'});
+}
 
 // ===== AI ADVISOR =====
 const aiHistory=[];
 const SYSTEM=`You are a friendly, knowledgeable home equity and renovation mortgage advisor for FixerUpperFinds.com, run by Lee Smith (NMLS #188505) of RenovationOne, licensed in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, and TX. Lee can be reached at (301) 509-9437.
 
-Your mission is to help home buyers understand how to build instant equity by purchasing undervalued, cosmetic-update, or fixer-upper homes — and finance them with renovation loans.
+Your mission is to help home buyers understand how to build instant equity by purchasing undervalued, cosmetic-update, or fixer-upper homes and finance them with renovation loans.
 
-You cover three home types:
-1. Full Renovation — major structural or systems work, biggest equity upside, uses FHA 203(k) or HomeStyle
-2. Cosmetic Update — new kitchen, flooring, paint, bath update — great equity with less hassle, any loan type
-3. Undervalued / Outdated — solid home, just dated, priced below market — easiest path to equity
+Three home types on this site:
+1. Full Renovation — major structural or systems work, biggest equity upside
+2. Cosmetic Update — new kitchen, flooring, paint, bath — great equity with less hassle  
+3. Undervalued / Outdated — solid home, just dated, priced below market
 
-You specialize in these 5 loan programs:
-1. FHA 203(k) — 3.5% down, 580+ credit, covers any repair type, primary residence only
-2. Fannie Mae HomeStyle — 3% down, 620+ credit, conventional, investment properties OK, no FHA fees
-3. Freddie Mac CHOICERenovation — 3% down, 620+ credit, resilience upgrades, investment properties OK
-4. VA Renovation — $0 down, no PMI, veterans/active duty/surviving spouses, 620+ credit typically
-5. USDA Renovation — $0 down in eligible rural/suburban areas, 640+ credit, income limits apply
+Five loan programs:
+1. FHA 203(k) — 3.5% down, 580+ credit, any repair, primary residence
+2. HomeStyle — 3% down, 620+ credit, conventional, investment OK
+3. CHOICERenovation — 3% down, 620+ credit, resilience upgrades, investment OK
+4. VA Renovation — $0 down, no PMI, veterans/active duty/surviving spouses
+5. USDA Renovation — $0 down in rural/suburban eligible areas, 640+ credit
 
-Key equity concepts to discuss:
-- Instant equity = ARV (after renovation value) minus total acquisition cost (purchase + renovation)
-- Cosmetic updates often return $2-3 for every $1 spent
-- Buying 20-30% below ARV is common with fixer-uppers
-- Renovation loans roll purchase + reno into ONE mortgage — no out of pocket repair costs
-
-Keep responses warm, conversational, and specific to the person's situation. 2-4 paragraphs max. Always end with a gentle nudge to use the equity calculator above or call Lee at (301) 509-9437. Never guarantee rates or make lending commitments.`;
+Keep responses warm, conversational, 2-4 paragraphs. Always end with a nudge to use the equity calculator or call Lee at (301) 509-9437. Never guarantee rates or make lending commitments.`;
 
 function appendMsg(role,text){
   const box=document.getElementById('aiMessages');
-  const div=document.createElement('div'); div.className='msg '+(role==='user'?'user':'bot');
+  const div=document.createElement('div');div.className='msg '+(role==='user'?'user':'bot');
   div.innerHTML=`<div class="msg-av">${role==='user'?'👤':'🏡'}</div><div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>`;
-  box.appendChild(div); box.scrollTop=box.scrollHeight;
+  box.appendChild(div);box.scrollTop=box.scrollHeight;
 }
 function showTyping(){
   const box=document.getElementById('aiMessages');
-  const div=document.createElement('div'); div.className='msg bot'; div.id='typingMsg';
+  const div=document.createElement('div');div.className='msg bot';div.id='typingMsg';
   div.innerHTML='<div class="msg-av">🏡</div><div class="msg-bubble typing"><span></span><span></span><span></span></div>';
-  box.appendChild(div); box.scrollTop=box.scrollHeight;
+  box.appendChild(div);box.scrollTop=box.scrollHeight;
 }
-function hideTyping(){ const t=document.getElementById('typingMsg'); if(t)t.remove(); }
-
+function hideTyping(){const t=document.getElementById('typingMsg');if(t)t.remove();}
 async function sendAI(){
   const input=document.getElementById('aiInput');
   const btn=document.getElementById('aiSendBtn');
-  const text=input.value.trim(); if(!text)return;
-  input.value=''; btn.disabled=true;
+  const text=input.value.trim();if(!text)return;
+  input.value='';btn.disabled=true;
   document.getElementById('quickBtns').style.display='none';
   appendMsg('user',text);
   aiHistory.push({role:'user',content:text});
   showTyping();
   try{
-    const res=await fetch('/api/chat',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:aiHistory,system:SYSTEM})
-    });
-    const data=await res.json();
-    hideTyping();
-    const reply=data.reply||'Sorry, I had trouble responding. Please try again or call Lee at (301) 509-9437.';
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aiHistory,system:SYSTEM})});
+    const data=await res.json();hideTyping();
+    const reply=data.reply||'Sorry, I had trouble responding. Please call Lee at (301) 509-9437.';
     aiHistory.push({role:'assistant',content:reply});
     appendMsg('bot',reply);
   }catch(e){
     hideTyping();
-    appendMsg('bot','Sorry, I\'m having trouble connecting. Please call Lee directly at (301) 509-9437 — he\'ll be happy to help!');
+    appendMsg('bot','Sorry, having trouble connecting. Please call Lee at (301) 509-9437 — he\'ll be happy to help!');
   }
   btn.disabled=false;
 }
-function quickAsk(q){ document.getElementById('aiInput').value=q; sendAI(); }
+function quickAsk(q){document.getElementById('aiInput').value=q;sendAI();}
 
-// ===== UTILS =====
-function toggleCheck(el){ el.classList.toggle('checked'); }
-function openModal(loanType, note){
+// ===== FORMS =====
+function toggleCheck(el){el.classList.toggle('checked');}
+function openModal(loanType){
   document.getElementById('modalTitle').textContent='Get Pre-Qualified';
-  document.getElementById('modalSub').textContent=(note||loanType)+' · RenovationOne · Lee Smith NMLS #188505';
+  document.getElementById('modalSub').textContent=loanType+' · RenovationOne · Lee Smith NMLS #188505';
   document.getElementById('modalFormWrap').style.display='block';
   document.getElementById('modalSuccess').style.display='none';
   document.getElementById('modalOverlay').classList.add('open');
 }
-function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
-function closeModalOutside(e){ if(e.target===document.getElementById('modalOverlay'))closeModal(); }
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 function submitModal(){
   const name=document.getElementById('mName').value;
   const email=document.getElementById('mEmail').value;
+  const phone=document.getElementById('mPhone').value;
   if(!name||!email){alert('Please enter your name and email.');return;}
+  submitToHubSpot([
+    {name:'firstname',value:name.split(' ')[0]},
+    {name:'lastname',value:name.split(' ').slice(1).join(' ')||''},
+    {name:'email',value:email},
+    {name:'phone',value:phone},
+    {name:'message',value:'Modal lead: '+document.getElementById('mType').value}
+  ]);
   document.getElementById('modalFormWrap').style.display='none';
   document.getElementById('modalSuccess').style.display='block';
 }
-function submitForm(){
-  alert('Thank you! Lee Smith will contact you within 48 hours.\n\nNeed faster help? Call (301) 509-9437');
+function submitMainForm(){
+  const fname=document.getElementById('f_fname').value;
+  const email=document.getElementById('f_email').value;
+  const phone=document.getElementById('f_phone').value;
+  const lname=document.getElementById('f_lname').value;
+  if(!fname||!email){alert('Please enter your name and email.');return;}
+  submitToHubSpot([
+    {name:'firstname',value:fname},
+    {name:'lastname',value:lname},
+    {name:'email',value:email},
+    {name:'phone',value:phone},
+    {name:'message',value:'Pre-approval form · State: '+document.getElementById('f_state').value}
+  ]);
+  alert('Thank you '+fname+'! Lee Smith will contact you within 48 hours.\n\nNeed faster help? Call (301) 509-9437'
 }
 setInterval(()=>{
   const m=Math.floor(Math.random()*15)+1;
@@ -847,4 +944,3 @@ setInterval(()=>{
 </script>
 </body>
 </html>
- 
