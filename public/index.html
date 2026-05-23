@@ -254,6 +254,36 @@
     .calc-grid{grid-template-columns:1fr;}
     .hero-stats{gap:1.5rem;}
   }
+
+  /* LOAN PROGRAMS */
+  .loans-section{padding:5rem 2rem;background:var(--cream-dark);}
+  .loans-inner{max-width:1180px;margin:0 auto;}
+  .loans-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;}
+  .loans-title{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--forest);margin-bottom:0.75rem;line-height:1.2;}
+  .loans-sub{color:var(--text-muted);font-size:1rem;max-width:600px;line-height:1.6;margin-bottom:2.5rem;}
+  .loan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.25rem;}
+  .loan-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.15s,box-shadow 0.2s;}
+  .loan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--forest);transition:background 0.2s;}
+  .loan-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 8px 32px rgba(28,58,42,0.12);}
+  .loan-card:hover::before{background:var(--amber);}
+  .loan-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.75rem;gap:0.5rem;}
+  .loan-tag{display:inline-block;font-size:0.6rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;background:var(--forest);color:var(--amber-light);padding:3px 8px;border-radius:4px;flex-shrink:0;}
+  .loan-tag.fha{background:#8b3a2a;}
+  .loan-tag.conv{background:#1a3a6b;}
+  .loan-tag.va{background:#2a4a8a;}
+  .loan-tag.usda{background:#2a6b3a;}
+  .loan-card h3{font-size:0.95rem;font-weight:700;color:var(--forest);margin-bottom:0.4rem;line-height:1.3;}
+  .loan-card p{font-size:0.8rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.85rem;}
+  .loan-specs{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
+  .loan-spec{font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:4px;background:var(--cream-dark);color:var(--forest);border:1px solid var(--border);}
+  .loan-spec.green{background:var(--green-light);color:var(--green);border-color:#b0d8c0;}
+  .loan-apply{display:block;text-align:center;background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);padding:0.5rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:background 0.2s;}
+  .loan-card:hover .loan-apply{background:var(--amber);color:var(--white);border-color:var(--amber);}
+
+  /* USDA BADGE */
+  .usda-eligible{position:absolute;bottom:10px;left:10px;background:rgba(28,107,60,0.92);color:#fff;font-size:0.65rem;font-weight:800;padding:4px 8px;border-radius:5px;letter-spacing:0.03em;}
+  .usda-ineligible{position:absolute;bottom:10px;left:10px;background:rgba(80,80,80,0.7);color:#ddd;font-size:0.65rem;font-weight:700;padding:4px 8px;border-radius:5px;}
+
 </style>
 </head>
 <body>
@@ -268,6 +298,7 @@
     <a href="#listings">Today's Finds</a>
     <a href="#calculator">Equity Calculator</a>
     <a href="#ai-advisor">AI Advisor</a>
+    <a href="#loan-programs">Loan Programs</a>
     <a href="#how">How It Works</a>
     <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="nav-cta">Apply for a Renovation Loan →</a>
   </div>
@@ -489,6 +520,140 @@
   </div>
 </section>
 
+
+<!-- LOAN PROGRAMS -->
+<section id="loan-programs" class="loans-section">
+  <div class="loans-inner">
+    <div class="loans-label">Renovation Loan Programs</div>
+    <h2 class="loans-title">7 Ways to Finance a Fixer-Upper</h2>
+    <p class="loans-sub">Every program below wraps your purchase price and renovation costs into one single mortgage — no second loan, no paying out of pocket for repairs before moving in.</p>
+    <div class="loan-grid">
+
+      <!-- FHA 203k Limited -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag fha">FHA · Limited</div>
+        </div>
+        <h3>FHA 203(k) Limited</h3>
+        <p>The streamlined renovation loan for cosmetic and non-structural work. Covers kitchens, flooring, roofing, HVAC, windows, paint, and more — anything that doesn't require structural engineering or foundation work. Recently updated to allow up to $75,000 in renovation costs. Faster and simpler to close than the Standard 203k.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">3.5% min down</span>
+          <span class="loan-spec green">580+ credit</span>
+          <span class="loan-spec">Up to $75K reno</span>
+          <span class="loan-spec">Primary residence</span>
+          <span class="loan-spec">No structural work</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+      <!-- FHA 203k Standard -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag fha">FHA · Standard</div>
+        </div>
+        <h3>FHA 203(k) Standard</h3>
+        <p>The full-power renovation loan for major repairs and structural work. Covers additions, foundation repairs, septic systems, full gut renovations — anything goes. Required when renovation costs exceed $75,000 or when structural work is needed. Requires a HUD-approved 203k consultant to manage the draw schedule and inspections. Best for serious fixer-uppers.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">3.5% min down</span>
+          <span class="loan-spec green">580+ credit</span>
+          <span class="loan-spec">$75K+ reno</span>
+          <span class="loan-spec">Primary residence</span>
+          <span class="loan-spec">Structural work OK</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+      <!-- HomeStyle -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag conv">Conventional</div>
+        </div>
+        <h3>HomeStyle Renovation</h3>
+        <p>A conventional renovation loan with no FHA mortgage insurance fees. Great for buyers with stronger credit putting 10-20% down. Covers any renovation type including luxury upgrades and landscaping. Investment properties and second homes are allowed — making it ideal for house hackers and investors.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">3% min down</span>
+          <span class="loan-spec green">620+ credit</span>
+          <span class="loan-spec">No FHA fees</span>
+          <span class="loan-spec">Investment props OK</span>
+          <span class="loan-spec">Any reno type</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+      <!-- CHOICERenovation -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag conv">Conventional</div>
+        </div>
+        <h3>CHOICERenovation</h3>
+        <p>Very similar to HomeStyle Renovation — same 3% down, same conventional loan structure, same investment property eligibility. The key difference is CHOICERenovation includes a resilience improvement credit for upgrades that protect against storms, floods, wildfires, and other natural hazards. A great alternative to HomeStyle, especially for properties in coastal, flood zone, or weather-prone markets. Your loan advisor can compare both and recommend the better fit.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">3% min down</span>
+          <span class="loan-spec green">620+ credit</span>
+          <span class="loan-spec">Resilience credit</span>
+          <span class="loan-spec">Investment props OK</span>
+          <span class="loan-spec">No FHA fees</span>
+          <span class="loan-spec">Any reno type</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+      <!-- RenoExpress -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag conv">Conventional · Fast</div>
+        </div>
+        <h3>RenoExpress</h3>
+        <p>The fastest renovation loan on the market. Designed for lighter cosmetic updates under $75,000 with a streamlined approval process and no HUD consultant required. Perfect for cosmetic updaters and undervalued homes that just need modernizing. Closes faster than any other renovation loan.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">3% min down</span>
+          <span class="loan-spec green">620+ credit</span>
+          <span class="loan-spec">Up to $75K reno</span>
+          <span class="loan-spec">Fastest close</span>
+          <span class="loan-spec">No consultant needed</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+      <!-- VA Reno -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag va">VA · Veterans</div>
+        </div>
+        <h3>VA Renovation Loan</h3>
+        <p>The most powerful renovation loan available — and it's exclusively for veterans, active duty service members, and surviving spouses. Zero down payment, no private mortgage insurance, and competitive rates. Combines purchase and renovation into one loan with no monthly MI. One of the best financial tools available for eligible buyers.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">$0 down</span>
+          <span class="loan-spec green">No PMI ever</span>
+          <span class="loan-spec">620+ credit</span>
+          <span class="loan-spec">Veterans only</span>
+          <span class="loan-spec">Primary residence</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+      <!-- USDA Reno -->
+      <div class="loan-card">
+        <div class="loan-card-header">
+          <div class="loan-tag usda">USDA · Rural</div>
+        </div>
+        <h3>USDA Renovation Loan</h3>
+        <p>Zero down payment for eligible rural and suburban properties. Many properties just outside major metros qualify — not just farms and countryside. Wraps purchase and renovation into one low-cost loan with below-market rates. Income limits apply. Use the USDA eligibility map to check a specific address. Ideal for undervalued and cosmetic-update homes in suburban markets.</p>
+        <div class="loan-specs">
+          <span class="loan-spec green">$0 down</span>
+          <span class="loan-spec green">Low fees</span>
+          <span class="loan-spec">640+ credit</span>
+          <span class="loan-spec">USDA zones only</span>
+          <span class="loan-spec">Income limits apply</span>
+        </div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="loan-apply">Apply with a Renovation Loan Advisor →</a>
+      </div>
+
+    </div>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:1.5rem;line-height:1.6;">All loan programs subject to credit approval, property eligibility, and investor guidelines. Down payment requirements, credit score minimums, and loan limits vary by borrower and property. Not a commitment to lend. Equal Housing Opportunity.</p>
+  </div>
+</section>
+
 <!-- FINANCING CTA -->
 <section class="financing-section">
   <div class="financing-inner">
@@ -560,13 +725,13 @@ function submitToHubSpot(fields){
 
 // ===== PROPERTIES =====
 const allProps=[
-  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",tags:["New Floors Needed","Kitchen Update","Great Location"]},
-  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",tags:["Foreclosure","Priced to Sell","Structural Updates"]},
-  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA",state:"PA",zip:"15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",tags:["REO","Below Market","Motivated Seller"]},
-  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC",state:"NC",zip:"27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",tags:["Outdated Interior","Below AVM","No Structural Issues"]},
-  {id:5,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",tags:["Cosmetic Only","Great Bones","Below Market"]},
-  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",tags:["Dated But Solid","Below Market","Low Entry Price"]},
-  {id:7,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",tags:["Dated Kitchen","New Roof 2022","Walk to Water"]},
+  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",usda:false,tags:["New Floors Needed","Kitchen Update","Great Location"]},
+  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",usda:false,tags:["Foreclosure","Priced to Sell","Structural Updates"]},
+  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA",state:"PA",zip:"15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",usda:true,tags:["REO","Below Market","Motivated Seller"]},
+  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC",state:"NC",zip:"27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",usda:false,tags:["Outdated Interior","Below AVM","No Structural Issues"]},
+  {id:5,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",usda:true,tags:["Cosmetic Only","Great Bones","Below Market"]},
+  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",usda:true,tags:["Dated But Solid","Below Market","Low Entry Price"]},
+  {id:7,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",usda:false,tags:["Dated Kitchen","New Roof 2022","Walk to Water"]},
 ];
 const typeLabel={'full-reno':'🔨 Full Renovation','cosmetic':'🎨 Cosmetic Update','undervalued':'💎 Undervalued'};
 const typeBadge={'full-reno':'badge-full','cosmetic':'badge-cosmetic','undervalued':'badge-under'};
@@ -589,6 +754,7 @@ function renderProps(list){
       <div class="prop-type-badge ${typeBadge[p.type]}">${typeLabel[p.type]}</div>
       <div class="prop-equity-badge">Est. +$${Math.round(equity/1000)}K equity</div>
       <div class="prop-days">${p.days===1?'🔥 New Today':'Added '+p.days+'d ago'}</div>
+      ${p.usda?'<div class="usda-eligible">✓ USDA Eligible Zone</div>':'<div class="usda-ineligible">Check USDA eligibility</div>'}
     </div>
     <div class="prop-body">
       <div class="prop-addr">${p.addr}</div>
