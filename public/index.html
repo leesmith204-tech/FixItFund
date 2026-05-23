@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FixerUpperFinds — Find Undervalued Homes. Build Equity from Day One.</title>
+<title>FixerUpperFinds — Search Fixer-Uppers & Undervalued Homes</title>
+<meta name="description" content="Search daily listings of fixer-uppers, cosmetic updaters, and undervalued homes. Find below-market properties and build equity from day one.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Cabinet+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -19,14 +20,20 @@
 
   /* NAV */
   nav{background:var(--forest);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:68px;position:sticky;top:0;z-index:200;border-bottom:3px solid var(--amber);}
-  .nav-logo-main{font-family:'Fraunces',serif;color:var(--white);font-size:1.4rem;line-height:1;}
+  .nav-logo-main{font-family:'Fraunces',serif;color:var(--white);font-size:1.5rem;line-height:1;}
   .nav-logo-main span{color:var(--amber-light);}
-  .nav-logo-sub{font-size:0.62rem;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;}
+  .nav-logo-sub{font-size:0.62rem;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;}
   .nav-links{display:flex;gap:1.5rem;align-items:center;}
   .nav-links a{color:#aabfb0;text-decoration:none;font-size:0.85rem;font-weight:500;transition:color 0.2s;}
   .nav-links a:hover{color:var(--white);}
-  .nav-cta{background:var(--amber);color:var(--white)!important;padding:0.5rem 1.25rem;border-radius:6px;font-weight:700!important;}
+  .nav-cta{background:var(--amber);color:var(--white)!important;padding:0.5rem 1.25rem;border-radius:6px;font-weight:700!important;transition:background 0.2s!important;}
   .nav-cta:hover{background:var(--amber-light)!important;color:var(--forest)!important;}
+
+  /* FINANCING BANNER */
+  .financing-bar{background:var(--forest-mid);border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;padding:0.65rem 1rem;}
+  .financing-bar a{color:var(--amber-light);font-size:0.82rem;font-weight:600;text-decoration:none;letter-spacing:0.02em;}
+  .financing-bar a:hover{color:var(--white);}
+  .financing-bar span{color:#6a8a78;font-size:0.82rem;}
 
   /* HERO */
   .hero{background:var(--forest);padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
@@ -35,29 +42,31 @@
   .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(212,130,42,0.15);border:1px solid rgba(212,130,42,0.4);color:var(--amber-light);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
   .hero h1{font-family:'Fraunces',serif;color:var(--white);font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.1;margin-bottom:1rem;}
   .hero h1 em{color:var(--amber-light);font-style:italic;}
-  .hero-sub{color:#8aab98;font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;max-width:600px;margin-left:auto;margin-right:auto;}
+  .hero-sub{color:#8aab98;font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;max-width:620px;margin-left:auto;margin-right:auto;}
 
   /* SEARCH BOX */
-  .search-box{background:var(--white);border-radius:16px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:820px;margin:0 auto;}
+  .search-box{background:var(--white);border-radius:16px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:860px;margin:0 auto;}
   .search-box-title{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;text-align:left;}
-  .search-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.75rem;align-items:end;}
+  .search-row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr auto;gap:0.75rem;align-items:end;}
   .search-field label{display:block;font-size:0.72rem;font-weight:700;color:var(--text-muted);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:5px;}
   .search-field input,.search-field select{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--cream);}
   .search-field input:focus,.search-field select:focus{border-color:var(--forest);}
-  .search-btn{background:var(--amber);color:var(--white);border:none;padding:0.75rem 1.75rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;white-space:nowrap;height:46px;}
+  .search-field input::placeholder{color:#aaa;}
+  .search-btn{background:var(--amber);color:var(--white);border:none;padding:0.75rem 1.5rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;white-space:nowrap;height:46px;}
   .search-btn:hover{background:var(--amber-light);color:var(--forest);}
-  .hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:2rem;}
+  .hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
+  .hero-stat{text-align:center;}
   .hero-stat-num{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--amber-light);line-height:1;}
   .hero-stat-label{font-size:0.72rem;color:#6a8a78;margin-top:2px;letter-spacing:0.04em;}
 
-  /* LEAD GATE MODAL */
-  .gate-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
+  /* LEAD GATE */
+  .gate-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
   .gate-overlay.open{display:flex;}
-  .gate-modal{background:var(--white);border-radius:20px;padding:2.5rem;max-width:480px;width:100%;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.3);}
-  .gate-modal h2{font-family:'Fraunces',serif;color:var(--forest);font-size:1.6rem;margin-bottom:0.4rem;line-height:1.2;}
-  .gate-modal p{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;}
-  .gate-search-summary{background:var(--cream-dark);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;margin-bottom:1.5rem;font-size:0.85rem;color:var(--forest);font-weight:600;}
-  .gate-form{display:flex;flex-direction:column;gap:0.75rem;}
+  .gate-modal{background:var(--white);border-radius:20px;padding:2.5rem;max-width:460px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.3);}
+  .gate-modal h2{font-family:'Fraunces',serif;color:var(--forest);font-size:1.5rem;margin-bottom:0.4rem;line-height:1.2;}
+  .gate-modal p{color:var(--text-muted);font-size:0.88rem;margin-bottom:1.25rem;line-height:1.6;}
+  .gate-summary{background:var(--cream-dark);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1rem;margin-bottom:1.25rem;font-size:0.83rem;color:var(--forest);font-weight:600;}
+  .gate-form{display:flex;flex-direction:column;gap:0.7rem;}
   .gate-form input{padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;transition:border-color 0.2s;}
   .gate-form input:focus{border-color:var(--forest);}
   .gate-submit{background:var(--forest);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;margin-top:0.25rem;}
@@ -65,7 +74,7 @@
   .gate-skip{display:block;text-align:center;margin-top:0.75rem;font-size:0.8rem;color:var(--text-muted);cursor:pointer;text-decoration:underline;}
   .gate-skip:hover{color:var(--forest);}
   .gate-trust{display:flex;gap:1rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
-  .gate-trust span{font-size:0.72rem;color:#aaa;}
+  .gate-trust span{font-size:0.72rem;color:#bbb;}
 
   /* CATEGORY TABS */
   .cat-section{background:var(--forest-mid);border-bottom:1px solid rgba(255,255,255,0.08);}
@@ -75,13 +84,12 @@
   .cat-tab.active{color:var(--white);border-bottom-color:var(--amber);}
   .cat-count{background:rgba(212,130,42,0.25);color:var(--amber-light);font-size:0.65rem;font-weight:700;padding:2px 6px;border-radius:10px;}
 
-  /* SEARCH RESULTS BAR */
-  .results-bar{background:var(--cream-dark);border-bottom:1px solid var(--border);padding:0.85rem 2rem;}
+  /* RESULTS BAR */
+  .results-bar{background:var(--cream-dark);border-bottom:1px solid var(--border);padding:0.85rem 2rem;display:none;}
   .results-bar-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}
   .results-summary{font-size:0.875rem;color:var(--text-muted);}
   .results-summary strong{color:var(--forest);}
   .results-clear{font-size:0.8rem;color:var(--amber);cursor:pointer;font-weight:600;text-decoration:underline;}
-  .results-clear:hover{color:var(--forest);}
 
   /* LISTINGS */
   .listings-section{padding:3rem 2rem;max-width:1180px;margin:0 auto;}
@@ -90,10 +98,10 @@
   .live-pill{display:inline-flex;align-items:center;gap:6px;background:#fff0f0;border:1px solid #ffc0c0;color:var(--red);font-size:0.72rem;font-weight:700;letter-spacing:0.06em;padding:4px 10px;border-radius:20px;}
   .live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.5s infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+  .prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
   .no-results{text-align:center;padding:4rem 2rem;color:var(--text-muted);}
   .no-results h3{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem;}
-  .no-results p{font-size:0.9rem;line-height:1.6;}
-  .prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
+  .no-results p{font-size:0.9rem;line-height:1.6;margin-bottom:1.5rem;}
   .prop-card{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
   .prop-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(28,58,42,0.14);}
   .prop-img{height:190px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -123,29 +131,22 @@
   .equity-fill{height:100%;background:linear-gradient(90deg,var(--forest-light),var(--amber));border-radius:4px;}
   .prop-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem;}
   .prop-tag{background:var(--cream-dark);color:var(--text-muted);font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;}
-  .prop-loans-row{border-top:1px solid var(--border);padding-top:0.85rem;margin-bottom:0.85rem;}
-  .prop-loans-lbl{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.4rem;}
-  .loan-pills{display:flex;gap:0.3rem;flex-wrap:wrap;}
-  .loan-pill{font-size:0.66rem;font-weight:700;padding:3px 7px;border-radius:4px;background:#e8edf5;color:var(--blue);border:1px solid #c5cfe0;}
-  .prop-cta{display:block;width:100%;background:var(--forest);color:var(--white);border:none;padding:0.72rem;border-radius:8px;font-size:0.875rem;font-weight:700;cursor:pointer;text-align:center;transition:background 0.2s;font-family:'Cabinet Grotesk',sans-serif;}
+  .prop-cta{display:block;width:100%;background:var(--forest);color:var(--white);border:none;padding:0.72rem;border-radius:8px;font-size:0.875rem;font-weight:700;cursor:pointer;text-align:center;transition:background 0.2s;font-family:'Cabinet Grotesk',sans-serif;text-decoration:none;}
   .prop-cta:hover{background:var(--amber);}
 
   /* EQUITY CALCULATOR */
   .calc-section{background:var(--forest);padding:5rem 2rem;}
   .calc-inner{max-width:1060px;margin:0 auto;}
-  .section-label-light{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
-  .section-label-dark{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;}
-  .section-title-light{font-family:'Fraunces',serif;color:var(--white);font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0.75rem;line-height:1.15;}
-  .section-title-dark{font-family:'Fraunces',serif;color:var(--forest);font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:0.75rem;line-height:1.2;}
-  .section-sub-light{color:#7a9a88;font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2.5rem;}
-  .section-sub-dark{color:var(--text-muted);font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2.5rem;}
+  .calc-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+  .calc-title{font-family:'Fraunces',serif;color:var(--white);font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0.75rem;line-height:1.15;}
+  .calc-sub{color:#7a9a88;font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2.5rem;}
   .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
   .calc-inputs{display:flex;flex-direction:column;gap:1.1rem;}
   .calc-field label{display:block;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7a9a88;margin-bottom:6px;}
-  .calc-field input,.calc-field select{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:var(--white);padding:0.75rem 1rem;border-radius:8px;font-size:1rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;}
-  .calc-field input:focus,.calc-field select:focus{border-color:var(--amber-light);}
+  .calc-field input{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:var(--white);padding:0.75rem 1rem;border-radius:8px;font-size:1rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;}
+  .calc-field input:focus{border-color:var(--amber-light);}
   .calc-field input::placeholder{color:#4a6a58;}
-  .calc-field select option{background:var(--forest);}
+  .calc-tip{font-size:0.68rem;color:#4a6a58;margin-top:4px;}
   .calc-results{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:2rem;}
   .calc-results-title{font-family:'Fraunces',serif;color:var(--white);font-size:1.15rem;margin-bottom:1.5rem;}
   .calc-line{display:flex;justify-content:space-between;align-items:center;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.07);}
@@ -159,32 +160,20 @@
   .calc-line.green-line .calc-line-lbl{color:#6dcfa0;font-weight:600;font-size:0.88rem;}
   .calc-line.green-line .calc-line-val{font-family:'Fraunces',serif;font-size:1.3rem;color:#6dcfa0;}
   .calc-equity-visual{margin:1.25rem 0;}
-  .calc-equity-visual-label{display:flex;justify-content:space-between;font-size:0.75rem;color:#7a9a88;margin-bottom:6px;}
+  .calc-equity-label{display:flex;justify-content:space-between;font-size:0.75rem;color:#7a9a88;margin-bottom:6px;}
   .calc-equity-track{background:rgba(255,255,255,0.08);border-radius:6px;height:12px;overflow:hidden;}
   .calc-equity-fill{height:100%;background:linear-gradient(90deg,var(--forest-light),var(--amber-light));border-radius:6px;transition:width 0.8s ease;}
   .calc-disclaimer{font-size:0.7rem;color:#4a6a58;margin-top:0.75rem;line-height:1.5;}
-  .calc-cta-btn{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:1.25rem;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
+  .calc-cta-btn{display:block;width:100%;background:var(--amber);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:1.25rem;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;text-align:center;text-decoration:none;}
   .calc-cta-btn:hover{background:var(--amber-light);color:var(--forest);}
-
-  /* LOAN PROGRAMS */
-  .loans-section{padding:5rem 2rem;background:var(--cream-dark);}
-  .loans-inner{max-width:1180px;margin:0 auto;}
-  .loan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem;}
-  .loan-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,transform 0.15s,box-shadow 0.2s;position:relative;overflow:hidden;}
-  .loan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--forest);transition:background 0.2s;}
-  .loan-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 8px 32px rgba(28,58,42,0.12);}
-  .loan-card:hover::before{background:var(--amber);}
-  .loan-tag{display:inline-block;font-size:0.62rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;background:var(--forest);color:var(--amber-light);padding:3px 8px;border-radius:4px;margin-bottom:0.75rem;}
-  .loan-card h3{font-size:0.95rem;font-weight:700;color:var(--forest);margin-bottom:0.4rem;}
-  .loan-card p{font-size:0.8rem;color:var(--text-muted);line-height:1.55;margin-bottom:0.75rem;}
-  .loan-highlight{font-size:0.76rem;font-weight:700;color:var(--green);margin-bottom:1rem;}
-  .loan-cta-link{display:block;text-align:center;background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);padding:0.5rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:background 0.2s;}
-  .loan-card:hover .loan-cta-link{background:var(--amber);color:var(--white);border-color:var(--amber);}
 
   /* AI ADVISOR */
   .ai-section{background:var(--white);padding:5rem 2rem;}
   .ai-inner{max-width:860px;margin:0 auto;}
-  .ai-box{background:var(--cream);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;margin-top:2rem;}
+  .ai-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;}
+  .ai-title{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--forest);margin-bottom:0.75rem;line-height:1.2;}
+  .ai-sub{color:var(--text-muted);font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2rem;}
+  .ai-box{background:var(--cream);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;}
   .ai-header{background:var(--forest);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:12px;}
   .ai-avatar{width:40px;height:40px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
   .ai-header-info h3{color:var(--white);font-size:0.95rem;font-weight:700;}
@@ -214,61 +203,45 @@
   .ai-send:hover{background:var(--amber);}
   .ai-send:disabled{background:#b0bfb8;cursor:not-allowed;}
 
-  /* LEAD FORM */
-  .lead-section{background:var(--forest);padding:5rem 2rem;}
-  .lead-inner{max-width:860px;margin:0 auto;}
-  .form-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:2.5rem;margin-top:2rem;}
-  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-  .fg{display:flex;flex-direction:column;gap:6px;}
-  .fg.full{grid-column:1/-1;}
-  .fg label{font-size:0.75rem;font-weight:700;color:#7a9a88;letter-spacing:0.05em;text-transform:uppercase;}
-  .fg input,.fg select{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:var(--white);padding:0.75rem 1rem;border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;transition:border-color 0.2s;outline:none;}
-  .fg input::placeholder{color:#4a6a58;}
-  .fg input:focus,.fg select:focus{border-color:var(--amber-light);}
-  .fg select option{background:var(--forest);}
-  .loan-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:0.6rem;grid-column:1/-1;}
-  .lcheck{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:0.6rem 0.85rem;border-radius:8px;cursor:pointer;transition:all 0.15s;}
-  .lcheck:hover{border-color:var(--amber-light);background:rgba(212,130,42,0.1);}
-  .lcheck.checked{border-color:var(--amber);background:rgba(212,130,42,0.15);}
-  .lcheck input{display:none;}
-  .chkbox{width:16px;height:16px;border:1.5px solid rgba(255,255,255,0.3);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-  .lcheck.checked .chkbox{background:var(--amber);border-color:var(--amber);}
-  .chkinner{width:8px;height:8px;background:white;border-radius:1px;display:none;}
-  .lcheck.checked .chkinner{display:block;}
-  .lcheck-lbl{font-size:0.78rem;font-weight:500;color:#c0d8c8;}
-  .submit-btn{margin-top:1.5rem;width:100%;background:var(--amber);color:var(--white);padding:1rem;border-radius:10px;font-size:1rem;font-weight:700;border:none;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
-  .submit-btn:hover{background:var(--amber-light);color:var(--forest);}
-  .trust-row{display:flex;gap:1.5rem;margin-top:1.25rem;justify-content:center;flex-wrap:wrap;}
-  .trust-item{font-size:0.76rem;color:#5a7a68;}
+  /* FINANCING CTA SECTION */
+  .financing-section{background:var(--amber-pale);border-top:2px solid var(--amber);border-bottom:2px solid var(--amber);padding:3rem 2rem;}
+  .financing-inner{max-width:800px;margin:0 auto;text-align:center;}
+  .financing-inner h2{font-family:'Fraunces',serif;color:var(--forest);font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:0.75rem;}
+  .financing-inner p{color:var(--text-muted);font-size:1rem;line-height:1.6;max-width:560px;margin:0 auto 2rem;}
+  .financing-btn{display:inline-block;background:var(--forest);color:var(--white);padding:1rem 2.5rem;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;transition:background 0.2s;font-family:'Cabinet Grotesk',sans-serif;}
+  .financing-btn:hover{background:var(--amber);}
+  .financing-note{font-size:0.78rem;color:var(--text-muted);margin-top:1rem;}
 
-  /* AGENT */
-  .agent-section{background:var(--cream-dark);padding:3rem 2rem;border-top:1px solid var(--border);}
-  .agent-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
-  .agent-avatar{width:80px;height:80px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.8rem;color:var(--amber-light);flex-shrink:0;border:3px solid var(--amber);}
-  .agent-info h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--forest);margin-bottom:2px;}
-  .agent-info p{font-size:0.85rem;color:var(--text-muted);line-height:1.6;}
-  .agent-info strong{color:var(--forest);}
-  .agent-contact{margin-left:auto;display:flex;flex-direction:column;gap:0.5rem;}
-  .agent-btn{background:var(--forest);color:var(--white);padding:0.6rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:700;text-align:center;transition:background 0.2s;}
-  .agent-btn:hover{background:var(--amber);}
-  .agent-btn.outline{background:transparent;border:1.5px solid var(--forest);color:var(--forest);}
-  .agent-btn.outline:hover{background:var(--forest);color:var(--white);}
+  /* HOW IT WORKS */
+  .how-section{background:var(--cream-dark);padding:5rem 2rem;}
+  .how-inner{max-width:1000px;margin:0 auto;text-align:center;}
+  .how-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;}
+  .how-title{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--forest);margin-bottom:3rem;line-height:1.2;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
+  .step{text-align:center;}
+  .step-num{width:52px;height:52px;border-radius:50%;background:var(--forest);color:var(--amber-light);font-family:'Fraunces',serif;font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+  .step h3{font-size:1rem;font-weight:700;color:var(--forest);margin-bottom:0.4rem;}
+  .step p{font-size:0.85rem;color:var(--text-muted);line-height:1.6;}
 
-  footer{background:#0d1f16;color:#3a5a48;padding:2rem;text-align:center;font-size:0.78rem;line-height:1.9;}
-  footer strong{color:#5a7a68;}
+  /* FOOTER */
+  footer{background:#0d1f16;color:#3a5a48;padding:2.5rem 2rem;text-align:center;font-size:0.8rem;line-height:2;}
   footer a{color:#5a7a68;text-decoration:none;}
+  footer a:hover{color:var(--amber-light);}
+  footer strong{color:#5a7a68;}
+  .footer-logo{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--amber-light);margin-bottom:0.5rem;}
+  .footer-logo span{color:var(--white);}
 
   /* GENERAL MODAL */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:500;align-items:center;justify-content:center;padding:1rem;}
   .modal-overlay.open{display:flex;}
-  .modal{background:var(--white);border-radius:18px;padding:2rem;max-width:520px;width:100%;position:relative;max-height:90vh;overflow-y:auto;}
+  .modal{background:var(--white);border-radius:18px;padding:2rem;max-width:480px;width:100%;position:relative;max-height:90vh;overflow-y:auto;}
   .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-muted);}
   .modal h2{font-family:'Fraunces',serif;color:var(--forest);margin-bottom:0.25rem;font-size:1.4rem;}
   .modal-sub{font-size:0.88rem;color:var(--text-muted);margin-bottom:1.5rem;}
   .mform .fg{margin-bottom:0.75rem;}
   .mform label{font-size:0.78rem;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px;}
-  .mform input,.mform select{width:100%;padding:0.65rem 0.9rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text);}
-  .mform input:focus,.mform select:focus{border-color:var(--forest);}
+  .mform input{width:100%;padding:0.65rem 0.9rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text);}
+  .mform input:focus{border-color:var(--forest);}
   .modal-submit{width:100%;background:var(--forest);color:var(--white);padding:0.85rem;border-radius:10px;font-size:1rem;font-weight:700;border:none;cursor:pointer;margin-top:1rem;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
   .modal-submit:hover{background:var(--amber);}
   .success-msg{display:none;text-align:center;padding:2rem 0;}
@@ -278,9 +251,8 @@
   @media(max-width:768px){
     .nav-links{display:none;}
     .search-row{grid-template-columns:1fr;}
-    .calc-grid,.form-grid{grid-template-columns:1fr;}
-    .form-card{padding:1.5rem;}
-    .agent-contact{margin-left:0;width:100%;}
+    .calc-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:1.5rem;}
   }
 </style>
 </head>
@@ -290,26 +262,31 @@
 <nav>
   <div>
     <div class="nav-logo-main">Fixer<span>Upper</span>Finds</div>
-    <div class="nav-logo-sub">by RenovationOne · Lee Smith NMLS #188505</div>
+    <div class="nav-logo-sub">Daily listings · Fixer-uppers · Undervalued homes</div>
   </div>
   <div class="nav-links">
     <a href="#listings">Today's Finds</a>
     <a href="#calculator">Equity Calculator</a>
     <a href="#ai-advisor">AI Advisor</a>
-    <a href="#loan-programs">Loan Programs</a>
-    <a href="#get-started" class="nav-cta">Get Pre-Approved</a>
+    <a href="#how">How It Works</a>
+    <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="nav-cta">Apply for a Renovation Loan →</a>
   </div>
 </nav>
 
-<!-- HERO WITH SEARCH -->
+<!-- FINANCING BANNER -->
+<div class="financing-bar">
+  <span>Ready to finance your find? </span>
+  <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank">Apply with a Renovation Loan Advisor →</a>
+</div>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-pattern"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">🏡 MD · DC · VA · WV · PA · NJ · NC · DE · MA · NH · IL · TX</div>
-    <h1>Find Undervalued Homes.<br><em>Build Equity</em> from Day One.</h1>
-    <p class="hero-sub">Search daily listings of fixer-uppers, cosmetic updaters, and undervalued homes — then get matched with renovation financing that makes it possible.</p>
+    <div class="hero-eyebrow">🏡 Fixer-Uppers · Cosmetic Updates · Undervalued Homes</div>
+    <h1>Search Undervalued Homes.<br><em>Build Equity</em> from Day One.</h1>
+    <p class="hero-sub">Browse daily listings of below-market properties across MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL &amp; TX. Find the hidden gem that builds your wealth.</p>
 
-    <!-- SEARCH BOX -->
     <div class="search-box">
       <div class="search-box-title">🔍 Search Properties by Location</div>
       <div class="search-row">
@@ -336,6 +313,15 @@
           </select>
         </div>
         <div class="search-field">
+          <label>Property Type</label>
+          <select id="searchType">
+            <option value="">All Types</option>
+            <option value="full-reno">Full Renovation</option>
+            <option value="cosmetic">Cosmetic Update</option>
+            <option value="undervalued">Undervalued / Outdated</option>
+          </select>
+        </div>
+        <div class="search-field">
           <label>Max Price</label>
           <select id="searchPrice">
             <option value="">Any Price</option>
@@ -345,35 +331,36 @@
             <option value="600000">Under $600K</option>
           </select>
         </div>
-        <button class="search-btn" onclick="doSearch()">Find Properties →</button>
+        <button class="search-btn" onclick="doSearch()">Search →</button>
       </div>
     </div>
 
     <div class="hero-stats">
-      <div><div class="hero-stat-num">340+</div><div class="hero-stat-label">Live Listings Today</div></div>
-      <div><div class="hero-stat-num">$42K</div><div class="hero-stat-label">Avg. Instant Equity</div></div>
-      <div><div class="hero-stat-num">12</div><div class="hero-stat-label">States Covered</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">340+</div><div class="hero-stat-label">Live Listings Today</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">12</div><div class="hero-stat-label">States Covered</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">$42K</div><div class="hero-stat-label">Avg. Instant Equity</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Daily</div><div class="hero-stat-label">New Listings Added</div></div>
     </div>
   </div>
 </section>
 
-<!-- LEAD GATE MODAL -->
+<!-- LEAD GATE -->
 <div class="gate-overlay" id="gateOverlay">
   <div class="gate-modal">
     <h2>Where should we send your matches?</h2>
-    <p>Enter your info and we'll show you properties in your area — plus notify you when new ones hit the market.</p>
-    <div class="gate-search-summary" id="gateSummary">📍 Searching: All States · All Prices</div>
+    <p>Enter your email and we'll show you properties in your area — and alert you when new ones hit the market.</p>
+    <div class="gate-summary" id="gateSummary">📍 Searching: All States · All Types</div>
     <div class="gate-form">
       <input type="text" id="gateName" placeholder="Your Name" required>
       <input type="email" id="gateEmail" placeholder="Email Address" required>
-      <input type="tel" id="gatePhone" placeholder="Phone Number (optional)">
+      <input type="tel" id="gatePhone" placeholder="Phone (optional)">
       <button class="gate-submit" onclick="submitGate()">Show Me Properties →</button>
     </div>
-    <span class="gate-skip" onclick="skipGate()">Skip for now — just show me the listings</span>
+    <span class="gate-skip" onclick="skipGate()">Skip — just show me the listings</span>
     <div class="gate-trust">
       <span>🔒 Never sold or spammed</span>
-      <span>⚡ Instant results</span>
-      <span>✓ Free to use</span>
+      <span>⚡ Free to use</span>
+      <span>✓ Unsubscribe anytime</span>
     </div>
   </div>
 </div>
@@ -389,7 +376,7 @@
 </div>
 
 <!-- RESULTS BAR -->
-<div class="results-bar" id="resultsBar" style="display:none;">
+<div class="results-bar" id="resultsBar">
   <div class="results-bar-inner">
     <div class="results-summary" id="resultsSummary">Showing <strong>7 properties</strong></div>
     <div class="results-clear" onclick="clearSearch()">✕ Clear search — show all listings</div>
@@ -407,80 +394,61 @@
   </div>
   <div class="prop-grid" id="propGrid"></div>
   <div id="noResults" class="no-results" style="display:none;">
-    <h3>No properties found</h3>
-    <p>We don't have listings in that area yet — but we're adding new properties daily.<br>
-    Leave your info and Lee will notify you the moment something comes up in your market.</p>
-    <br>
-    <button class="search-btn" style="margin:0 auto;display:block;" onclick="openModal('Property Alert')">Notify Me When Available →</button>
+    <h3>No properties found in that area yet</h3>
+    <p>We're adding new listings daily. Leave your email and we'll notify you the moment something comes up in your market.</p>
+    <button class="search-btn" style="margin:0 auto;display:block;" onclick="openModal()">Notify Me →</button>
   </div>
+  <p style="font-size:0.72rem;color:var(--text-muted);margin-top:1rem;text-align:center;">*Equity estimates are based on purchase price, estimated renovation costs, and estimated ARV. Not a guarantee of value. Consult a licensed appraiser.</p>
   <div style="text-align:center;margin-top:2.5rem;" id="loadMoreBtn">
-    <button class="btn-primary" style="background:var(--amber);color:var(--white);padding:0.9rem 2rem;border-radius:8px;font-size:1rem;font-weight:700;border:none;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;" onclick="loadMore()">Load More Finds</button>
+    <button style="background:var(--amber);color:var(--white);padding:0.9rem 2rem;border-radius:8px;font-size:1rem;font-weight:700;border:none;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;" onclick="loadMore()">Load More Finds</button>
   </div>
 </section>
 
 <!-- EQUITY CALCULATOR -->
 <section id="calculator" class="calc-section">
   <div class="calc-inner">
-    <div class="section-label-light">Equity Calculator</div>
-    <h2 class="section-title-light">See Your Equity Before You Buy</h2>
-    <p class="section-sub-light">Enter the purchase price and estimated update cost — see your total loan, monthly payment, and instant equity position at closing.</p>
+    <div class="calc-label">Equity Calculator</div>
+    <h2 class="calc-title">See Your Equity Before You Buy</h2>
+    <p class="calc-sub">Enter the purchase price, update cost, and estimated after-renovation value to see your instant equity position.</p>
     <div class="calc-grid">
       <div class="calc-inputs">
-        <div class="calc-field"><label>Purchase Price ($)</label><input type="number" id="cPurchase" value="185000" oninput="calcUpdate()"></div>
-        <div class="calc-field"><label>Update / Renovation Cost ($)</label><input type="number" id="cReno" value="35000" oninput="calcUpdate()"></div>
-        <div class="calc-field"><label>After Renovation Value — ARV ($) <span style="font-size:0.65rem;color:#4a6a58;font-weight:400;">Tip: search Zillow for nearby updated homes</span></label><input type="number" id="cARV" value="280000" oninput="calcUpdate()"></div>
-        <div class="calc-field"><label>Down Payment (%)</label><input type="number" id="cDown" value="3.5" step="0.5" oninput="calcUpdate()"></div>
-        <div class="calc-field"><label>Interest Rate (%)</label><input type="number" id="cRate" value="7.25" step="0.125" oninput="calcUpdate()"></div>
-        <div class="calc-field"><label>Loan Program</label>
-          <select id="cProgram" onchange="calcUpdate()">
-            <option value="fha">FHA 203(k)</option>
-            <option value="conv">HomeStyle / CHOICEReno (Conventional)</option>
-            <option value="va">VA Renovation ($0 down)</option>
-            <option value="usda">USDA Renovation ($0 down)</option>
-          </select>
+        <div class="calc-field">
+          <label>Purchase Price ($)</label>
+          <input type="number" id="cPurchase" value="185000" oninput="calcUpdate()">
         </div>
-        <div class="calc-field"><label>Loan Term</label>
-          <select id="cTerm" onchange="calcUpdate()">
-            <option value="360">30-Year Fixed</option>
-            <option value="240">20-Year Fixed</option>
-            <option value="180">15-Year Fixed</option>
-          </select>
+        <div class="calc-field">
+          <label>Update / Renovation Cost ($)</label>
+          <input type="number" id="cReno" value="35000" oninput="calcUpdate()">
+        </div>
+        <div class="calc-field">
+          <label>After Renovation Value — ARV ($)</label>
+          <input type="number" id="cARV" value="280000" oninput="calcUpdate()">
+          <div class="calc-tip">💡 Tip: Search Zillow for recently sold updated homes nearby to estimate ARV. This is an estimate only — not a certified appraisal.</div>
+        </div>
+        <div class="calc-field">
+          <label>Down Payment (%)</label>
+          <input type="number" id="cDown" value="3.5" step="0.5" oninput="calcUpdate()">
         </div>
       </div>
       <div class="calc-results">
-        <div class="calc-results-title">📊 Your Numbers at a Glance</div>
+        <div class="calc-results-title">📊 Your Equity Snapshot</div>
         <div class="calc-line"><span class="calc-line-lbl">Purchase Price</span><span class="calc-line-val" id="rPurchase">$185,000</span></div>
         <div class="calc-line"><span class="calc-line-lbl">+ Update / Reno Cost</span><span class="calc-line-val" id="rReno">$35,000</span></div>
         <div class="calc-line highlight"><span class="calc-line-lbl">= Total Acquisition Cost</span><span class="calc-line-val" id="rTotal">$220,000</span></div>
         <div class="calc-line"><span class="calc-line-lbl">− Down Payment</span><span class="calc-line-val" id="rDown">$7,700</span></div>
-        <div class="calc-line"><span class="calc-line-lbl">Base Loan Amount</span><span class="calc-line-val" id="rBase">$212,300</span></div>
-        <div class="calc-line"><span class="calc-line-lbl">Upfront MIP / Fee</span><span class="calc-line-val" id="rMIP">$3,715</span></div>
-        <div class="calc-line highlight"><span class="calc-line-lbl">= Total Loan Amount</span><span class="calc-line-val" id="rLoan">$216,015</span></div>
-        <div class="calc-line green-line"><span class="calc-line-lbl">≈ Est. Monthly Payment</span><span class="calc-line-val" id="rPayment">$1,594/mo</span></div>
+        <div class="calc-line highlight"><span class="calc-line-lbl">= Amount to Finance</span><span class="calc-line-val" id="rLoan">$212,300</span></div>
+        <div class="calc-line"><span class="calc-line-lbl">After Renovation Value (ARV)</span><span class="calc-line-val" id="rARV">$280,000</span></div>
         <div class="calc-equity-visual">
-          <div class="calc-equity-visual-label"><span>Instant Equity at Closing</span><span id="rEquityPct" style="color:var(--amber-light);font-weight:700;">21%</span></div>
+          <div class="calc-equity-label">
+            <span>Instant Equity at Closing</span>
+            <span id="rEquityPct" style="color:var(--amber-light);font-weight:700;">21%</span>
+          </div>
           <div class="calc-equity-track"><div class="calc-equity-fill" id="rEquityBar" style="width:21%"></div></div>
         </div>
         <div class="calc-line green-line"><span class="calc-line-lbl">🏆 Instant Equity (ARV − Total Cost)</span><span class="calc-line-val" id="rEquity">$60,000</span></div>
-        <div class="calc-disclaimer" id="rDisclaimer">FHA 203(k): includes 1.75% upfront MIP and 0.55% annual MIP. Does not include taxes or insurance. For illustration only.</div>
-        <button class="calc-cta-btn" onclick="openModal('Calculator Lead')">Lock In This Rate — Get Pre-Approved →</button>
+        <div class="calc-disclaimer">⚠️ <strong>Estimates only.</strong> After Renovation Value (ARV) is an estimate based on comparable sales and is not a guarantee of future value. Renovation costs are estimates and may vary significantly based on contractor pricing, materials, and scope of work. Actual equity position depends on a certified appraisal, market conditions, and final renovation costs. Always consult a licensed appraiser and contractor before making purchasing decisions.</div>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="calc-cta-btn">Ready to Finance? Apply Now →</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- LOAN PROGRAMS -->
-<section id="loan-programs" class="loans-section">
-  <div class="loans-inner">
-    <div class="section-label-dark">Renovation Loan Programs</div>
-    <h2 class="section-title-dark">One Loan. Purchase + Updates.</h2>
-    <p class="section-sub-dark">Every program rolls your purchase price and renovation cost into one mortgage. No second loan. No out-of-pocket repair costs.</p>
-    <div class="loan-grid">
-      <div class="loan-card" onclick="openModal('FHA 203(k)')"><div class="loan-tag">FHA</div><h3>FHA 203(k) Renovation</h3><p>3.5% down, works on full gut jobs or cosmetic updates. Most flexible for first-time buyers.</p><div class="loan-highlight">✓ 3.5% down · 580+ credit · Any repair type</div><a class="loan-cta-link" href="#" onclick="openModal('FHA 203(k)');return false;">Get Pre-Qualified →</a></div>
-      <div class="loan-card" onclick="openModal('HomeStyle')"><div class="loan-tag">FANNIE MAE</div><h3>HomeStyle Renovation</h3><p>Conventional loan with no FHA fees. No monthly PMI at 20% down.</p><div class="loan-highlight">✓ 3% down · No FHA fees · Investment props OK</div><a class="loan-cta-link" href="#" onclick="openModal('HomeStyle');return false;">Get Pre-Qualified →</a></div>
-      <div class="loan-card" onclick="openModal('CHOICERenovation')"><div class="loan-tag">FREDDIE MAC</div><h3>CHOICERenovation</h3><p>Covers resilience upgrades like storm and flood protection. Investment properties OK.</p><div class="loan-highlight">✓ 3% down · Resilience credit · Investment props OK</div><a class="loan-cta-link" href="#" onclick="openModal('CHOICERenovation');return false;">Get Pre-Qualified →</a></div>
-      <div class="loan-card" onclick="openModal('VA Renovation')"><div class="loan-tag">VA</div><h3>VA Renovation Loan</h3><p>$0 down for eligible veterans and active duty. No PMI. Most powerful loan available.</p><div class="loan-highlight">✓ $0 down · No PMI · Veterans &amp; active duty</div><a class="loan-cta-link" href="#" onclick="openModal('VA Renovation');return false;">Get Pre-Qualified →</a></div>
-      <div class="loan-card" onclick="openModal('USDA Renovation')"><div class="loan-tag">USDA</div><h3>USDA Renovation Loan</h3><p>$0 down in eligible rural and suburban areas. Great for undervalued homes outside major metros.</p><div class="loan-highlight">✓ $0 down · Rural/suburban · Low fees</div><a class="loan-cta-link" href="#" onclick="openModal('USDA Renovation');return false;">Get Pre-Qualified →</a></div>
     </div>
   </div>
 </section>
@@ -488,184 +456,138 @@
 <!-- AI ADVISOR -->
 <section id="ai-advisor" class="ai-section">
   <div class="ai-inner">
-    <div class="section-label-dark">AI-Powered Home &amp; Equity Advisor</div>
-    <h2 class="section-title-dark">Not Sure Where to Start?</h2>
-    <p class="section-sub-dark">Ask our AI advisor about equity building, loan programs, renovation budgets, or which type of home makes the most financial sense for you.</p>
+    <div class="ai-label">AI Home Search Advisor</div>
+    <h2 class="ai-title">Not Sure What to Look For?</h2>
+    <p class="ai-sub">Ask our AI advisor about fixer-uppers, cosmetic updates, equity building strategies, renovation budgets, or what to look for in a below-market home.</p>
     <div class="ai-box">
       <div class="ai-header">
         <div class="ai-avatar">🏡</div>
-        <div class="ai-header-info"><h3>FixerUpperFinds AI Advisor</h3><p>Equity &amp; renovation mortgage specialist · Powered by Claude AI</p></div>
+        <div class="ai-header-info">
+          <h3>FixerUpperFinds AI Advisor</h3>
+          <p>Home search &amp; equity building specialist · Powered by Claude AI</p>
+        </div>
         <div class="ai-online"></div>
       </div>
       <div class="ai-messages" id="aiMessages">
         <div class="msg bot">
           <div class="msg-av">🏡</div>
-          <div class="msg-bubble">Hi! I'm your home equity advisor. I help buyers find the smartest path to homeownership — whether that's a full fixer-upper, a cosmetic updater, or an undervalued home that just needs modernizing.<br><br>Tell me about your situation — your budget, location, how handy you are, or whether you're a veteran — and I'll help you figure out the best type of home and financing to build equity fast.</div>
+          <div class="msg-bubble">Hi! I'm your home search advisor. I can help you understand the difference between fixer-uppers, cosmetic updaters, and undervalued homes — and figure out which type makes the most financial sense for your situation.<br><br>Ask me anything about finding below-market homes, estimating equity, renovation costs, or what to look for when searching for a great deal!</div>
         </div>
       </div>
       <div class="ai-quick" id="quickBtns">
-        <button class="ai-qbtn" onclick="quickAsk('What is the difference between a fixer upper and a cosmetic update home?')">Fixer upper vs cosmetic?</button>
-        <button class="ai-qbtn" onclick="quickAsk('I am a first time buyer with $10,000 saved and a 650 credit score. What is my best option?')">First time buyer</button>
-        <button class="ai-qbtn" onclick="quickAsk('I am a veteran. What is the best renovation loan for me?')">I am a veteran</button>
-        <button class="ai-qbtn" onclick="quickAsk('How much equity can I build buying a home that just needs a kitchen and bathroom update?')">Kitchen &amp; bath equity?</button>
-        <button class="ai-qbtn" onclick="quickAsk('What credit score and down payment do I need for a renovation loan?')">Credit &amp; down payment?</button>
+        <button class="ai-qbtn" onclick="quickAsk('What is the difference between a fixer upper, cosmetic update, and undervalued home?')">What are the 3 home types?</button>
+        <button class="ai-qbtn" onclick="quickAsk('How do I estimate the after renovation value of a home I am looking at?')">How to estimate ARV?</button>
+        <button class="ai-qbtn" onclick="quickAsk('What should I look for when touring a fixer upper to avoid a money pit?')">Avoid money pits?</button>
+        <button class="ai-qbtn" onclick="quickAsk('How much equity can I realistically build buying a home that just needs a kitchen and bathroom update?')">Kitchen &amp; bath equity?</button>
+        <button class="ai-qbtn" onclick="quickAsk('What renovation projects add the most value to a home?')">Best ROI renovations?</button>
       </div>
       <div class="ai-input-row">
-        <input class="ai-input" id="aiInput" type="text" placeholder="Ask about equity, loan programs, renovation budgets..." onkeydown="if(event.key==='Enter')sendAI()">
+        <input class="ai-input" id="aiInput" type="text" placeholder="Ask about home types, equity, renovations..." onkeydown="if(event.key==='Enter')sendAI()">
         <button class="ai-send" id="aiSendBtn" onclick="sendAI()">Send →</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LEAD FORM -->
-<section id="get-started" class="lead-section">
-  <div class="lead-inner">
-    <div class="section-label-light">Start Building Equity</div>
-    <h2 class="section-title-light">Get Pre-Approved in 48 Hours</h2>
-    <p class="section-sub-light">No real estate agent required. Tell us what you're looking for and Lee will match you with the right loan program and properties in your area.</p>
-    <div class="form-card">
-      <div class="form-grid">
-        <div class="fg"><label>First Name</label><input type="text" id="f_fname" placeholder="Jane"></div>
-        <div class="fg"><label>Last Name</label><input type="text" id="f_lname" placeholder="Smith"></div>
-        <div class="fg"><label>Email Address</label><input type="email" id="f_email" placeholder="jane@email.com"></div>
-        <div class="fg"><label>Phone Number</label><input type="tel" id="f_phone" placeholder="(555) 555-5555"></div>
-        <div class="fg"><label>Target Purchase Price</label><select id="f_price"><option>Under $150,000</option><option>$150k–$250k</option><option>$250k–$400k</option><option>$400k–$600k</option><option>Over $600k</option></select></div>
-        <div class="fg"><label>Update / Reno Budget</label><select><option>Under $20,000</option><option>$20k–$50k</option><option>$50k–$100k</option><option>$100k–$200k</option><option>Over $200k</option></select></div>
-        <div class="fg"><label>Home Type I'm Looking For</label><select><option>Full Renovation</option><option>Cosmetic Update</option><option>Undervalued / Outdated</option><option>Any — show me the best equity deal</option></select></div>
-        <div class="fg"><label>Target State</label><select id="f_state"><option>Maryland</option><option>Washington DC</option><option>Virginia</option><option>West Virginia</option><option>Pennsylvania</option><option>New Jersey</option><option>North Carolina</option><option>Delaware</option><option>Massachusetts</option><option>New Hampshire</option><option>Illinois</option><option>Texas</option></select></div>
-        <div class="fg"><label>Veteran / Active Military?</label><select><option>No</option><option>Yes – Veteran</option><option>Yes – Active Duty</option><option>Surviving Spouse</option></select></div>
-        <div class="fg"><label>Estimated Credit Score</label><select><option>740+</option><option>700–739</option><option>660–699</option><option>620–659</option><option>580–619</option><option>Below 580</option></select></div>
-        <div class="fg full"><label>Interested Loan Programs</label>
-          <div class="loan-checks">
-            <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">FHA 203(k)</span></label>
-            <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">HomeStyle</span></label>
-            <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">CHOICERenovation</span></label>
-            <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">VA Renovation</span></label>
-            <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">USDA Renovation</span></label>
-            <label class="lcheck" onclick="toggleCheck(this)"><input type="checkbox"><div class="chkbox"><div class="chkinner"></div></div><span class="lcheck-lbl">Not Sure Yet</span></label>
-          </div>
-        </div>
-      </div>
-      <button class="submit-btn" onclick="submitMainForm()">Start Building Equity — Request Pre-Approval →</button>
-      <div class="trust-row">
-        <div class="trust-item">🔒 Info never sold</div>
-        <div class="trust-item">📋 Soft credit pull only</div>
-        <div class="trust-item">⚡ Response within 48 hrs</div>
-        <div class="trust-item">✓ No agent required</div>
-      </div>
-    </div>
+<!-- FINANCING CTA -->
+<section class="financing-section">
+  <div class="financing-inner">
+    <h2>Found Your Property? Let's Get You Financed.</h2>
+    <p>FixerUpperFinds is a property search tool. For renovation financing — FHA 203k, HomeStyle, VA Reno, USDA Reno, and CHOICERenovation — apply directly with a licensed renovation loan advisor.</p>
+    <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="financing-btn">Apply with a Renovation Loan Advisor →</a>
+    <div class="financing-note">Licensed Renovation Loan Advisor · Equal Housing Lender</div>
   </div>
 </section>
 
-<!-- AGENT -->
-<section class="agent-section">
-  <div class="agent-inner">
-    <div class="agent-avatar">LS</div>
-    <div class="agent-info">
-      <h3>Lee Smith</h3>
-      <p><strong>RenovationOne</strong> · NMLS #188505<br>
-      Licensed in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX<br>
-      Renovation mortgage specialist helping buyers build equity through smart home purchases.</p>
-    </div>
-    <div class="agent-contact">
-      <a href="tel:3015099437" class="agent-btn">📞 (301) 509-9437</a>
-      <a href="#get-started" class="agent-btn outline">Get Pre-Approved</a>
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+  <div class="how-inner">
+    <div class="how-label">Simple Process</div>
+    <h2 class="how-title">How FixerUpperFinds Works</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Search Your Area</h3><p>Enter your zip code, city, or state to find below-market properties added daily from public records and distressed listings.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Pick Your Type</h3><p>Filter by Full Renovation, Cosmetic Update, or Undervalued/Outdated — each offers a different level of work and equity upside.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Run the Numbers</h3><p>Use our equity calculator to see your instant equity position — purchase price plus renovation versus after-renovation value.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Get Financed</h3><p>Apply for a renovation loan that wraps your purchase and renovation into one mortgage — FHA 203k, HomeStyle, VA Reno, and more.</p></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <strong>FixerUpperFinds.com</strong> · Powered by <strong>RenovationOne</strong><br>
-  Lee Smith · NMLS #188505 · <a href="tel:3015099437">(301) 509-9437</a><br>
-  Licensed in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX · Equal Housing Lender 🏠<br><br>
-  Property listings sourced from public records and third-party data providers. Not affiliated with any real estate agent or brokerage.<br>
-  Loan programs subject to credit approval, property eligibility, and investor guidelines. Calculator estimates for illustration only. Not a commitment to lend.<br>
-  <a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a> · <a href="#">NMLS Consumer Access</a>
+  <div class="footer-logo">Fixer<span>Upper</span>Finds</div>
+  Daily listings of fixer-uppers, cosmetic updaters &amp; undervalued homes<br>
+  Covering MD · DC · VA · WV · PA · NJ · NC · DE · MA · NH · IL · TX<br><br>
+  <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank">Apply with a Renovation Loan Advisor →</a><br><br>
+  Property listings sourced from public records and third-party data providers.<br>
+  FixerUpperFinds is a property search platform and is not a lender or real estate brokerage.<br>
+  Connecting you with licensed renovation loan advisors in your state.
+  <a href="#" onclick="showPrivacy()">Privacy Policy</a> · <a href="#" onclick="showTerms()">Terms of Use</a> · <a href="#" onclick="showDisclaimer()">Full Disclaimer</a><br><br>
+  <strong style="color:#4a6a58;">Disclaimers:</strong> FixerUpperFinds is a property search and information platform only. We are not a real estate broker, mortgage lender, or financial advisor. Property listings are sourced from public records and third-party data providers and may not reflect current availability or accuracy. Equity estimates, ARV figures, and renovation cost estimates are for informational purposes only and are not guarantees of value or investment returns. Always consult a licensed real estate professional, certified appraiser, and licensed contractor before making any real estate or financial decisions. Renovation costs vary widely by market, contractor, and scope of work. We make no representations regarding the accuracy, completeness, or timeliness of any listing data. <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" style="color:#5a7a68;">Financing provided by a licensed mortgage lender.</a> Equal Housing Opportunity.
 </footer>
 
-<!-- MODAL -->
+<!-- NOTIFY MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2 id="modalTitle">Get Pre-Qualified</h2>
-    <p class="modal-sub" id="modalSub">RenovationOne · Lee Smith NMLS #188505</p>
+    <h2>Get Property Alerts</h2>
+    <p class="modal-sub">We'll notify you when new listings hit your area.</p>
     <div id="modalFormWrap">
       <div class="mform">
-        <div class="fg"><label>Full Name</label><input id="mName" type="text" placeholder="Jane Smith"></div>
+        <div class="fg"><label>Name</label><input id="mName" type="text" placeholder="Jane Smith"></div>
         <div class="fg"><label>Email</label><input id="mEmail" type="email" placeholder="jane@email.com"></div>
-        <div class="fg"><label>Phone</label><input id="mPhone" type="tel" placeholder="(555) 555-5555"></div>
-        <div class="fg"><label>Interested In</label><select id="mType"><option>FHA 203(k)</option><option>HomeStyle</option><option>CHOICERenovation</option><option>VA Renovation</option><option>USDA Renovation</option><option>Not sure — help me decide</option></select></div>
-        <button class="modal-submit" onclick="submitModal()">Send My Request to Lee →</button>
-        <p style="font-size:0.72rem;color:#aaa;margin-top:0.75rem;text-align:center;">Lee Smith · NMLS #188505 · (301) 509-9437 · RenovationOne</p>
+        <div class="fg"><label>Target Area</label><input id="mArea" type="text" placeholder="City, State or Zip"></div>
+        <button class="modal-submit" onclick="submitModal()">Notify Me of New Listings →</button>
       </div>
     </div>
     <div class="success-msg" id="modalSuccess">
-      <h3>Request Sent! ✓</h3>
-      <p>Lee Smith will contact you within 48 hours.<br><br>Questions now? Call <strong>(301) 509-9437</strong></p>
+      <h3>You're on the list! ✓</h3>
+      <p>We'll alert you when new properties matching your search hit the market.</p>
     </div>
   </div>
 </div>
 
-<!-- HUBSPOT FORMS SDK -->
+<!-- HUBSPOT -->
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-
 <script>
-// ===== HUBSPOT CONFIG =====
-const HS_PORTAL_ID = '246283164';
-const HS_FORM_ID   = '1abc34dc-caa7-4a8a-a64a-32b41cd93133';
-
+const HS_PORTAL_ID='246283164';
+const HS_FORM_ID='1abc34dc-caa7-4a8a-a64a-32b41cd93133';
 function submitToHubSpot(fields){
-  const data = {
-    portalId: HS_PORTAL_ID,
-    formGuid: HS_FORM_ID,
-    fields: fields,
-    context: { pageUri: window.location.href, pageName: 'FixerUpperFinds' }
-  };
-  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  }).catch(e => console.log('HubSpot submit error:', e));
+  fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+HS_PORTAL_ID+'/'+HS_FORM_ID,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({portalId:HS_PORTAL_ID,formGuid:HS_FORM_ID,fields:fields,context:{pageUri:window.location.href,pageName:'FixerUpperFinds'}})
+  }).catch(e=>console.log('HS error:',e));
 }
 
 // ===== PROPERTIES =====
-const allProps = [
-  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",tags:["New Floors Needed","Kitchen Update","Great Location"],loans:["FHA 203k","HomeStyle","CHOICEReno"]},
-  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",tags:["Foreclosure","Priced to Sell","Structural Updates"],loans:["FHA 203k","VA Reno"]},
-  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA",state:"PA",zip:"15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",tags:["REO","Below Market","Motivated Seller"],loans:["FHA 203k","USDA Reno"]},
-  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC",state:"NC",zip:"27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",tags:["Outdated Interior","Below AVM","No Structural Issues"],loans:["HomeStyle","CHOICEReno","VA Reno"]},
-  {id:5,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",tags:["Cosmetic Only","Great Bones","USDA Zone"],loans:["FHA 203k","USDA Reno","HomeStyle"]},
-  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",tags:["Dated But Solid","Below Market","$0 Down USDA Zone"],loans:["FHA 203k","USDA Reno"]},
-  {id:7,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",tags:["Dated Kitchen","New Roof 2022","Walk to Water"],loans:["FHA 203k","HomeStyle","VA Reno"]},
+const allProps=[
+  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",tags:["New Floors Needed","Kitchen Update","Great Location"]},
+  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",tags:["Foreclosure","Priced to Sell","Structural Updates"]},
+  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA",state:"PA",zip:"15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",tags:["REO","Below Market","Motivated Seller"]},
+  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC",state:"NC",zip:"27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",tags:["Outdated Interior","Below AVM","No Structural Issues"]},
+  {id:5,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",tags:["Cosmetic Only","Great Bones","Below Market"]},
+  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",tags:["Dated But Solid","Below Market","Low Entry Price"]},
+  {id:7,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",tags:["Dated Kitchen","New Roof 2022","Walk to Water"]},
 ];
-
-const typeLabel={'full-reno':'🔨 Full Renovation','cosmetic':'🎨 Cosmetic Update','undervalued':'💎 Undervalued / Outdated'};
+const typeLabel={'full-reno':'🔨 Full Renovation','cosmetic':'🎨 Cosmetic Update','undervalued':'💎 Undervalued'};
 const typeBadge={'full-reno':'badge-full','cosmetic':'badge-cosmetic','undervalued':'badge-under'};
-const typeImgClass={'full-reno':'full-reno','cosmetic':'cosmetic','undervalued':'undervalued'};
-
+const typeImg={'full-reno':'full-reno','cosmetic':'cosmetic','undervalued':'undervalued'};
 let currentFilter='all';
-let currentSearch={location:'',state:'',price:''};
+let currentSearch={location:'',state:'',type:'',price:''};
 
 function renderProps(list){
   const grid=document.getElementById('propGrid');
   grid.innerHTML='';
-  if(list.length===0){
-    document.getElementById('noResults').style.display='block';
-    document.getElementById('loadMoreBtn').style.display='none';
-    return;
-  }
-  document.getElementById('noResults').style.display='none';
-  document.getElementById('loadMoreBtn').style.display='block';
+  document.getElementById('noResults').style.display=list.length===0?'block':'none';
+  document.getElementById('loadMoreBtn').style.display=list.length===0?'none':'block';
   list.forEach(p=>{
     const equity=p.arv-p.price-p.reno;
     const equityPct=Math.round((equity/p.arv)*100);
     const div=document.createElement('div');div.className='prop-card';
     div.setAttribute('data-type',p.type);div.setAttribute('data-state',p.state);div.setAttribute('data-zip',p.zip);div.setAttribute('data-price',p.price);
-    div.innerHTML=`<div class="prop-img ${typeImgClass[p.type]}">
+    div.innerHTML=`<div class="prop-img ${typeImg[p.type]}">
       <div class="prop-img-icon">🏠</div>
       <div class="prop-type-badge ${typeBadge[p.type]}">${typeLabel[p.type]}</div>
-      <div class="prop-equity-badge">+$${Math.round(equity/1000)}K equity</div>
+      <div class="prop-equity-badge">Est. +$${Math.round(equity/1000)}K equity</div>
       <div class="prop-days">${p.days===1?'🔥 New Today':'Added '+p.days+'d ago'}</div>
     </div>
     <div class="prop-body">
@@ -674,115 +596,99 @@ function renderProps(list){
       <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">ARV $${p.arv.toLocaleString()}</div></div>
       <div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div>
       <div class="prop-equity-bar">
-        <div class="prop-equity-label"><span>Instant Equity at Closing</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
+        <div class="prop-equity-label"><span>Est. Equity Potential*</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
         <div class="equity-track"><div class="equity-fill" style="width:${Math.min(equityPct*2,100)}%"></div></div>
       </div>
       <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
-      <div class="prop-loans-row"><div class="prop-loans-lbl">Eligible Loan Programs</div><div class="loan-pills">${p.loans.map(l=>'<span class="loan-pill">'+l+'</span>').join('')}</div></div>
-      <button class="prop-cta" onclick="loadCalc(${p.price},${p.reno},${p.arv})">Run My Numbers for This Home →</button>
+      <div style="display:flex;gap:0.5rem;margin-top:0.25rem;">
+        <button class="prop-cta" style="flex:1;" onclick="loadCalc(${p.price},${p.reno},${p.arv})">Run Numbers</button>
+        <a class="prop-cta" style="flex:2;background:var(--amber);" href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank">Apply for Financing →</a>
+      </div>
     </div>`;
     grid.appendChild(div);
   });
   updateCounts(list);
 }
-
 function updateCounts(list){
   document.getElementById('countAll').textContent=list.length;
   document.getElementById('countFull').textContent=list.filter(p=>p.type==='full-reno').length;
   document.getElementById('countCosmetic').textContent=list.filter(p=>p.type==='cosmetic').length;
   document.getElementById('countUnder').textContent=list.filter(p=>p.type==='undervalued').length;
 }
-
-function getFilteredProps(){
+function getFiltered(){
   return allProps.filter(p=>{
     const matchType=currentFilter==='all'||p.type===currentFilter;
+    const matchSType=!currentSearch.type||p.type===currentSearch.type;
     const matchState=!currentSearch.state||p.state===currentSearch.state;
-    const matchLocation=!currentSearch.location||
-      p.zip.includes(currentSearch.location)||
-      p.city.toLowerCase().includes(currentSearch.location.toLowerCase());
+    const matchLoc=!currentSearch.location||p.zip.includes(currentSearch.location)||p.city.toLowerCase().includes(currentSearch.location.toLowerCase());
     const matchPrice=!currentSearch.price||p.price<=parseInt(currentSearch.price);
-    return matchType&&matchState&&matchLocation&&matchPrice;
+    return matchType&&matchSType&&matchState&&matchLoc&&matchPrice;
   });
 }
-
 renderProps(allProps);
 
 function filterCat(tab,type){
   document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
   tab.classList.add('active');
   currentFilter=type;
-  renderProps(getFilteredProps());
+  renderProps(getFiltered());
 }
-
-// ===== SEARCH =====
 function doSearch(){
   const loc=document.getElementById('searchLocation').value.trim();
   const state=document.getElementById('searchState').value;
+  const type=document.getElementById('searchType').value;
   const price=document.getElementById('searchPrice').value;
-  currentSearch={location:loc,state:state,price:price};
-
-  // Show lead gate
+  currentSearch={location:loc,state:state,type:type,price:price};
   let summary='📍 Searching: ';
   if(loc) summary+=loc+' ';
   if(state) summary+=state+' ';
+  if(type) summary+='· '+typeLabel[type]+' ';
   if(price) summary+='· Under $'+parseInt(price).toLocaleString();
-  if(!loc&&!state&&!price) summary+='All States · All Prices';
+  if(!loc&&!state&&!type&&!price) summary+='All States · All Types';
   document.getElementById('gateSummary').textContent=summary;
   document.getElementById('gateOverlay').classList.add('open');
 }
-
 function showResults(){
-  const filtered=getFilteredProps();
   document.getElementById('gateOverlay').classList.remove('open');
+  const filtered=getFiltered();
   const bar=document.getElementById('resultsBar');
-  const loc=currentSearch.location;
-  const state=currentSearch.state;
-  const price=currentSearch.price;
-  if(loc||state||price){
+  const hasSearch=currentSearch.location||currentSearch.state||currentSearch.type||currentSearch.price;
+  if(hasSearch){
     bar.style.display='block';
-    let summary=`Showing <strong>${filtered.length} properties</strong>`;
-    if(loc) summary+=` near <strong>${loc}</strong>`;
-    if(state) summary+=` in <strong>${state}</strong>`;
-    if(price) summary+=` under <strong>$${parseInt(price).toLocaleString()}</strong>`;
-    document.getElementById('resultsSummary').innerHTML=summary;
+    let s='Showing <strong>'+filtered.length+' properties</strong>';
+    if(currentSearch.location) s+=' near <strong>'+currentSearch.location+'</strong>';
+    if(currentSearch.state) s+=' in <strong>'+currentSearch.state+'</strong>';
+    document.getElementById('resultsSummary').innerHTML=s;
     document.getElementById('listingsTitle').textContent='Search Results';
   }
   renderProps(filtered);
   document.getElementById('listings').scrollIntoView({behavior:'smooth'});
 }
-
 function clearSearch(){
-  currentSearch={location:'',state:'',price:''};
+  currentSearch={location:'',state:'',type:'',price:''};
   document.getElementById('searchLocation').value='';
   document.getElementById('searchState').value='';
+  document.getElementById('searchType').value='';
   document.getElementById('searchPrice').value='';
   document.getElementById('resultsBar').style.display='none';
   document.getElementById('listingsTitle').textContent="Today's Finds";
-  renderProps(getFilteredProps());
+  renderProps(getFiltered());
 }
-
-// ===== LEAD GATE =====
 function submitGate(){
   const name=document.getElementById('gateName').value.trim();
   const email=document.getElementById('gateEmail').value.trim();
   const phone=document.getElementById('gatePhone').value.trim();
   if(!name||!email){alert('Please enter your name and email.');return;}
-
-  // Submit to HubSpot
   submitToHubSpot([
     {name:'firstname',value:name.split(' ')[0]},
     {name:'lastname',value:name.split(' ').slice(1).join(' ')||''},
     {name:'email',value:email},
     {name:'phone',value:phone},
-    {name:'message',value:'Search gate lead · '+document.getElementById('gateSummary').textContent}
+    {name:'message',value:'Search gate: '+document.getElementById('gateSummary').textContent}
   ]);
   showResults();
 }
-
-function skipGate(){
-  showResults();
-}
-
+function skipGate(){showResults();}
 function loadMore(){
   const btn=document.querySelector('[onclick="loadMore()"]');
   btn.textContent='✓ All listings loaded for today';
@@ -792,46 +698,26 @@ function loadMore(){
 // ===== CALCULATOR =====
 function fmt(n){return '$'+Math.round(n).toLocaleString();}
 function calcUpdate(){
-  const prog=document.getElementById('cProgram').value;
   const purchase=parseFloat(document.getElementById('cPurchase').value)||0;
   const reno=parseFloat(document.getElementById('cReno').value)||0;
   const arv=parseFloat(document.getElementById('cARV').value)||0;
-  const rate=parseFloat(document.getElementById('cRate').value)||7.25;
-  const term=parseInt(document.getElementById('cTerm').value)||360;
-  let downPct=parseFloat(document.getElementById('cDown').value)||3.5;
-  if(prog==='va'||prog==='usda'){downPct=0;document.getElementById('cDown').value=0;}
+  const downPct=parseFloat(document.getElementById('cDown').value)||3.5;
   const total=purchase+reno;
   const downAmt=total*(downPct/100);
-  const base=total-downAmt;
-  let upfront=0;
-  if(prog==='fha') upfront=base*0.0175;
-  else if(prog==='va') upfront=base*0.023;
-  else if(prog==='usda') upfront=base*0.01;
-  const loanAmt=base+upfront;
-  let monthlyMI=0;
-  if(prog==='fha') monthlyMI=(loanAmt*0.0055)/12;
-  else if(prog==='conv'&&(base/total)>0.80) monthlyMI=(loanAmt*0.007)/12;
-  else if(prog==='usda') monthlyMI=(loanAmt*0.0035)/12;
-  const r=rate/100/12;
-  const pi=r>0?loanAmt*(r*Math.pow(1+r,term))/(Math.pow(1+r,term)-1):loanAmt/term;
+  const loan=total-downAmt;
   const equity=arv-total;
   const equityPct=arv>0?Math.round((equity/arv)*100):0;
   document.getElementById('rPurchase').textContent=fmt(purchase);
   document.getElementById('rReno').textContent=fmt(reno);
   document.getElementById('rTotal').textContent=fmt(total);
   document.getElementById('rDown').textContent=fmt(downAmt);
-  document.getElementById('rBase').textContent=fmt(base);
-  document.getElementById('rMIP').textContent=upfront>0?fmt(upfront):'$0';
-  document.getElementById('rLoan').textContent=fmt(loanAmt);
-  document.getElementById('rPayment').textContent='~'+fmt(pi+monthlyMI)+'/mo';
+  document.getElementById('rLoan').textContent=fmt(loan);
+  document.getElementById('rARV').textContent=fmt(arv);
   document.getElementById('rEquity').textContent=fmt(equity);
   document.getElementById('rEquityPct').textContent=equityPct+'%';
   document.getElementById('rEquityBar').style.width=Math.min(Math.max(equityPct,0),100)+'%';
-  const d={fha:'FHA 203(k): 1.75% upfront MIP + 0.55% annual MIP. Does not include taxes or insurance.',conv:'Conventional: PMI if LTV > 80%. Does not include taxes or insurance.',va:'VA: 2.3% funding fee. No monthly MI. Does not include taxes or insurance.',usda:'USDA: 1% upfront + 0.35% annual fee. Does not include taxes or insurance.'};
-  document.getElementById('rDisclaimer').textContent=d[prog]||'';
 }
 calcUpdate();
-
 function loadCalc(price,reno,arv){
   document.getElementById('cPurchase').value=price;
   document.getElementById('cReno').value=reno;
@@ -842,28 +728,25 @@ function loadCalc(price,reno,arv){
 
 // ===== AI ADVISOR =====
 const aiHistory=[];
-const SYSTEM=`You are a friendly, knowledgeable home equity and renovation mortgage advisor for FixerUpperFinds.com, run by Lee Smith (NMLS #188505) of RenovationOne, licensed in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, and TX. Lee can be reached at (301) 509-9437.
+const SYSTEM=`You are a friendly, knowledgeable home search and equity building advisor for FixerUpperFinds.com — a property search platform that helps buyers find fixer-uppers, cosmetic updaters, and undervalued homes across MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, and TX.
 
-Your mission is to help home buyers understand how to build instant equity by purchasing undervalued, cosmetic-update, or fixer-upper homes and finance them with renovation loans.
+You are NOT a mortgage lender. You are a home search advisor. You help buyers:
+- Understand the three property types: Full Renovation, Cosmetic Update, Undervalued/Outdated
+- Estimate equity potential from below-market purchases
+- Understand renovation costs and ROI for common projects
+- Know what to look for when touring a fixer-upper
+- Avoid money pits and bad deals
+- Understand how ARV (after renovation value) works
+- Learn which renovations add the most value
 
-Three home types on this site:
-1. Full Renovation — major structural or systems work, biggest equity upside
-2. Cosmetic Update — new kitchen, flooring, paint, bath — great equity with less hassle  
-3. Undervalued / Outdated — solid home, just dated, priced below market
+For financing questions, always direct users to apply with a renovation loan advisor at: https://mobile.fairwaynow.com/dr/c/hre8e — tell them to click the Apply for Financing button on the site.
 
-Five loan programs:
-1. FHA 203(k) — 3.5% down, 580+ credit, any repair, primary residence
-2. HomeStyle — 3% down, 620+ credit, conventional, investment OK
-3. CHOICERenovation — 3% down, 620+ credit, resilience upgrades, investment OK
-4. VA Renovation — $0 down, no PMI, veterans/active duty/surviving spouses
-5. USDA Renovation — $0 down in rural/suburban eligible areas, 640+ credit
-
-Keep responses warm, conversational, 2-4 paragraphs. Always end with a nudge to use the equity calculator or call Lee at (301) 509-9437. Never guarantee rates or make lending commitments.`;
+Keep responses warm, helpful, and specific. 2-4 paragraphs max. Never give specific loan rate guarantees. Always end with a useful next step — use the equity calculator, search for properties, or apply for financing.`;
 
 function appendMsg(role,text){
   const box=document.getElementById('aiMessages');
   const div=document.createElement('div');div.className='msg '+(role==='user'?'user':'bot');
-  div.innerHTML=`<div class="msg-av">${role==='user'?'👤':'🏡'}</div><div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  div.innerHTML='<div class="msg-av">'+(role==='user'?'👤':'🏡')+'</div><div class="msg-bubble">'+text.replace(/\n/g,'<br>')+'</div>';
   box.appendChild(div);box.scrollTop=box.scrollHeight;
 }
 function showTyping(){
@@ -884,23 +767,21 @@ async function sendAI(){
   showTyping();
   try{
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aiHistory,system:SYSTEM})});
-    const data=await res.json();hideTyping();
-    const reply=data.reply||'Sorry, I had trouble responding. Please call Lee at (301) 509-9437.';
+    const data=await res.json();
+    hideTyping();
+    const reply=data.reply||'Sorry, I had trouble responding. Please try again.';
     aiHistory.push({role:'assistant',content:reply});
     appendMsg('bot',reply);
   }catch(e){
     hideTyping();
-    appendMsg('bot','Sorry, having trouble connecting. Please call Lee at (301) 509-9437 — he\'ll be happy to help!');
+    appendMsg('bot','Sorry, having trouble connecting. Please try again in a moment!');
   }
   btn.disabled=false;
 }
 function quickAsk(q){document.getElementById('aiInput').value=q;sendAI();}
 
-// ===== FORMS =====
-function toggleCheck(el){el.classList.toggle('checked');}
-function openModal(loanType){
-  document.getElementById('modalTitle').textContent='Get Pre-Qualified';
-  document.getElementById('modalSub').textContent=loanType+' · RenovationOne · Lee Smith NMLS #188505';
+// ===== MODALS =====
+function openModal(){
   document.getElementById('modalFormWrap').style.display='block';
   document.getElementById('modalSuccess').style.display='none';
   document.getElementById('modalOverlay').classList.add('open');
@@ -910,37 +791,94 @@ function closeModalOutside(e){if(e.target===document.getElementById('modalOverla
 function submitModal(){
   const name=document.getElementById('mName').value;
   const email=document.getElementById('mEmail').value;
-  const phone=document.getElementById('mPhone').value;
+  const area=document.getElementById('mArea').value;
   if(!name||!email){alert('Please enter your name and email.');return;}
   submitToHubSpot([
     {name:'firstname',value:name.split(' ')[0]},
     {name:'lastname',value:name.split(' ').slice(1).join(' ')||''},
     {name:'email',value:email},
-    {name:'phone',value:phone},
-    {name:'message',value:'Modal lead: '+document.getElementById('mType').value}
+    {name:'message',value:'Property alert request · Area: '+area}
   ]);
   document.getElementById('modalFormWrap').style.display='none';
   document.getElementById('modalSuccess').style.display='block';
-}
-function submitMainForm(){
-  const fname=document.getElementById('f_fname').value;
-  const email=document.getElementById('f_email').value;
-  const phone=document.getElementById('f_phone').value;
-  const lname=document.getElementById('f_lname').value;
-  if(!fname||!email){alert('Please enter your name and email.');return;}
-  submitToHubSpot([
-    {name:'firstname',value:fname},
-    {name:'lastname',value:lname},
-    {name:'email',value:email},
-    {name:'phone',value:phone},
-    {name:'message',value:'Pre-approval form · State: '+document.getElementById('f_state').value}
-  ]);
-  alert('Thank you '+fname+'! Lee Smith will contact you within 48 hours.\n\nNeed faster help? Call (301) 509-9437'
 }
 setInterval(()=>{
   const m=Math.floor(Math.random()*15)+1;
   document.getElementById('lastUpdated').textContent='Updated '+m+' minute'+(m>1?'s':'')+' ago';
 },60000);
 </script>
+
+<!-- PRIVACY / DISCLAIMER MODALS -->
+<div class="modal-overlay" id="privacyOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:620px;">
+    <button class="modal-close" onclick="document.getElementById('privacyOverlay').classList.remove('open')">✕</button>
+    <h2>Privacy Policy</h2>
+    <p class="modal-sub">Last updated: 2025</p>
+    <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.8;max-height:60vh;overflow-y:auto;">
+      <strong style="color:var(--forest);">Information We Collect</strong><br>
+      When you use the search feature or sign up for property alerts, we may collect your name, email address, and phone number. We also collect standard website analytics data such as pages visited and search terms used.<br><br>
+      <strong style="color:var(--forest);">How We Use Your Information</strong><br>
+      Your information is used to send property alerts, respond to inquiries, and connect you with licensed renovation loan advisors if requested. We do not sell your personal information to third parties.<br><br>
+      <strong style="color:var(--forest);">Third-Party Services</strong><br>
+      We use HubSpot for contact management. By submitting your information you agree to HubSpot's privacy policy. We may share your information with licensed mortgage professionals for the purpose of fulfilling your financing request.<br><br>
+      <strong style="color:var(--forest);">Cookies & Analytics</strong><br>
+      This site may use cookies and analytics tools to improve user experience. You may disable cookies in your browser settings.<br><br>
+      <strong style="color:var(--forest);">Your Rights</strong><br>
+      You may request deletion of your personal data at any time by contacting us. You may unsubscribe from property alerts at any time via the unsubscribe link in any email we send.<br><br>
+      <strong style="color:var(--forest);">Contact</strong><br>
+      For privacy questions, contact us through the website contact form.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="termsOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:620px;">
+    <button class="modal-close" onclick="document.getElementById('termsOverlay').classList.remove('open')">✕</button>
+    <h2>Terms of Use</h2>
+    <p class="modal-sub">Last updated: 2025</p>
+    <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.8;max-height:60vh;overflow-y:auto;">
+      <strong style="color:var(--forest);">Acceptance of Terms</strong><br>
+      By using FixerUpperFinds.com you agree to these terms of use. If you do not agree, please do not use this site.<br><br>
+      <strong style="color:var(--forest);">Property Listings</strong><br>
+      Property listings on this site are sourced from public records and third-party data providers. FixerUpperFinds does not guarantee the accuracy, completeness, or availability of any listing. Listings may be outdated, inaccurate, or no longer available. Always verify property information with a licensed real estate professional.<br><br>
+      <strong style="color:var(--forest);">Not Real Estate or Financial Advice</strong><br>
+      FixerUpperFinds is an informational platform only. Nothing on this site constitutes real estate advice, financial advice, investment advice, or a commitment to lend. All equity estimates, ARV figures, and renovation cost estimates are for informational purposes only.<br><br>
+      <strong style="color:var(--forest);">No Warranties</strong><br>
+      This site is provided "as is" without warranties of any kind. We make no representations regarding the accuracy or completeness of property data, equity estimates, or renovation cost estimates.<br><br>
+      <strong style="color:var(--forest);">Limitation of Liability</strong><br>
+      FixerUpperFinds shall not be liable for any damages arising from your use of this site or reliance on any information provided herein.<br><br>
+      <strong style="color:var(--forest);">Third-Party Links</strong><br>
+      This site contains links to third-party websites including mortgage lender application pages. We are not responsible for the content or practices of any third-party site.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="disclaimerOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:620px;">
+    <button class="modal-close" onclick="document.getElementById('disclaimerOverlay').classList.remove('open')">✕</button>
+    <h2>Full Disclaimer</h2>
+    <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.8;max-height:60vh;overflow-y:auto;">
+      <strong style="color:var(--forest);">Property Listings</strong><br>
+      All property listings are sourced from public records, county assessor data, and third-party data providers. Listings may be inaccurate, outdated, or unavailable. FixerUpperFinds does not verify listing accuracy and is not a licensed real estate brokerage.<br><br>
+      <strong style="color:var(--forest);">After Renovation Value (ARV)</strong><br>
+      ARV estimates displayed on this site are estimates only, based on comparable sales data and user inputs. They are not certified appraisals and do not constitute a guarantee of future market value. Actual property values may be higher or lower. Always obtain a certified appraisal from a licensed appraiser before making any purchase decision.<br><br>
+      <strong style="color:var(--forest);">Renovation Cost Estimates</strong><br>
+      Renovation cost estimates are rough estimates only and may vary significantly based on geographic market, contractor availability, material costs, scope of work, and property condition. Obtain multiple bids from licensed contractors before budgeting renovation costs.<br><br>
+      <strong style="color:var(--forest);">Equity Estimates</strong><br>
+      Equity estimates shown are calculated as estimated ARV minus purchase price minus estimated renovation costs. These are illustrative estimates only and do not guarantee any actual equity position. Market conditions, appraisal results, and actual renovation costs will determine true equity.<br><br>
+      <strong style="color:var(--forest);">Not Financial or Legal Advice</strong><br>
+      Nothing on this site constitutes financial, investment, legal, or real estate advice. Consult a licensed real estate professional, certified appraiser, licensed contractor, and qualified financial advisor before making any real estate purchase or investment decision.<br><br>
+      <strong style="color:var(--forest);">Financing</strong><br>
+      Renovation loan information is provided for general educational purposes only. Loan availability, rates, and terms vary by lender, borrower qualifications, property type, and other factors. Financing links on this site connect to a licensed mortgage lender. All loans subject to credit approval, underwriting, and investor guidelines. Not a commitment to lend. Equal Housing Opportunity.
+    </div>
+  </div>
+</div>
+
+<script>
+function showPrivacy(){document.getElementById('privacyOverlay').classList.add('open');}
+function showTerms(){document.getElementById('termsOverlay').classList.add('open');}
+function showDisclaimer(){document.getElementById('disclaimerOverlay').classList.add('open');}
+</script>
+
 </body>
 </html>
