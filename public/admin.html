@@ -342,7 +342,7 @@ async function generatePost(){
 
 Write a complete, SEO-optimized blog post based on the topic provided. 
 
-RESPOND ONLY IN THIS EXACT JSON FORMAT — no other text:
+CRITICAL: You MUST respond with ONLY a raw JSON object. No markdown, no backticks, no explanation before or after. Start your response with { and end with }. The JSON must be:
 {
   "title": "The exact blog post title (compelling, SEO-rich)",
   "seoTitle": "SEO title tag (under 60 chars)",
@@ -370,21 +370,43 @@ ${notes ? `Additional notes: ${notes}` : ''}`;
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
         messages: [{role:'user', content: userMsg}],
-        system: systemPrompt
+        system: systemPrompt,
+        max_tokens: 2000
       })
     });
     const data = await res.json();
     clearInterval(msgInterval);
 
+    console.log('Raw reply:', data.reply ? data.reply.substring(0,200) : 'NO REPLY');
     let postData;
     try {
-      const clean = data.reply.replace(/```json|```/g,'').trim();
-      postData = JSON.parse(clean);
+      // Try multiple parsing approaches
+      let clean = data.reply || '';
+      // Remove markdown code blocks
+      clean = clean.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+      // Try direct parse first
+      try {
+        postData = JSON.parse(clean);
+      } catch(e1) {
+        // Try to find JSON object in response
+        const match = clean.match(/\{[\s\S]*\}/);
+        if(match){
+          postData = JSON.parse(match[0]);
+        } else {
+          // Build a post from plain text response as fallback
+          postData = {
+            title: document.getElementById('topicInput').value,
+            seoTitle: document.getElementById('topicInput').value.substring(0,60),
+            metaDescription: document.getElementById('topicInput').value + ' — FixerUpperFinds guide.',
+            category: 'Buying Guide',
+            readTime: '5 min read',
+            content: clean
+          };
+        }
+      }
     } catch(e) {
-      // Try to extract JSON from response
-      const match = data.reply.match(/\{[\s\S]*\}/);
-      if(match) postData = JSON.parse(match[0]);
-      else throw new Error('Could not parse response');
+      console.error('Parse error:', e, 'Raw reply:', data.reply);
+      throw new Error('Could not parse response: ' + e.message);
     }
 
     currentPost = {
@@ -407,13 +429,19 @@ ${notes ? `Additional notes: ${notes}` : ''}`;
     document.getElementById('previewState').textContent = state || 'All States';
     document.getElementById('previewSEOTitle').textContent = 'SEO Title: ' + postData.seoTitle;
     document.getElementById('previewMetaDesc').textContent = 'Meta: ' + postData.metaDescription;
-    document.getElementById('previewContent').textContent = postData.content;
+    const cleanContent = postData.content
+      .replace(/\\n/g, '\n')
+      .replace(/\n\n/g, '\n')
+      .trim();
+    postData.content = cleanContent;
+    document.getElementById('previewContent').textContent = cleanContent;
 
   } catch(e) {
     clearInterval(msgInterval);
+    console.error('Generation error:', e);
     document.getElementById('generatingState').style.display='none';
     document.getElementById('previewPlaceholder').style.display='block';
-    document.getElementById('previewPlaceholder').innerHTML='<h3 style="color:var(--red)">Generation failed</h3><p>Please try again. Make sure your site is running correctly.</p>';
+    document.getElementById('previewPlaceholder').innerHTML='<h3 style="color:var(--red)">Generation failed</h3><p>Error: '+e.message+'</p><p>Check the browser console (F12) for details.</p>';
   }
 
   btn.disabled = false;
@@ -425,16 +453,23 @@ async function publishPost(){
   currentPost.status = 'published';
   currentPost.publishedAt = new Date().toISOString();
 
-  // Save to storage
-  const posts = getPosts();
-  const existing = posts.findIndex(p=>p.id===currentPost.id);
-  if(existing>=0) posts[existing]=currentPost;
-  else posts.unshift(currentPost);
-  savePosts(posts);
-
-  showToast('✓ Post published successfully!');
-  discardPost();
-  switchTab(document.querySelectorAll('.admin-tab')[1], 'postsTab');
+  try {
+    const res = await fetch('/api/posts', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','x-admin-key': ADMIN_PASSWORD},
+      body: JSON.stringify(currentPost)
+    });
+    const data = await res.json();
+    if(data.success){
+      showToast('✓ Post published and live on site!');
+      discardPost();
+      switchTab(document.querySelectorAll('.admin-tab')[1], 'postsTab');
+    } else {
+      showToast('Error saving post: ' + (data.error||'Unknown error'));
+    }
+  } catch(e) {
+    showToast('Error: ' + e.message);
+  }
 }
 
 function editPost(){
@@ -458,29 +493,26 @@ function discardPost(){
 }
 
 // ===== POSTS LIST =====
-function getPosts(){
-  try { return JSON.parse(localStorage.getItem('fuf_posts')||'[]'); }
-  catch(e){ return []; }
-}
-function savePosts(posts){
-  localStorage.setItem('fuf_posts', JSON.stringify(posts));
-}
-
-function loadPosts(){
-  const posts = getPosts();
+async function loadPosts(){
   const list = document.getElementById('postList');
   const empty = document.getElementById('emptyPosts');
   const count = document.getElementById('postsCount');
+  list.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text-muted);">Loading posts...</div>';
 
-  count.textContent = posts.length + ' post' + (posts.length!==1?'s':'');
+  try {
+    const res = await fetch('/api/posts/all', {headers:{'x-admin-key': ADMIN_PASSWORD}});
+    const data = await res.json();
+    const posts = data.posts || [];
 
-  if(posts.length===0){
-    list.innerHTML='';
-    empty.style.display='block';
-    return;
-  }
-  empty.style.display='none';
-  list.innerHTML = posts.map(p=>`
+    count.textContent = posts.length + ' post' + (posts.length!==1?'s':'');
+
+    if(posts.length===0){
+      list.innerHTML='';
+      empty.style.display='block';
+      return;
+    }
+    empty.style.display='none';
+    list.innerHTML = posts.map(p=>`
     <div class="post-item" id="post-${p.id}">
       <div class="post-item-info">
         <h3>${p.title}</h3>
@@ -502,41 +534,59 @@ function loadPosts(){
   `).join('');
 }
 
-function toggleStatus(id){
-  const posts = getPosts();
-  const post = posts.find(p=>p.id===id);
-  if(!post) return;
-  post.status = post.status==='published'?'draft':'published';
-  savePosts(posts);
-  loadPosts();
-  showToast(post.status==='published'?'✓ Post published':'Post unpublished');
+async function toggleStatus(id){
+  try {
+    const res = await fetch('/api/posts/'+id, {
+      method:'PATCH',
+      headers:{'Content-Type':'application/json','x-admin-key': ADMIN_PASSWORD},
+      body: JSON.stringify({})
+    });
+    const data = await res.json();
+    if(data.success){
+      loadPosts();
+      showToast(data.post.status==='published'?'✓ Post published and live!':'Post unpublished');
+    }
+  } catch(e){ showToast('Error: '+e.message); }
 }
 
-function deletePost(id){
+async function deletePost(id){
   if(!confirm('Delete this post? This cannot be undone.')) return;
-  const posts = getPosts().filter(p=>p.id!==id);
-  savePosts(posts);
-  loadPosts();
-  showToast('Post deleted');
+  try {
+    const res = await fetch('/api/posts/'+id, {
+      method:'DELETE',
+      headers:{'x-admin-key': ADMIN_PASSWORD}
+    });
+    const data = await res.json();
+    if(data.success){ loadPosts(); showToast('Post deleted'); }
+    else showToast('Error: '+(data.error||'Unknown'));
+  } catch(e){ showToast('Error: '+e.message); }
 }
 
-function viewPost(id){
-  const post = getPosts().find(p=>p.id===id);
-  if(!post) return;
-  const win = window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><title>${post.title}</title>
-  <style>body{font-family:Georgia,serif;max-width:760px;margin:3rem auto;padding:0 2rem;line-height:1.8;color:#1a1a18;}
-  h1{font-size:2rem;margin-bottom:0.5rem;line-height:1.2;}
-  h2{font-size:1.4rem;margin:2rem 0 0.75rem;color:#1c3a2a;}
-  h3{font-size:1.1rem;margin:1.5rem 0 0.5rem;color:#1c3a2a;}
-  p{margin-bottom:1rem;}</style></head>
-  <body><h1>${post.title}</h1>
-  <p style="color:#888;font-size:0.85rem;">${post.category} · ${post.readTime} · ${new Date(post.publishedAt||post.createdAt).toLocaleDateString()}</p>
-  <hr style="margin:1.5rem 0;border:none;border-top:1px solid #ddd;">
-  ${post.content.replace(/## (.+)/g,'<h2>$1</h2>').replace(/### (.+)/g,'<h3>$1</h3>').replace(/\n\n/g,'</p><p>').replace(/^/,'<p>').replace(/$/,'</p>')}
-  </body></html>`);
+async function viewPost(id){
+  try {
+    const res = await fetch('/api/posts/all', {headers:{'x-admin-key': ADMIN_PASSWORD}});
+    const data = await res.json();
+    const post = (data.posts||[]).find(p=>String(p.id)===String(id));
+    if(!post){ alert('Post not found'); return; }
+    const win = window.open('','_blank');
+    const html = post.content
+      .replace(/## ([^\n]+)/g,'<h2>$1</h2>')
+      .replace(/### ([^\n]+)/g,'<h3>$1</h3>')
+      .split('\n').filter(l=>l.trim())
+      .map(l=>l.startsWith('<h')?l:'<p>'+l+'</p>').join('');
+    win.document.write('<html><head><title>'+post.title+'</title>'
+      +'<style>body{font-family:Georgia,serif;max-width:760px;margin:3rem auto;padding:0 2rem;line-height:1.8;color:#1a1a18;}'
+      +'h1{font-size:2rem;margin-bottom:0.5rem;}h2{font-size:1.4rem;margin:2rem 0 0.75rem;color:#1c3a2a;}'
+      +'h3{font-size:1.1rem;margin:1.5rem 0 0.5rem;color:#1c3a2a;}p{margin-bottom:1rem;}</style></head>'
+      +'<body><h1>'+post.title+'</h1>'
+      +'<p style="color:#888;font-size:0.85rem;">'+post.category+' · '+post.readTime+'</p>'
+      +'<hr style="margin:1.5rem 0;border:none;border-top:1px solid #ddd;">'
+      +html+'</body></html>');
+    win.document.close();
+  } catch(e) {
+    alert('Error loading post: '+e.message);
+  }
 }
-
 // ===== TOAST =====
 function showToast(msg){
   const t = document.getElementById('toast');
