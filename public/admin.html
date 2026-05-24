@@ -285,31 +285,40 @@ function generatePost() {
     var raw = data.reply || '';
     console.log('Raw reply first 300 chars:', raw.substring(0, 300));
 
-    // Parse plain text format: TITLE: ... SEO_TITLE: ... etc
-    function extractField(text, fieldName) {
-      var patterns = [
-        new RegExp(fieldName + ':\s*(.+?)(?=\n[A-Z_]+:|$)', 's'),
-        new RegExp(fieldName + ':\s*(.+)', 'i')
-      ];
-      for (var i = 0; i < patterns.length; i++) {
-        var m = text.match(patterns[i]);
-        if (m) return m[1].trim();
+    // Parse plain text format line by line
+    var lines = raw.split('\n');
+    var title = topic;
+    var seoTitle = topic.substring(0,60);
+    var meta = topic + ' — FixerUpperFinds guide.';
+    var category = 'Buying Guide';
+    var readTime = '6 min read';
+    var contentLines = [];
+    var inContent = false;
+
+    for (var li = 0; li < lines.length; li++) {
+      var line = lines[li];
+      if (inContent) {
+        contentLines.push(line);
+      } else if (line.indexOf('TITLE:') === 0) {
+        title = line.substring(6).trim();
+      } else if (line.indexOf('SEO_TITLE:') === 0) {
+        seoTitle = line.substring(10).trim();
+      } else if (line.indexOf('META:') === 0) {
+        meta = line.substring(5).trim();
+      } else if (line.indexOf('CATEGORY:') === 0) {
+        category = line.substring(9).trim();
+      } else if (line.indexOf('READ_TIME:') === 0) {
+        readTime = line.substring(10).trim();
+      } else if (line.indexOf('CONTENT:') === 0) {
+        inContent = true;
+        var rest = line.substring(8).trim();
+        if (rest) contentLines.push(rest);
       }
-      return '';
     }
 
-    var title = extractField(raw, 'TITLE') || topic;
-    var seoTitle = extractField(raw, 'SEO_TITLE') || topic.substring(0,60);
-    var meta = extractField(raw, 'META') || title + ' — FixerUpperFinds guide.';
-    var category = extractField(raw, 'CATEGORY') || 'Buying Guide';
-    var readTime = extractField(raw, 'READ_TIME') || '6 min read';
-
-    // Extract content - everything after CONTENT:
-    var contentStart = raw.indexOf('CONTENT:');
-    var postContent = contentStart >= 0 ? raw.substring(contentStart + 8).trim() : raw;
-
-    // Clean up the content
-    postContent = postContent.replace(/\\n/g, '\n').replace(/\n\n\n/g, '\n\n').trim();
+    var postContent = contentLines.join('\n').trim();
+    console.log('Parsed title:', title);
+    console.log('Content length:', postContent.length);
 
     var postData = {
       title: title,
