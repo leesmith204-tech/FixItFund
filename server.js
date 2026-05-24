@@ -237,3 +237,4 @@ situation. Keep responses concise (2-4 paragraphs), conversational, and always e
 with a gentle nudge to use the calculator or get pre-approved. Never guarantee
 specific rates or make lending commitments.`;
  
+ 
