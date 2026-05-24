@@ -262,7 +262,7 @@ function generatePost() {
     document.getElementById('genMsg').textContent = msgs[mi];
   }, 3000);
 
-  var sysPrompt = 'You are an SEO content writer for FixerUpperFinds.com, a fixer-upper home search platform covering MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX. Write a complete blog post. Return ONLY a JSON object with no other text, no markdown, no backticks. Start with { and end with }. Use this exact structure: {"title":"string","seoTitle":"string under 60 chars","metaDescription":"string under 155 chars","category":"one of: Buying Guide OR Loan Programs OR Local Markets OR Renovation Tips OR Equity Building","readTime":"X min read","content":"full post 800-1000 words using ## for H2 headers and ### for H3 headers, separate paragraphs with newline"} Never mention specific lender names or rates. End with CTA to search at FixerUpperFinds.com.';
+  var sysPrompt = 'You are a blog writer for FixerUpperFinds.com. CRITICAL INSTRUCTIONS: You must respond with ONLY plain text content in this EXACT format with no JSON, no quotes, no curly braces, no backticks, no markdown code blocks. Use these exact separator lines:\n\nTITLE: [the blog post title here]\nSEO_TITLE: [title under 60 chars]\nMETA: [description under 155 chars]\nCATEGORY: [one of: Buying Guide, Loan Programs, Local Markets, Renovation Tips, Equity Building]\nREAD_TIME: [X min read]\nCONTENT:\n[full blog post here, 600-800 words, use ## for section headers, write naturally]\n\nDo not use JSON. Do not use curly braces. Just plain text with the labels above. Never mention specific lender names or rates. End the content with a call to action to visit FixerUpperFinds.com.';
 
   var userMsg = 'Write a blog post about: ' + topic;
   if (state) userMsg += ' (focused on ' + state + ')';
@@ -283,39 +283,44 @@ function generatePost() {
     console.log('Reply received, length:', data.reply ? data.reply.length : 0);
 
     var raw = data.reply || '';
-    var clean = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+    console.log('Raw reply first 300 chars:', raw.substring(0, 300));
 
-    var postData;
-    var parsed = false;
-
-    try {
-      postData = JSON.parse(clean);
-      parsed = true;
-    } catch(e1) {
-      var match = clean.match(/\{[\s\S]*\}/);
-      if (match) {
-        try {
-          postData = JSON.parse(match[0]);
-          parsed = true;
-        } catch(e2) {
-          console.log('JSON parse failed:', e2.message);
-        }
+    // Parse plain text format: TITLE: ... SEO_TITLE: ... etc
+    function extractField(text, fieldName) {
+      var patterns = [
+        new RegExp(fieldName + ':\s*(.+?)(?=\n[A-Z_]+:|$)', 's'),
+        new RegExp(fieldName + ':\s*(.+)', 'i')
+      ];
+      for (var i = 0; i < patterns.length; i++) {
+        var m = text.match(patterns[i]);
+        if (m) return m[1].trim();
       }
+      return '';
     }
 
-    if (!parsed) {
-      postData = {
-        title: topic,
-        seoTitle: topic.substring(0, 60),
-        metaDescription: topic + ' — guide from FixerUpperFinds.',
-        category: 'Buying Guide',
-        readTime: '5 min read',
-        content: clean
-      };
-    }
+    var title = extractField(raw, 'TITLE') || topic;
+    var seoTitle = extractField(raw, 'SEO_TITLE') || topic.substring(0,60);
+    var meta = extractField(raw, 'META') || title + ' — FixerUpperFinds guide.';
+    var category = extractField(raw, 'CATEGORY') || 'Buying Guide';
+    var readTime = extractField(raw, 'READ_TIME') || '6 min read';
 
-    var content = (postData.content || '').replace(/\\n/g, '\n').replace(/\n\n\n/g, '\n\n').trim();
-    postData.content = content;
+    // Extract content - everything after CONTENT:
+    var contentStart = raw.indexOf('CONTENT:');
+    var postContent = contentStart >= 0 ? raw.substring(contentStart + 8).trim() : raw;
+
+    // Clean up the content
+    postContent = postContent.replace(/\\n/g, '\n').replace(/\n\n\n/g, '\n\n').trim();
+
+    var postData = {
+      title: title,
+      seoTitle: seoTitle,
+      metaDescription: meta,
+      category: category,
+      readTime: readTime,
+      content: postContent
+    };
+
+    var content = postData.content;
 
     currentPost = {
       id: Date.now(),
