@@ -344,11 +344,10 @@ function generatePost() {
       type: type,
       status: 'draft',
       createdAt: new Date().toISOString(),
-      slug: (postData.title || topic).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+      slug: (title || topic).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     };
 
-    console.log('currentPost.title:', currentPost.title);
-    console.log('currentPost keys:', Object.keys(currentPost).join(', '));
+    console.log('Setting title to:', title);
     document.getElementById('genState').style.display = 'none';
     document.getElementById('postPV').style.display = 'block';
     document.getElementById('pvTitle').textContent = title || topic;
