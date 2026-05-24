@@ -14,6 +14,7 @@ const path       = require('path');
 
 const app  = express();
 app.set('trust proxy', 1);
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3000;
 
 // ─── Validate env on startup ────────────────────────────────────────────────
@@ -94,7 +95,7 @@ app.post('/api/chat', aiLimiter, async (req, res) => {
   // ── Call Anthropic API ────────────────────────────────────────────────────
   try {
     const payload = {
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
       messages: trimmedMessages,
     };
@@ -163,7 +164,49 @@ app.post('/api/chat', aiLimiter, async (req, res) => {
     });
   }
 });
+// ─── Blog Posts ───────────────────────────────────────────────────────────────
+const POSTS_FILE = path.join(__dirname, 'posts.json');
+const ADMIN_KEY  = process.env.ADMIN_KEY || 'FixerUpper2026!';
+const fs = require('fs');
 
+function readPosts(){
+  try{ if(fs.existsSync(POSTS_FILE)) return JSON.parse(fs.readFileSync(POSTS_FILE,'utf8')); }
+  catch(e){}
+  return [];
+}
+function writePosts(p){ try{ fs.writeFileSync(POSTS_FILE,JSON.stringify(p,null,2)); return true; }catch(e){ return false; } }
+
+app.get('/api/posts', (req,res) => {
+  const posts = readPosts().filter(p=>p.status==='published').sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
+  res.json({posts});
+});
+app.get('/api/posts/all', (req,res) => {
+  if(req.headers['x-admin-key']!==ADMIN_KEY) return res.status(401).json({error:'Unauthorized'});
+  res.json({posts: readPosts().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))});
+});
+app.post('/api/posts', (req,res) => {
+  if(req.headers['x-admin-key']!==ADMIN_KEY) return res.status(401).json({error:'Unauthorized'});
+  const post = req.body;
+  if(!post||!post.id||!post.title) return res.status(400).json({error:'Post needs id and title'});
+  const posts = readPosts();
+  const idx = posts.findIndex(p=>p.id===post.id);
+  if(idx>=0) posts[idx]=post; else posts.unshift(post);
+  writePosts(posts) ? res.json({success:true,post}) : res.status(500).json({error:'Save failed'});
+});
+app.delete('/api/posts/:id', (req,res) => {
+  if(req.headers['x-admin-key']!==ADMIN_KEY) return res.status(401).json({error:'Unauthorized'});
+  const posts = readPosts().filter(p=>String(p.id)!==String(req.params.id));
+  writePosts(posts) ? res.json({success:true}) : res.status(500).json({error:'Delete failed'});
+});
+app.patch('/api/posts/:id', (req,res) => {
+  if(req.headers['x-admin-key']!==ADMIN_KEY) return res.status(401).json({error:'Unauthorized'});
+  const posts = readPosts();
+  const post = posts.find(p=>String(p.id)===String(req.params.id));
+  if(!post) return res.status(404).json({error:'Not found'});
+  post.status = req.body.status||(post.status==='published'?'draft':'published');
+  if(post.status==='published'&&!post.publishedAt) post.publishedAt=new Date().toISOString();
+  writePosts(posts) ? res.json({success:true,post}) : res.status(500).json({error:'Update failed'});
+});
 // ─── Health check endpoint ────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   res.json({
