@@ -347,6 +347,8 @@ function generatePost() {
       slug: (postData.title || topic).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     };
 
+    console.log('currentPost.title:', currentPost.title);
+    console.log('currentPost keys:', Object.keys(currentPost).join(', '));
     document.getElementById('genState').style.display = 'none';
     document.getElementById('postPV').style.display = 'block';
     document.getElementById('pvTitle').textContent = currentPost.title;
