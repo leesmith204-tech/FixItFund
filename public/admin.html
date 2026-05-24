@@ -333,11 +333,11 @@ function generatePost() {
 
     currentPost = {
       id: Date.now(),
-      title: postData.title || topic,
-      seoTitle: postData.seoTitle || topic.substring(0,60),
-      metaDescription: postData.metaDescription || '',
-      category: postData.category || 'Buying Guide',
-      readTime: postData.readTime || '5 min read',
+      title: title || topic,
+      seoTitle: seoTitle || topic.substring(0,60),
+      metaDescription: meta || '',
+      category: category || 'Buying Guide',
+      readTime: readTime || '5 min read',
       content: postBody,
       topic: topic,
       state: state,
@@ -351,7 +351,7 @@ function generatePost() {
     console.log('currentPost keys:', Object.keys(currentPost).join(', '));
     document.getElementById('genState').style.display = 'none';
     document.getElementById('postPV').style.display = 'block';
-    document.getElementById('pvTitle').textContent = currentPost.title;
+    document.getElementById('pvTitle').textContent = title || topic;
     document.getElementById('pvCat').textContent = currentPost.category;
     document.getElementById('pvTime').textContent = currentPost.readTime;
     document.getElementById('pvState').textContent = state || 'All States';
