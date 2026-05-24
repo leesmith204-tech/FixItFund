@@ -7,264 +7,192 @@
 <meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Cabinet+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --forest:#1c3a2a;--forest-mid:#2a5240;--amber:#d4822a;--amber-light:#f0a84a;
-    --cream:#faf7f2;--cream-dark:#f2ede4;--border:#ddd6ca;--text:#1a1a18;
-    --text-muted:#6b6560;--white:#ffffff;--green:#1c6b3a;--red:#c0392b;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Cabinet Grotesk',sans-serif;background:var(--cream);color:var(--text);}
-
-  /* LOGIN */
-  .login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
-  .login-box{background:var(--white);border-radius:20px;padding:3rem;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.1);text-align:center;}
-  .login-logo{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--forest);margin-bottom:0.25rem;}
-  .login-logo span{color:var(--amber);}
-  .login-sub{font-size:0.8rem;color:var(--text-muted);margin-bottom:2rem;}
-  .login-box input{width:100%;padding:0.85rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;margin-bottom:1rem;transition:border-color 0.2s;}
-  .login-box input:focus{border-color:var(--forest);}
-  .login-btn{width:100%;background:var(--forest);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
-  .login-btn:hover{background:var(--amber);}
-  .login-error{color:var(--red);font-size:0.85rem;margin-top:0.75rem;display:none;}
-
-  /* ADMIN LAYOUT */
-  .admin-screen{display:none;}
-  .admin-nav{background:var(--forest);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--amber);}
-  .admin-nav-logo{font-family:'Fraunces',serif;color:var(--white);font-size:1.2rem;}
-  .admin-nav-logo span{color:var(--amber-light);}
-  .admin-nav-right{display:flex;gap:1rem;align-items:center;}
-  .admin-nav-right a{color:#aabfb0;text-decoration:none;font-size:0.85rem;}
-  .admin-nav-right a:hover{color:var(--white);}
-  .logout-btn{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.2);padding:0.4rem 1rem;border-radius:6px;font-size:0.82rem;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
-  .logout-btn:hover{background:rgba(255,255,255,0.2);}
-
-  .admin-body{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;}
-  .admin-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:2.5rem;}
-  .admin-tab{padding:0.85rem 1.5rem;cursor:pointer;font-size:0.875rem;font-weight:600;color:var(--text-muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s;}
-  .admin-tab.active{color:var(--forest);border-bottom-color:var(--amber);}
-  .admin-tab:hover{color:var(--forest);}
-
-  /* GENERATE TAB */
-  .generate-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
-  .gen-panel{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.75rem;}
-  .gen-panel h2{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--forest);margin-bottom:0.25rem;}
-  .gen-panel p{font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
-  .form-field{margin-bottom:1rem;}
-  .form-field label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px;}
-  .form-field input,.form-field select,.form-field textarea{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--cream);}
-  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--forest);}
-  .form-field textarea{min-height:100px;resize:vertical;}
-  .quick-topics{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
-  .quick-topic{background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);font-size:0.72rem;font-weight:600;padding:4px 10px;border-radius:20px;cursor:pointer;transition:all 0.15s;}
-  .quick-topic:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
-  .generate-btn{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;margin-top:0.5rem;}
-  .generate-btn:hover{background:var(--amber-light);color:var(--forest);}
-  .generate-btn:disabled{background:#ccc;cursor:not-allowed;}
-
-  /* PREVIEW PANEL */
-  .preview-panel{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.75rem;position:relative;}
-  .preview-panel h2{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--forest);margin-bottom:1.5rem;}
-  .preview-placeholder{text-align:center;padding:3rem 1rem;color:var(--text-muted);}
-  .preview-placeholder h3{font-size:1rem;margin-bottom:0.5rem;color:var(--text-muted);}
-  .preview-placeholder p{font-size:0.82rem;line-height:1.6;}
-  .generating-state{text-align:center;padding:3rem 1rem;}
-  .generating-dots{display:flex;gap:8px;justify-content:center;margin-bottom:1rem;}
-  .generating-dots span{width:10px;height:10px;border-radius:50%;background:var(--amber);animation:gd 1.2s infinite;}
-  .generating-dots span:nth-child(2){animation-delay:0.2s;}
-  .generating-dots span:nth-child(3){animation-delay:0.4s;}
-  @keyframes gd{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-8px);opacity:1}}
-  .generating-state p{font-size:0.9rem;color:var(--text-muted);}
-  .post-preview{display:none;}
-  .post-preview-title{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem;line-height:1.3;}
-  .post-meta-row{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;}
-  .post-meta-tag{font-size:0.7rem;font-weight:700;padding:3px 8px;border-radius:4px;background:var(--cream-dark);color:var(--text-muted);}
-  .post-content{font-size:0.875rem;line-height:1.8;color:var(--text);max-height:400px;overflow-y:auto;border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;white-space:pre-wrap;}
-  .post-actions{display:flex;gap:0.75rem;margin-top:1.25rem;border-top:1px solid var(--border);padding-top:1.25rem;}
-  .publish-btn{flex:1;background:var(--forest);color:var(--white);border:none;padding:0.8rem;border-radius:8px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
-  .publish-btn:hover{background:var(--amber);}
-  .edit-btn{background:var(--cream-dark);color:var(--forest);border:1.5px solid var(--border);padding:0.8rem 1.25rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:all 0.2s;}
-  .edit-btn:hover{border-color:var(--forest);}
-  .discard-btn{background:transparent;color:var(--text-muted);border:1.5px solid var(--border);padding:0.8rem 1.25rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
-
-  /* POSTS TAB */
-  .posts-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
-  .posts-header h2{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);}
-  .posts-count{font-size:0.82rem;color:var(--text-muted);}
-  .post-list{display:flex;flex-direction:column;gap:1rem;}
-  .post-item{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;transition:box-shadow 0.2s;}
-  .post-item:hover{box-shadow:0 4px 20px rgba(28,58,42,0.08);}
-  .post-item-info h3{font-size:0.95rem;font-weight:700;color:var(--forest);margin-bottom:0.25rem;}
-  .post-item-info p{font-size:0.8rem;color:var(--text-muted);line-height:1.5;}
-  .post-item-meta{display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;}
-  .post-status{font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:4px;}
-  .status-published{background:var(--green-light);color:var(--green);}
-  .status-draft{background:#fff3e0;color:#7a4a00;}
-  .post-item-actions{display:flex;gap:0.5rem;flex-shrink:0;}
-  .btn-sm{padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--forest);font-family:'Cabinet Grotesk',sans-serif;transition:all 0.15s;white-space:nowrap;}
-  .btn-sm:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
-  .btn-sm.danger:hover{background:var(--red);border-color:var(--red);color:var(--white);}
-  .empty-posts{text-align:center;padding:4rem;color:var(--text-muted);}
-  .empty-posts h3{font-size:1rem;margin-bottom:0.5rem;}
-
-  /* SUCCESS TOAST */
-  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--forest);color:var(--white);padding:1rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.2);transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:999;}
-  .toast.show{transform:translateY(0);opacity:1;}
-
-  @media(max-width:768px){
-    .generate-grid{grid-template-columns:1fr;}
-  }
-
-  .green-light{background:#e8f5ee;}
-  .green{color:#1c6b3a;}
+:root{--forest:#1c3a2a;--forest-mid:#2a5240;--amber:#d4822a;--amber-light:#f0a84a;--cream:#faf7f2;--cream-dark:#f2ede4;--border:#ddd6ca;--text:#1a1a18;--text-muted:#6b6560;--white:#ffffff;--green:#1c6b3a;--red:#c0392b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cabinet Grotesk',sans-serif;background:var(--cream);color:var(--text);}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
+.login-box{background:var(--white);border-radius:20px;padding:3rem;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.1);text-align:center;}
+.login-logo{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--forest);margin-bottom:0.25rem;}
+.login-logo span{color:var(--amber);}
+.login-sub{font-size:0.8rem;color:var(--text-muted);margin-bottom:2rem;}
+.login-box input{width:100%;padding:0.85rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;margin-bottom:1rem;}
+.login-btn{width:100%;background:var(--forest);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
+.login-btn:hover{background:var(--amber);}
+.login-error{color:var(--red);font-size:0.85rem;margin-top:0.75rem;display:none;}
+.admin-screen{display:none;}
+.admin-nav{background:var(--forest);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--amber);}
+.admin-nav-logo{font-family:'Fraunces',serif;color:var(--white);font-size:1.2rem;}
+.admin-nav-logo span{color:var(--amber-light);}
+.nav-right{display:flex;gap:1rem;align-items:center;}
+.nav-right a{color:#aabfb0;text-decoration:none;font-size:0.85rem;}
+.logout-btn{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.2);padding:0.4rem 1rem;border-radius:6px;font-size:0.82rem;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
+.admin-body{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;}
+.admin-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:2.5rem;}
+.admin-tab{padding:0.85rem 1.5rem;cursor:pointer;font-size:0.875rem;font-weight:600;color:var(--text-muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s;}
+.admin-tab.active{color:var(--forest);border-bottom-color:var(--amber);}
+.generate-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.panel{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.75rem;}
+.panel h2{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--forest);margin-bottom:0.25rem;}
+.panel p{font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.form-field{margin-bottom:1rem;}
+.form-field label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px;}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;background:var(--cream);}
+.form-field textarea{min-height:80px;resize:vertical;}
+.quick-topics{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
+.qtopic{background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);font-size:0.72rem;font-weight:600;padding:4px 10px;border-radius:20px;cursor:pointer;}
+.qtopic:hover{background:var(--forest);color:var(--white);}
+.gen-btn{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;margin-top:0.5rem;}
+.gen-btn:hover{background:var(--amber-light);color:var(--forest);}
+.gen-btn:disabled{background:#ccc;cursor:not-allowed;}
+.preview-placeholder{text-align:center;padding:3rem 1rem;color:var(--text-muted);}
+.generating{text-align:center;padding:3rem 1rem;display:none;}
+.dots{display:flex;gap:8px;justify-content:center;margin-bottom:1rem;}
+.dots span{width:10px;height:10px;border-radius:50%;background:var(--amber);animation:gd 1.2s infinite;}
+.dots span:nth-child(2){animation-delay:0.2s;}
+.dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes gd{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-8px);opacity:1}}
+.post-preview{display:none;}
+.post-preview-title{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--forest);margin-bottom:0.5rem;}
+.meta-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;}
+.meta-tag{font-size:0.7rem;font-weight:700;padding:3px 8px;border-radius:4px;background:var(--cream-dark);color:var(--text-muted);}
+.post-content-preview{font-size:0.85rem;line-height:1.8;color:var(--text);max-height:380px;overflow-y:auto;border-top:1px solid var(--border);padding-top:1rem;margin-top:0.75rem;white-space:pre-wrap;}
+.post-actions{display:flex;gap:0.75rem;margin-top:1.25rem;border-top:1px solid var(--border);padding-top:1.25rem;}
+.pub-btn{flex:1;background:var(--forest);color:var(--white);border:none;padding:0.8rem;border-radius:8px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
+.pub-btn:hover{background:var(--amber);}
+.disc-btn{background:transparent;color:var(--text-muted);border:1.5px solid var(--border);padding:0.8rem 1.25rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
+.posts-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.posts-header h2{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);}
+.post-list{display:flex;flex-direction:column;gap:1rem;}
+.post-item{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.post-item h3{font-size:0.95rem;font-weight:700;color:var(--forest);margin-bottom:0.25rem;}
+.post-item p{font-size:0.8rem;color:var(--text-muted);}
+.item-meta{display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;}
+.status-pub{background:#e8f5ee;color:var(--green);font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:4px;}
+.status-draft{background:#fff3e0;color:#7a4a00;font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:4px;}
+.item-actions{display:flex;gap:0.5rem;flex-shrink:0;}
+.btn-sm{padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--forest);font-family:'Cabinet Grotesk',sans-serif;}
+.btn-sm:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
+.btn-danger:hover{background:var(--red);border-color:var(--red);color:var(--white);}
+.empty-posts{text-align:center;padding:4rem;color:var(--text-muted);}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--forest);color:var(--white);padding:1rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.2);transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:999;}
+.toast.show{transform:translateY(0);opacity:1;}
+@media(max-width:768px){.generate-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">Fixer<span>Upper</span>Finds</div>
     <div class="login-sub">Blog Admin — Authorized Access Only</div>
-    <input type="password" id="passwordInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkPassword()">
-    <button class="login-btn" onclick="checkPassword()">Sign In →</button>
-    <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+    <input type="password" id="pwInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="loginErr">Incorrect password.</div>
   </div>
 </div>
 
-<!-- ADMIN SCREEN -->
 <div class="admin-screen" id="adminScreen">
   <nav class="admin-nav">
-    <div class="admin-nav-logo">Fixer<span>Upper</span>Finds — <span style="font-size:0.85rem;font-weight:400;">Blog Admin</span></div>
-    <div class="admin-nav-right">
-      <a href="https://fixerupperfinds.com" target="_blank">← View Site</a>
-      <button class="logout-btn" onclick="logout()">Log Out</button>
+    <div class="admin-nav-logo">Fixer<span>Upper</span>Finds <span style="font-size:0.8rem;font-weight:400;">Blog Admin</span></div>
+    <div class="nav-right">
+      <a href="https://fixerupperfinds.com" target="_blank">View Site</a>
+      <button class="logout-btn" onclick="doLogout()">Log Out</button>
     </div>
   </nav>
-
   <div class="admin-body">
     <div class="admin-tabs">
-      <div class="admin-tab active" onclick="switchTab(this,'generateTab')">✍️ Generate New Post</div>
-      <div class="admin-tab" onclick="switchTab(this,'postsTab')">📚 All Posts</div>
+      <div class="admin-tab active" onclick="showTab('genTab',this)">Write New Post</div>
+      <div class="admin-tab" onclick="showTab('postsTab',this)">All Posts</div>
     </div>
 
-    <!-- GENERATE TAB -->
-    <div id="generateTab">
+    <div id="genTab">
       <div class="generate-grid">
-        <!-- LEFT — INPUT -->
-        <div class="gen-panel">
+        <div class="panel">
           <h2>AI Blog Post Generator</h2>
-          <p>Choose a topic or type your own. Claude will write a full SEO-optimized post in seconds.</p>
-
+          <p>Pick a topic or type your own. Claude writes a full SEO post in seconds.</p>
           <div class="form-field">
-            <label>Quick Topic Suggestions</label>
+            <label>Quick Topics</label>
             <div class="quick-topics">
-              <div class="quick-topic" onclick="setTopic('How to Buy a Fixer Upper in Maryland 2026')">MD Fixer Upper Guide</div>
-              <div class="quick-topic" onclick="setTopic('FHA 203k vs HomeStyle Loan — Which is Right for You?')">FHA 203k vs HomeStyle</div>
-              <div class="quick-topic" onclick="setTopic('Best Fixer Upper Homes for Sale in Northern Virginia 2026')">VA Fixer Uppers</div>
-              <div class="quick-topic" onclick="setTopic('How Does the VA Renovation Loan Work for Veterans?')">VA Reno Loan Guide</div>
-              <div class="quick-topic" onclick="setTopic('USDA Renovation Loan Eligible Areas in Maryland and Virginia')">USDA Eligible Areas</div>
-              <div class="quick-topic" onclick="setTopic('How to Build Instant Equity Buying a Fixer Upper Home')">Build Instant Equity</div>
-              <div class="quick-topic" onclick="setTopic('Best Renovation Projects That Add the Most Home Value in 2026')">Best ROI Renovations</div>
-              <div class="quick-topic" onclick="setTopic('Fixer Upper Homes for Sale in Frederick Maryland')">Frederick MD Listings</div>
-              <div class="quick-topic" onclick="setTopic('How to Estimate After Renovation Value ARV on a Fixer Upper')">How to Estimate ARV</div>
-              <div class="quick-topic" onclick="setTopic('RenoExpress Loan — The Fastest Renovation Loan Explained 2026')">RenoExpress Guide</div>
-              <div class="quick-topic" onclick="setTopic('Fixer Upper Homes for Sale in Washington DC Metro Area')">DC Metro Listings</div>
-              <div class="quick-topic" onclick="setTopic('CHOICERenovation vs HomeStyle — Comparing Freddie Mac and Fannie Mae Renovation Loans')">CHOICEReno vs HomeStyle</div>
+              <span class="qtopic" onclick="setT('How to Buy a Fixer Upper in Maryland 2026')">MD Fixer Upper Guide</span>
+              <span class="qtopic" onclick="setT('FHA 203k vs HomeStyle Loan Which is Right for You')">FHA 203k vs HomeStyle</span>
+              <span class="qtopic" onclick="setT('Best Fixer Upper Homes in Northern Virginia 2026')">VA Fixer Uppers</span>
+              <span class="qtopic" onclick="setT('How Does the VA Renovation Loan Work for Veterans')">VA Reno Loan</span>
+              <span class="qtopic" onclick="setT('USDA Renovation Loan Eligible Areas Maryland Virginia')">USDA Eligible Areas</span>
+              <span class="qtopic" onclick="setT('How to Build Instant Equity Buying a Fixer Upper')">Build Equity</span>
+              <span class="qtopic" onclick="setT('Best Renovation Projects That Add the Most Home Value 2026')">Best ROI Renovations</span>
+              <span class="qtopic" onclick="setT('Fixer Upper Homes for Sale Frederick Maryland')">Frederick MD</span>
+              <span class="qtopic" onclick="setT('How to Estimate After Renovation Value ARV')">How to Estimate ARV</span>
+              <span class="qtopic" onclick="setT('RenoExpress Loan Fastest Renovation Loan Explained')">RenoExpress Guide</span>
+              <span class="qtopic" onclick="setT('Fixer Upper Homes Washington DC Metro Area')">DC Metro</span>
+              <span class="qtopic" onclick="setT('CHOICERenovation vs HomeStyle Renovation Loan Comparison')">CHOICEReno vs HomeStyle</span>
             </div>
           </div>
-
           <div class="form-field">
-            <label>Blog Post Topic</label>
-            <input type="text" id="topicInput" placeholder="e.g. How to Buy a Fixer Upper in Frederick MD">
+            <label>Topic</label>
+            <input type="text" id="topicIn" placeholder="e.g. How to Buy a Fixer Upper in Frederick MD">
           </div>
-
           <div class="form-field">
             <label>Target State (optional)</label>
-            <select id="stateInput">
+            <select id="stateIn">
               <option value="">No specific state</option>
-              <option value="Maryland">Maryland</option>
-              <option value="Washington DC">Washington DC</option>
-              <option value="Virginia">Virginia</option>
-              <option value="West Virginia">West Virginia</option>
-              <option value="Pennsylvania">Pennsylvania</option>
-              <option value="New Jersey">New Jersey</option>
-              <option value="North Carolina">North Carolina</option>
-              <option value="Delaware">Delaware</option>
-              <option value="Massachusetts">Massachusetts</option>
-              <option value="New Hampshire">New Hampshire</option>
-              <option value="Illinois">Illinois</option>
-              <option value="Texas">Texas</option>
+              <option>Maryland</option><option>Washington DC</option><option>Virginia</option>
+              <option>West Virginia</option><option>Pennsylvania</option><option>New Jersey</option>
+              <option>North Carolina</option><option>Delaware</option><option>Massachusetts</option>
+              <option>New Hampshire</option><option>Illinois</option><option>Texas</option>
             </select>
           </div>
-
           <div class="form-field">
             <label>Post Type</label>
-            <select id="typeInput">
+            <select id="typeIn">
               <option value="guide">How-To Guide</option>
               <option value="comparison">Loan Comparison</option>
               <option value="local">Local Market Guide</option>
-              <option value="tips">Tips & Advice</option>
-              <option value="explainer">Explainer / What Is</option>
+              <option value="tips">Tips and Advice</option>
+              <option value="explainer">Explainer</option>
             </select>
           </div>
-
           <div class="form-field">
             <label>Additional Notes (optional)</label>
-            <textarea id="notesInput" placeholder="Any specific points to include, keywords to target, or angle to take..."></textarea>
+            <textarea id="notesIn" placeholder="Any specific points or keywords..."></textarea>
           </div>
-
-          <button class="generate-btn" id="generateBtn" onclick="generatePost()">Generate Blog Post with AI →</button>
+          <button class="gen-btn" id="genBtn" onclick="generatePost()">Generate Post with AI</button>
         </div>
 
-        <!-- RIGHT — PREVIEW -->
-        <div class="preview-panel" id="previewPanel">
+        <div class="panel" id="previewPanel">
           <h2>Preview</h2>
-
-          <div class="preview-placeholder" id="previewPlaceholder">
-            <h3>Your post will appear here</h3>
-            <p>Choose a topic from the suggestions or type your own, then click Generate. Claude will write a full SEO-optimized post in about 15 seconds.</p>
+          <div class="preview-placeholder" id="previewPH">
+            <p>Choose a topic and click Generate. Your post will appear here in about 15 seconds.</p>
           </div>
-
-          <div class="generating-state" id="generatingState" style="display:none;">
-            <div class="generating-dots"><span></span><span></span><span></span></div>
-            <p id="generatingMsg">Researching topic and writing post...</p>
+          <div class="generating" id="genState">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <p id="genMsg">Writing your post...</p>
           </div>
-
-          <div class="post-preview" id="postPreview">
-            <div class="post-preview-title" id="previewTitle"></div>
-            <div class="post-meta-row">
-              <span class="post-meta-tag" id="previewCategory"></span>
-              <span class="post-meta-tag" id="previewReadTime"></span>
-              <span class="post-meta-tag" id="previewState"></span>
+          <div class="post-preview" id="postPV">
+            <div class="post-preview-title" id="pvTitle"></div>
+            <div class="meta-row">
+              <span class="meta-tag" id="pvCat"></span>
+              <span class="meta-tag" id="pvTime"></span>
+              <span class="meta-tag" id="pvState"></span>
             </div>
-            <div class="post-meta-row">
-              <span style="font-size:0.75rem;color:var(--text-muted);" id="previewSEOTitle">SEO Title: </span>
-            </div>
-            <div class="post-meta-row">
-              <span style="font-size:0.75rem;color:var(--text-muted);" id="previewMetaDesc">Meta: </span>
-            </div>
-            <div class="post-content" id="previewContent"></div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.25rem;" id="pvSEO"></div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;" id="pvMeta"></div>
+            <div class="post-content-preview" id="pvContent"></div>
             <div class="post-actions">
-              <button class="publish-btn" onclick="publishPost()">✓ Publish to Blog</button>
-              <button class="edit-btn" onclick="editPost()">Edit</button>
-              <button class="discard-btn" onclick="discardPost()">Discard</button>
+              <button class="pub-btn" onclick="publishPost()">Publish to Blog</button>
+              <button class="disc-btn" onclick="discardPost()">Discard</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- POSTS TAB -->
     <div id="postsTab" style="display:none;">
       <div class="posts-header">
-        <h2>All Blog Posts</h2>
-        <span class="posts-count" id="postsCount">0 posts</span>
+        <h2>All Posts</h2>
+        <span id="postCount" style="font-size:0.82rem;color:var(--text-muted);">0 posts</span>
       </div>
-      <div class="post-list" id="postList"></div>
-      <div class="empty-posts" id="emptyPosts">
-        <h3>No posts yet</h3>
-        <p>Generate your first post using the Generate tab!</p>
-      </div>
+      <div id="postList"></div>
+      <div id="emptyPosts" class="empty-posts"><p>No posts yet. Generate your first post!</p></div>
     </div>
   </div>
 </div>
@@ -272,327 +200,263 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== CONFIG =====
-const ADMIN_PASSWORD = 'FixerUpper2026!';
+var PASS = 'FixerUpper2026!';
+var currentPost = null;
 
-// ===== LOGIN =====
-function checkPassword(){
-  const pw = document.getElementById('passwordInput').value;
-  if(pw === ADMIN_PASSWORD){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('adminScreen').style.display='block';
+function doLogin() {
+  var pw = document.getElementById('pwInput').value;
+  if (pw === PASS) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
     loadPosts();
   } else {
-    document.getElementById('loginError').style.display='block';
-    document.getElementById('passwordInput').value='';
+    document.getElementById('loginErr').style.display = 'block';
+    document.getElementById('pwInput').value = '';
   }
 }
-function logout(){
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('adminScreen').style.display='none';
-  document.getElementById('passwordInput').value='';
+
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminScreen').style.display = 'none';
+  document.getElementById('pwInput').value = '';
 }
 
-// ===== TABS =====
-function switchTab(tab, panelId){
-  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-  tab.classList.add('active');
-  document.getElementById('generateTab').style.display='none';
-  document.getElementById('postsTab').style.display='none';
-  document.getElementById(panelId).style.display='block';
-  if(panelId==='postsTab') loadPosts();
+function showTab(tabId, el) {
+  document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('genTab').style.display = 'none';
+  document.getElementById('postsTab').style.display = 'none';
+  document.getElementById(tabId).style.display = 'block';
+  if (tabId === 'postsTab') loadPosts();
 }
 
-// ===== QUICK TOPICS =====
-function setTopic(topic){
-  document.getElementById('topicInput').value=topic;
+function setT(topic) {
+  document.getElementById('topicIn').value = topic;
 }
 
-// ===== GENERATE POST =====
-let currentPost = null;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
 
-async function generatePost(){
-  const topic = document.getElementById('topicInput').value.trim();
-  const state = document.getElementById('stateInput').value;
-  const type = document.getElementById('typeInput').value;
-  const notes = document.getElementById('notesInput').value.trim();
+function generatePost() {
+  var topic = document.getElementById('topicIn').value.trim();
+  var state = document.getElementById('stateIn').value;
+  var type = document.getElementById('typeIn').value;
+  var notes = document.getElementById('notesIn').value.trim();
 
-  if(!topic){ alert('Please enter a blog post topic.'); return; }
+  if (!topic) { alert('Please enter a topic.'); return; }
 
-  const btn = document.getElementById('generateBtn');
+  var btn = document.getElementById('genBtn');
   btn.disabled = true;
-  document.getElementById('previewPlaceholder').style.display='none';
-  document.getElementById('postPreview').style.display='none';
-  document.getElementById('generatingState').style.display='block';
+  document.getElementById('previewPH').style.display = 'none';
+  document.getElementById('postPV').style.display = 'none';
+  document.getElementById('genState').style.display = 'block';
 
-  const msgs = [
-    'Researching topic and writing post...',
-    'Optimizing for SEO keywords...',
-    'Adding state-specific content...',
-    'Formatting headings and structure...',
-    'Almost done...'
-  ];
-  let msgIdx = 0;
-  const msgInterval = setInterval(()=>{
-    msgIdx = (msgIdx+1) % msgs.length;
-    document.getElementById('generatingMsg').textContent = msgs[msgIdx];
+  var msgs = ['Writing your post...', 'Optimizing for SEO...', 'Adding local content...', 'Almost done...'];
+  var mi = 0;
+  var interval = setInterval(function() {
+    mi = (mi + 1) % msgs.length;
+    document.getElementById('genMsg').textContent = msgs[mi];
   }, 3000);
 
-  const systemPrompt = `You are an expert SEO content writer for FixerUpperFinds.com — a property search platform specializing in fixer-upper, cosmetic update, and undervalued homes across MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, and TX. The site connects home buyers with renovation financing through a licensed renovation loan advisor.
+  var sysPrompt = 'You are an SEO content writer for FixerUpperFinds.com, a fixer-upper home search platform covering MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX. Write a complete blog post. Return ONLY a JSON object with no other text, no markdown, no backticks. Start with { and end with }. Use this exact structure: {"title":"string","seoTitle":"string under 60 chars","metaDescription":"string under 155 chars","category":"one of: Buying Guide OR Loan Programs OR Local Markets OR Renovation Tips OR Equity Building","readTime":"X min read","content":"full post 800-1000 words using ## for H2 headers and ### for H3 headers, separate paragraphs with newline"} Never mention specific lender names or rates. End with CTA to search at FixerUpperFinds.com.';
 
-Write a complete, SEO-optimized blog post based on the topic provided. 
+  var userMsg = 'Write a blog post about: ' + topic;
+  if (state) userMsg += ' (focused on ' + state + ')';
+  if (notes) userMsg += '. Notes: ' + notes;
 
-CRITICAL: You MUST respond with ONLY a raw JSON object. No markdown, no backticks, no explanation before or after. Start your response with { and end with }. The JSON must be:
-{
-  "title": "The exact blog post title (compelling, SEO-rich)",
-  "seoTitle": "SEO title tag (under 60 chars)",
-  "metaDescription": "Meta description (under 155 chars, include call to action)",
-  "category": "One of: Buying Guide, Loan Programs, Local Markets, Renovation Tips, Equity Building",
-  "readTime": "X min read",
-  "content": "The full blog post content (800-1000 words). Use markdown-style headers with ## for H2 and ### for H3. Write naturally, informatively, and helpfully. Include specific details, practical advice, and relevant statistics where appropriate. End with a call to action to search properties at FixerUpperFinds.com or apply for renovation financing."
-}
+  fetch('/api/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      messages: [{role: 'user', content: userMsg}],
+      system: sysPrompt,
+      max_tokens: 2000
+    })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    clearInterval(interval);
+    console.log('Reply received, length:', data.reply ? data.reply.length : 0);
 
-Guidelines:
-- Write for first-time buyers and move-up buyers interested in below-market properties
-- Include relevant loan program information naturally (FHA 203k Limited up to $75K, FHA 203k Standard for $75K+, HomeStyle, CHOICERenovation, RenoExpress, VA Renovation, USDA Renovation)
-- Mention specific cities/neighborhoods when state is provided
-- Target long-tail keywords naturally throughout
-- Never mention specific lender names or rate guarantees
-- End every post with a CTA to search at FixerUpperFinds.com`;
+    var raw = data.reply || '';
+    var clean = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
 
-  const userMsg = `Write a blog post about: ${topic}${state ? ` (focused on ${state})` : ''}
-Post type: ${type}
-${notes ? `Additional notes: ${notes}` : ''}`;
+    var postData;
+    var parsed = false;
 
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        messages: [{role:'user', content: userMsg}],
-        system: systemPrompt,
-        max_tokens: 2000
-      })
-    });
-    const data = await res.json();
-    clearInterval(msgInterval);
-
-    console.log('Raw reply:', data.reply ? data.reply.substring(0,200) : 'NO REPLY');
-    let postData;
     try {
-      // Try multiple parsing approaches
-      let clean = data.reply || '';
-      // Remove markdown code blocks
-      clean = clean.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-      // Try direct parse first
-      try {
-        postData = JSON.parse(clean);
-      } catch(e1) {
-        // Try to find JSON object in response
-        const match = clean.match(/\{[\s\S]*\}/);
-        if(match){
+      postData = JSON.parse(clean);
+      parsed = true;
+    } catch(e1) {
+      var match = clean.match(/\{[\s\S]*\}/);
+      if (match) {
+        try {
           postData = JSON.parse(match[0]);
-        } else {
-          // Build a post from plain text response as fallback
-          postData = {
-            title: document.getElementById('topicInput').value,
-            seoTitle: document.getElementById('topicInput').value.substring(0,60),
-            metaDescription: document.getElementById('topicInput').value + ' — FixerUpperFinds guide.',
-            category: 'Buying Guide',
-            readTime: '5 min read',
-            content: clean
-          };
+          parsed = true;
+        } catch(e2) {
+          console.log('JSON parse failed:', e2.message);
         }
       }
-    } catch(e) {
-      console.error('Parse error:', e, 'Raw reply:', data.reply);
-      throw new Error('Could not parse response: ' + e.message);
     }
 
+    if (!parsed) {
+      postData = {
+        title: topic,
+        seoTitle: topic.substring(0, 60),
+        metaDescription: topic + ' — guide from FixerUpperFinds.',
+        category: 'Buying Guide',
+        readTime: '5 min read',
+        content: clean
+      };
+    }
+
+    var content = (postData.content || '').replace(/\\n/g, '\n').replace(/\n\n\n/g, '\n\n').trim();
+    postData.content = content;
+
     currentPost = {
-      ...postData,
       id: Date.now(),
+      title: postData.title || topic,
+      seoTitle: postData.seoTitle || topic.substring(0,60),
+      metaDescription: postData.metaDescription || '',
+      category: postData.category || 'Buying Guide',
+      readTime: postData.readTime || '5 min read',
+      content: content,
       topic: topic,
       state: state,
       type: type,
       status: 'draft',
       createdAt: new Date().toISOString(),
-      slug: postData.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+      slug: (postData.title || topic).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     };
 
-    // Show preview
-    document.getElementById('generatingState').style.display='none';
-    document.getElementById('postPreview').style.display='block';
-    document.getElementById('previewTitle').textContent = postData.title;
-    document.getElementById('previewCategory').textContent = postData.category;
-    document.getElementById('previewReadTime').textContent = postData.readTime;
-    document.getElementById('previewState').textContent = state || 'All States';
-    document.getElementById('previewSEOTitle').textContent = 'SEO Title: ' + postData.seoTitle;
-    document.getElementById('previewMetaDesc').textContent = 'Meta: ' + postData.metaDescription;
-    const cleanContent = postData.content
-      .replace(/\\n/g, '\n')
-      .replace(/\n\n/g, '\n')
-      .trim();
-    postData.content = cleanContent;
-    document.getElementById('previewContent').textContent = cleanContent;
-
-  } catch(e) {
-    clearInterval(msgInterval);
-    console.error('Generation error:', e);
-    document.getElementById('generatingState').style.display='none';
-    document.getElementById('previewPlaceholder').style.display='block';
-    document.getElementById('previewPlaceholder').innerHTML='<h3 style="color:var(--red)">Generation failed</h3><p>Error: '+e.message+'</p><p>Check the browser console (F12) for details.</p>';
-  }
-
-  btn.disabled = false;
+    document.getElementById('genState').style.display = 'none';
+    document.getElementById('postPV').style.display = 'block';
+    document.getElementById('pvTitle').textContent = currentPost.title;
+    document.getElementById('pvCat').textContent = currentPost.category;
+    document.getElementById('pvTime').textContent = currentPost.readTime;
+    document.getElementById('pvState').textContent = state || 'All States';
+    document.getElementById('pvSEO').textContent = 'SEO: ' + currentPost.seoTitle;
+    document.getElementById('pvMeta').textContent = 'Meta: ' + currentPost.metaDescription;
+    document.getElementById('pvContent').textContent = content;
+    btn.disabled = false;
+  })
+  .catch(function(err) {
+    clearInterval(interval);
+    console.error('Error:', err);
+    document.getElementById('genState').style.display = 'none';
+    document.getElementById('previewPH').style.display = 'block';
+    document.getElementById('previewPH').innerHTML = '<p style="color:red">Failed: ' + err.message + '</p>';
+    btn.disabled = false;
+  });
 }
 
-// ===== PUBLISH =====
-async function publishPost(){
-  if(!currentPost) return;
+function publishPost() {
+  if (!currentPost) return;
   currentPost.status = 'published';
   currentPost.publishedAt = new Date().toISOString();
 
-  try {
-    const res = await fetch('/api/posts', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json','x-admin-key': ADMIN_PASSWORD},
-      body: JSON.stringify(currentPost)
-    });
-    const data = await res.json();
-    if(data.success){
-      showToast('✓ Post published and live on site!');
+  fetch('/api/posts', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'x-admin-key': PASS},
+    body: JSON.stringify(currentPost)
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.success) {
+      showToast('Post published and live on site!');
       discardPost();
-      switchTab(document.querySelectorAll('.admin-tab')[1], 'postsTab');
+      showTab('postsTab', document.querySelectorAll('.admin-tab')[1]);
     } else {
-      showToast('Error saving post: ' + (data.error||'Unknown error'));
+      showToast('Error: ' + (data.error || 'Unknown'));
     }
-  } catch(e) {
-    showToast('Error: ' + e.message);
-  }
+  })
+  .catch(function(err) {
+    showToast('Error: ' + err.message);
+  });
 }
 
-function editPost(){
-  if(!currentPost) return;
-  const content = document.getElementById('previewContent');
-  content.contentEditable = 'true';
-  content.style.border = '1.5px solid var(--amber)';
-  content.style.borderRadius = '8px';
-  content.style.padding = '0.75rem';
-  content.focus();
-  showToast('Editing mode — click anywhere in the content to edit');
-}
-
-function discardPost(){
+function discardPost() {
   currentPost = null;
-  document.getElementById('postPreview').style.display='none';
-  document.getElementById('previewPlaceholder').style.display='block';
-  document.getElementById('previewPlaceholder').innerHTML='<h3>Your post will appear here</h3><p>Choose a topic from the suggestions or type your own, then click Generate.</p>';
-  document.getElementById('topicInput').value='';
-  document.getElementById('notesInput').value='';
+  document.getElementById('postPV').style.display = 'none';
+  document.getElementById('previewPH').style.display = 'block';
+  document.getElementById('previewPH').innerHTML = '<p>Choose a topic and click Generate. Your post will appear here in about 15 seconds.</p>';
+  document.getElementById('topicIn').value = '';
+  document.getElementById('notesIn').value = '';
 }
 
-// ===== POSTS LIST =====
-async function loadPosts(){
-  const list = document.getElementById('postList');
-  const empty = document.getElementById('emptyPosts');
-  const count = document.getElementById('postsCount');
-  list.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text-muted);">Loading posts...</div>';
+function loadPosts() {
+  var list = document.getElementById('postList');
+  var empty = document.getElementById('emptyPosts');
+  var count = document.getElementById('postCount');
+  list.innerHTML = '<p style="text-align:center;padding:2rem;color:var(--text-muted);">Loading...</p>';
 
-  try {
-    const res = await fetch('/api/posts/all', {headers:{'x-admin-key': ADMIN_PASSWORD}});
-    const data = await res.json();
-    const posts = data.posts || [];
-
-    count.textContent = posts.length + ' post' + (posts.length!==1?'s':'');
-
-    if(posts.length===0){
-      list.innerHTML='';
-      empty.style.display='block';
+  fetch('/api/posts/all', {headers: {'x-admin-key': PASS}})
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    var posts = data.posts || [];
+    count.textContent = posts.length + ' post' + (posts.length !== 1 ? 's' : '');
+    if (posts.length === 0) {
+      list.innerHTML = '';
+      empty.style.display = 'block';
       return;
     }
-    empty.style.display='none';
-    list.innerHTML = posts.map(p=>`
-    <div class="post-item" id="post-${p.id}">
-      <div class="post-item-info">
-        <h3>${p.title}</h3>
-        <p>${p.metaDescription}</p>
-        <div class="post-item-meta">
-          <span class="post-status ${p.status==='published'?'status-published':'status-draft'}">${p.status==='published'?'✓ Published':'Draft'}</span>
-          <span class="post-meta-tag">${p.category||'Guide'}</span>
-          <span class="post-meta-tag">${p.readTime||'5 min read'}</span>
-          ${p.state?`<span class="post-meta-tag">${p.state}</span>`:''}
-          <span class="post-meta-tag">${new Date(p.createdAt).toLocaleDateString()}</span>
-        </div>
-      </div>
-      <div class="post-item-actions">
-        <button class="btn-sm" onclick="viewPost(${p.id})">View</button>
-        <button class="btn-sm" onclick="toggleStatus(${p.id})">${p.status==='published'?'Unpublish':'Publish'}</button>
-        <button class="btn-sm danger" onclick="deletePost(${p.id})">Delete</button>
-      </div>
-    </div>
-  `).join('');
+    empty.style.display = 'none';
+    list.innerHTML = posts.map(function(p) {
+      return '<div class="post-item">'
+        + '<div>'
+        + '<h3>' + p.title + '</h3>'
+        + '<p>' + (p.metaDescription || '') + '</p>'
+        + '<div class="item-meta">'
+        + '<span class="' + (p.status === 'published' ? 'status-pub' : 'status-draft') + '">' + (p.status === 'published' ? 'Published' : 'Draft') + '</span>'
+        + '<span class="meta-tag">' + (p.category || '') + '</span>'
+        + '<span class="meta-tag">' + new Date(p.createdAt).toLocaleDateString() + '</span>'
+        + (p.state ? '<span class="meta-tag">' + p.state + '</span>' : '')
+        + '</div></div>'
+        + '<div class="item-actions">'
+        + '<button class="btn-sm" onclick="toggleStatus(' + p.id + ')">' + (p.status === 'published' ? 'Unpublish' : 'Publish') + '</button>'
+        + '<button class="btn-sm btn-danger" onclick="deletePost(' + p.id + ')">Delete</button>'
+        + '</div></div>';
+    }).join('');
+  })
+  .catch(function(err) {
+    list.innerHTML = '<p style="color:red;text-align:center;padding:2rem;">Error loading posts: ' + err.message + '</p>';
+  });
 }
 
-async function toggleStatus(id){
-  try {
-    const res = await fetch('/api/posts/'+id, {
-      method:'PATCH',
-      headers:{'Content-Type':'application/json','x-admin-key': ADMIN_PASSWORD},
-      body: JSON.stringify({})
-    });
-    const data = await res.json();
-    if(data.success){
+function toggleStatus(id) {
+  fetch('/api/posts/' + id, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json', 'x-admin-key': PASS},
+    body: JSON.stringify({})
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.success) {
       loadPosts();
-      showToast(data.post.status==='published'?'✓ Post published and live!':'Post unpublished');
+      showToast(data.post.status === 'published' ? 'Post published!' : 'Post unpublished');
+    } else {
+      showToast('Error: ' + (data.error || 'Unknown'));
     }
-  } catch(e){ showToast('Error: '+e.message); }
+  })
+  .catch(function(err) { showToast('Error: ' + err.message); });
 }
 
-async function deletePost(id){
-  if(!confirm('Delete this post? This cannot be undone.')) return;
-  try {
-    const res = await fetch('/api/posts/'+id, {
-      method:'DELETE',
-      headers:{'x-admin-key': ADMIN_PASSWORD}
-    });
-    const data = await res.json();
-    if(data.success){ loadPosts(); showToast('Post deleted'); }
-    else showToast('Error: '+(data.error||'Unknown'));
-  } catch(e){ showToast('Error: '+e.message); }
-}
-
-async function viewPost(id){
-  try {
-    const res = await fetch('/api/posts/all', {headers:{'x-admin-key': ADMIN_PASSWORD}});
-    const data = await res.json();
-    const post = (data.posts||[]).find(p=>String(p.id)===String(id));
-    if(!post){ alert('Post not found'); return; }
-    const win = window.open('','_blank');
-    const html = post.content
-      .replace(/## ([^\n]+)/g,'<h2>$1</h2>')
-      .replace(/### ([^\n]+)/g,'<h3>$1</h3>')
-      .split('\n').filter(l=>l.trim())
-      .map(l=>l.startsWith('<h')?l:'<p>'+l+'</p>').join('');
-    win.document.write('<html><head><title>'+post.title+'</title>'
-      +'<style>body{font-family:Georgia,serif;max-width:760px;margin:3rem auto;padding:0 2rem;line-height:1.8;color:#1a1a18;}'
-      +'h1{font-size:2rem;margin-bottom:0.5rem;}h2{font-size:1.4rem;margin:2rem 0 0.75rem;color:#1c3a2a;}'
-      +'h3{font-size:1.1rem;margin:1.5rem 0 0.5rem;color:#1c3a2a;}p{margin-bottom:1rem;}</style></head>'
-      +'<body><h1>'+post.title+'</h1>'
-      +'<p style="color:#888;font-size:0.85rem;">'+post.category+' · '+post.readTime+'</p>'
-      +'<hr style="margin:1.5rem 0;border:none;border-top:1px solid #ddd;">'
-      +html+'</body></html>');
-    win.document.close();
-  } catch(e) {
-    alert('Error loading post: '+e.message);
-  }
-}
-// ===== TOAST =====
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
+function deletePost(id) {
+  if (!confirm('Delete this post? Cannot be undone.')) return;
+  fetch('/api/posts/' + id, {
+    method: 'DELETE',
+    headers: {'x-admin-key': PASS}
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.success) { loadPosts(); showToast('Post deleted'); }
+    else showToast('Error: ' + (data.error || 'Unknown'));
+  })
+  .catch(function(err) { showToast('Error: ' + err.message); });
 }
 </script>
 </body>
