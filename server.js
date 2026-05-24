@@ -236,3 +236,4 @@ VA Renovation, and USDA Renovation loans. Help users figure out which loan fits 
 situation. Keep responses concise (2-4 paragraphs), conversational, and always end
 with a gentle nudge to use the calculator or get pre-approved. Never guarantee
 specific rates or make lending commitments.`;
+ 
