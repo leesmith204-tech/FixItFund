@@ -1126,7 +1126,7 @@ const starterPosts = [
     category:'Buying Guide',
     readTime:'6 min read',
     state:'Maryland',
-    excerpt:'Maryland offers some of the best opportunities for fixer-upper buyers in the mid-Atlantic. From Frederick to Baltimore, undervalued homes are hiding in plain sight — here's how to find and finance them.',
+    excerpt:"Maryland offers some of the best opportunities for fixer-upper buyers in the mid-Atlantic. From Frederick to Baltimore, undervalued homes are hiding in plain sight — here's how to find and finance them.",
     content:`## Why Maryland is a Great Market for Fixer-Uppers
 
 Maryland's diverse housing market — spanning from urban Baltimore rowhouses to suburban Frederick colonials to rural Western Maryland properties — creates exceptional opportunities for buyers willing to put in some work.
@@ -1174,7 +1174,7 @@ Search current fixer-upper and undervalued listings in Maryland on FixerUpperFin
     category:'Loan Programs',
     readTime:'7 min read',
     state:'',
-    excerpt:'Both loans let you wrap your purchase price and renovation costs into one mortgage — but they work differently. Here's a plain-English comparison to help you choose.',
+    excerpt:"Both loans let you wrap your purchase price and renovation costs into one mortgage — but they work differently. Here's a plain-English comparison to help you choose.",
     content:`## The Big Picture
 
 Both the FHA 203k and Fannie Mae HomeStyle are renovation loans that combine your purchase price and renovation budget into a single mortgage. You close once, renovate, and move in — no second loan, no out-of-pocket repair costs before moving.
@@ -1235,7 +1235,7 @@ Not sure? Apply with a renovation loan advisor who can run both scenarios side b
     category:'Equity Building',
     readTime:'5 min read',
     state:'',
-    excerpt:'The biggest wealth-building secret in real estate isn't timing the market — it's buying below market value on day one. Here's exactly how fixer-upper buyers create instant equity.',
+    excerpt:"The biggest wealth-building secret in real estate isn't timing the market — it's buying below market value on day one. Here's exactly how fixer-upper buyers create instant equity.",
     content:`## What Is Instant Equity?
 
 Instant equity is the difference between what your home is worth after renovation and what you paid to acquire and renovate it. Unlike traditional homebuying where your equity grows slowly as you pay down your mortgage, fixer-upper buyers can walk away from closing with tens of thousands in equity already built in.
@@ -1310,13 +1310,14 @@ function openBlogPost(post){
   document.getElementById('bmCategory').textContent = post.category;
   document.getElementById('bmTitle').textContent = post.title;
   document.getElementById('bmMeta').textContent = post.readTime + (post.state?' · '+post.state:'') + ' · ' + new Date(post.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-  const content = post.content
-    .replace(/## (.+)/g,'<h2>$1</h2>')
-    .replace(/### (.+)/g,'<h3>$1</h3>')
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .split('
-
-').map(p=>p.startsWith('<h')?p:'<p>'+p+'</p>').join('');
+  const rawContent = (post.content||'').replace(/\\n/g,'\n');
+  const content = rawContent
+    .replace(/## ([^\n]+)/g,'<h2>$1</h2>')
+    .replace(/### ([^\n]+)/g,'<h3>$1</h3>')
+    .split('\n')
+    .filter(l=>l.trim())
+    .map(l=>l.startsWith('<h')?l:'<p>'+l+'</p>')
+    .join('');
   document.getElementById('bmContent').innerHTML = content;
   document.getElementById('blogModalOverlay').classList.add('open');
   window.scrollTo(0,0);
@@ -1341,19 +1342,33 @@ function loadMorePosts(){
   }
 }
 
+async function loadMorePosts(){
+  try {
+    const res = await fetch('/api/posts');
+    const data = await res.json();
+    const serverPosts = data.posts || [];
+    const allPosts = [...serverPosts, ...starterPosts];
+    renderBlogPosts(allPosts);
+  } catch(e){
+    alert('No additional posts yet — check back soon!');
+  }
+}
+
 function showToastBlog(msg){
-  // Simple alert fallback
   alert(msg);
 }
 
-// Load published posts from admin + starter posts
-function initBlog(){
+// Load published posts from server + starter posts
+async function initBlog(){
   let posts = [...starterPosts];
   try {
-    const saved = JSON.parse(localStorage.getItem('fuf_posts')||'[]');
-    const published = saved.filter(p=>p.status==='published');
-    posts = [...published, ...posts];
-  } catch(e){}
+    const res = await fetch('/api/posts');
+    const data = await res.json();
+    const serverPosts = data.posts || [];
+    posts = [...serverPosts, ...starterPosts];
+  } catch(e){
+    console.log('Using starter posts:', e.message);
+  }
   renderBlogPosts(posts.slice(0,6));
 }
 initBlog();
@@ -1467,5 +1482,3 @@ function showDisclaimer(){document.getElementById('disclaimerOverlay').classList
 
 </body>
 </html>
- 
- 
