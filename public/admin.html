@@ -329,7 +329,7 @@ function generatePost() {
       content: postContent
     };
 
-    var content = postData.content;
+    var postBody = postData.content;
 
     currentPost = {
       id: Date.now(),
@@ -338,7 +338,7 @@ function generatePost() {
       metaDescription: postData.metaDescription || '',
       category: postData.category || 'Buying Guide',
       readTime: postData.readTime || '5 min read',
-      content: content,
+      content: postBody,
       topic: topic,
       state: state,
       type: type,
@@ -355,7 +355,7 @@ function generatePost() {
     document.getElementById('pvState').textContent = state || 'All States';
     document.getElementById('pvSEO').textContent = 'SEO: ' + currentPost.seoTitle;
     document.getElementById('pvMeta').textContent = 'Meta: ' + currentPost.metaDescription;
-    document.getElementById('pvContent').textContent = content;
+    document.getElementById('pvContent').textContent = postBody;
     btn.disabled = false;
   })
   .catch(function(err) {
