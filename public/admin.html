@@ -1,4 +1,4 @@
-﻿ï»¿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -265,8 +265,7 @@ function doGenerate() {
     var pLines = [];
     var inContent = false;
 
-    var allLines = raw.split('
-');
+    var allLines = raw.split('\n');
     for (var i = 0; i < allLines.length; i++) {
       var ln = allLines[i];
       if (inContent) {
