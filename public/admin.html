@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixerUpperFinds — Blog Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Cabinet+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:#1c3a2a;--forest-mid:#2a5240;--amber:#d4822a;--amber-light:#f0a84a;
+    --cream:#faf7f2;--cream-dark:#f2ede4;--border:#ddd6ca;--text:#1a1a18;
+    --text-muted:#6b6560;--white:#ffffff;--green:#1c6b3a;--red:#c0392b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cabinet Grotesk',sans-serif;background:var(--cream);color:var(--text);}
+
+  /* LOGIN */
+  .login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
+  .login-box{background:var(--white);border-radius:20px;padding:3rem;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.1);text-align:center;}
+  .login-logo{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--forest);margin-bottom:0.25rem;}
+  .login-logo span{color:var(--amber);}
+  .login-sub{font-size:0.8rem;color:var(--text-muted);margin-bottom:2rem;}
+  .login-box input{width:100%;padding:0.85rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:'Cabinet Grotesk',sans-serif;outline:none;margin-bottom:1rem;transition:border-color 0.2s;}
+  .login-box input:focus{border-color:var(--forest);}
+  .login-btn{width:100%;background:var(--forest);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
+  .login-btn:hover{background:var(--amber);}
+  .login-error{color:var(--red);font-size:0.85rem;margin-top:0.75rem;display:none;}
+
+  /* ADMIN LAYOUT */
+  .admin-screen{display:none;}
+  .admin-nav{background:var(--forest);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--amber);}
+  .admin-nav-logo{font-family:'Fraunces',serif;color:var(--white);font-size:1.2rem;}
+  .admin-nav-logo span{color:var(--amber-light);}
+  .admin-nav-right{display:flex;gap:1rem;align-items:center;}
+  .admin-nav-right a{color:#aabfb0;text-decoration:none;font-size:0.85rem;}
+  .admin-nav-right a:hover{color:var(--white);}
+  .logout-btn{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.2);padding:0.4rem 1rem;border-radius:6px;font-size:0.82rem;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
+  .logout-btn:hover{background:rgba(255,255,255,0.2);}
+
+  .admin-body{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;}
+  .admin-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:2.5rem;}
+  .admin-tab{padding:0.85rem 1.5rem;cursor:pointer;font-size:0.875rem;font-weight:600;color:var(--text-muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s;}
+  .admin-tab.active{color:var(--forest);border-bottom-color:var(--amber);}
+  .admin-tab:hover{color:var(--forest);}
+
+  /* GENERATE TAB */
+  .generate-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .gen-panel{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.75rem;}
+  .gen-panel h2{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--forest);margin-bottom:0.25rem;}
+  .gen-panel p{font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+  .form-field{margin-bottom:1rem;}
+  .form-field label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px;}
+  .form-field input,.form-field select,.form-field textarea{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Cabinet Grotesk',sans-serif;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--cream);}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--forest);}
+  .form-field textarea{min-height:100px;resize:vertical;}
+  .quick-topics{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
+  .quick-topic{background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);font-size:0.72rem;font-weight:600;padding:4px 10px;border-radius:20px;cursor:pointer;transition:all 0.15s;}
+  .quick-topic:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
+  .generate-btn{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;margin-top:0.5rem;}
+  .generate-btn:hover{background:var(--amber-light);color:var(--forest);}
+  .generate-btn:disabled{background:#ccc;cursor:not-allowed;}
+
+  /* PREVIEW PANEL */
+  .preview-panel{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.75rem;position:relative;}
+  .preview-panel h2{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--forest);margin-bottom:1.5rem;}
+  .preview-placeholder{text-align:center;padding:3rem 1rem;color:var(--text-muted);}
+  .preview-placeholder h3{font-size:1rem;margin-bottom:0.5rem;color:var(--text-muted);}
+  .preview-placeholder p{font-size:0.82rem;line-height:1.6;}
+  .generating-state{text-align:center;padding:3rem 1rem;}
+  .generating-dots{display:flex;gap:8px;justify-content:center;margin-bottom:1rem;}
+  .generating-dots span{width:10px;height:10px;border-radius:50%;background:var(--amber);animation:gd 1.2s infinite;}
+  .generating-dots span:nth-child(2){animation-delay:0.2s;}
+  .generating-dots span:nth-child(3){animation-delay:0.4s;}
+  @keyframes gd{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-8px);opacity:1}}
+  .generating-state p{font-size:0.9rem;color:var(--text-muted);}
+  .post-preview{display:none;}
+  .post-preview-title{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem;line-height:1.3;}
+  .post-meta-row{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .post-meta-tag{font-size:0.7rem;font-weight:700;padding:3px 8px;border-radius:4px;background:var(--cream-dark);color:var(--text-muted);}
+  .post-content{font-size:0.875rem;line-height:1.8;color:var(--text);max-height:400px;overflow-y:auto;border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;white-space:pre-wrap;}
+  .post-actions{display:flex;gap:0.75rem;margin-top:1.25rem;border-top:1px solid var(--border);padding-top:1.25rem;}
+  .publish-btn{flex:1;background:var(--forest);color:var(--white);border:none;padding:0.8rem;border-radius:8px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:background 0.2s;}
+  .publish-btn:hover{background:var(--amber);}
+  .edit-btn{background:var(--cream-dark);color:var(--forest);border:1.5px solid var(--border);padding:0.8rem 1.25rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:all 0.2s;}
+  .edit-btn:hover{border-color:var(--forest);}
+  .discard-btn{background:transparent;color:var(--text-muted);border:1.5px solid var(--border);padding:0.8rem 1.25rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;}
+
+  /* POSTS TAB */
+  .posts-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+  .posts-header h2{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--forest);}
+  .posts-count{font-size:0.82rem;color:var(--text-muted);}
+  .post-list{display:flex;flex-direction:column;gap:1rem;}
+  .post-item{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;transition:box-shadow 0.2s;}
+  .post-item:hover{box-shadow:0 4px 20px rgba(28,58,42,0.08);}
+  .post-item-info h3{font-size:0.95rem;font-weight:700;color:var(--forest);margin-bottom:0.25rem;}
+  .post-item-info p{font-size:0.8rem;color:var(--text-muted);line-height:1.5;}
+  .post-item-meta{display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;}
+  .post-status{font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:4px;}
+  .status-published{background:var(--green-light);color:var(--green);}
+  .status-draft{background:#fff3e0;color:#7a4a00;}
+  .post-item-actions{display:flex;gap:0.5rem;flex-shrink:0;}
+  .btn-sm{padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--forest);font-family:'Cabinet Grotesk',sans-serif;transition:all 0.15s;white-space:nowrap;}
+  .btn-sm:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
+  .btn-sm.danger:hover{background:var(--red);border-color:var(--red);color:var(--white);}
+  .empty-posts{text-align:center;padding:4rem;color:var(--text-muted);}
+  .empty-posts h3{font-size:1rem;margin-bottom:0.5rem;}
+
+  /* SUCCESS TOAST */
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--forest);color:var(--white);padding:1rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.2);transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:999;}
+  .toast.show{transform:translateY(0);opacity:1;}
+
+  @media(max-width:768px){
+    .generate-grid{grid-template-columns:1fr;}
+  }
+
+  .green-light{background:#e8f5ee;}
+  .green{color:#1c6b3a;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">Fixer<span>Upper</span>Finds</div>
+    <div class="login-sub">Blog Admin — Authorized Access Only</div>
+    <input type="password" id="passwordInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkPassword()">
+    <button class="login-btn" onclick="checkPassword()">Sign In →</button>
+    <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- ADMIN SCREEN -->
+<div class="admin-screen" id="adminScreen">
+  <nav class="admin-nav">
+    <div class="admin-nav-logo">Fixer<span>Upper</span>Finds — <span style="font-size:0.85rem;font-weight:400;">Blog Admin</span></div>
+    <div class="admin-nav-right">
+      <a href="https://fixerupperfinds.com" target="_blank">← View Site</a>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+  </nav>
+
+  <div class="admin-body">
+    <div class="admin-tabs">
+      <div class="admin-tab active" onclick="switchTab(this,'generateTab')">✍️ Generate New Post</div>
+      <div class="admin-tab" onclick="switchTab(this,'postsTab')">📚 All Posts</div>
+    </div>
+
+    <!-- GENERATE TAB -->
+    <div id="generateTab">
+      <div class="generate-grid">
+        <!-- LEFT — INPUT -->
+        <div class="gen-panel">
+          <h2>AI Blog Post Generator</h2>
+          <p>Choose a topic or type your own. Claude will write a full SEO-optimized post in seconds.</p>
+
+          <div class="form-field">
+            <label>Quick Topic Suggestions</label>
+            <div class="quick-topics">
+              <div class="quick-topic" onclick="setTopic('How to Buy a Fixer Upper in Maryland 2026')">MD Fixer Upper Guide</div>
+              <div class="quick-topic" onclick="setTopic('FHA 203k vs HomeStyle Loan — Which is Right for You?')">FHA 203k vs HomeStyle</div>
+              <div class="quick-topic" onclick="setTopic('Best Fixer Upper Homes for Sale in Northern Virginia 2026')">VA Fixer Uppers</div>
+              <div class="quick-topic" onclick="setTopic('How Does the VA Renovation Loan Work for Veterans?')">VA Reno Loan Guide</div>
+              <div class="quick-topic" onclick="setTopic('USDA Renovation Loan Eligible Areas in Maryland and Virginia')">USDA Eligible Areas</div>
+              <div class="quick-topic" onclick="setTopic('How to Build Instant Equity Buying a Fixer Upper Home')">Build Instant Equity</div>
+              <div class="quick-topic" onclick="setTopic('Best Renovation Projects That Add the Most Home Value in 2026')">Best ROI Renovations</div>
+              <div class="quick-topic" onclick="setTopic('Fixer Upper Homes for Sale in Frederick Maryland')">Frederick MD Listings</div>
+              <div class="quick-topic" onclick="setTopic('How to Estimate After Renovation Value ARV on a Fixer Upper')">How to Estimate ARV</div>
+              <div class="quick-topic" onclick="setTopic('RenoExpress Loan — The Fastest Renovation Loan Explained 2026')">RenoExpress Guide</div>
+              <div class="quick-topic" onclick="setTopic('Fixer Upper Homes for Sale in Washington DC Metro Area')">DC Metro Listings</div>
+              <div class="quick-topic" onclick="setTopic('CHOICERenovation vs HomeStyle — Comparing Freddie Mac and Fannie Mae Renovation Loans')">CHOICEReno vs HomeStyle</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Blog Post Topic</label>
+            <input type="text" id="topicInput" placeholder="e.g. How to Buy a Fixer Upper in Frederick MD">
+          </div>
+
+          <div class="form-field">
+            <label>Target State (optional)</label>
+            <select id="stateInput">
+              <option value="">No specific state</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Washington DC">Washington DC</option>
+              <option value="Virginia">Virginia</option>
+              <option value="West Virginia">West Virginia</option>
+              <option value="Pennsylvania">Pennsylvania</option>
+              <option value="New Jersey">New Jersey</option>
+              <option value="North Carolina">North Carolina</option>
+              <option value="Delaware">Delaware</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="New Hampshire">New Hampshire</option>
+              <option value="Illinois">Illinois</option>
+              <option value="Texas">Texas</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Post Type</label>
+            <select id="typeInput">
+              <option value="guide">How-To Guide</option>
+              <option value="comparison">Loan Comparison</option>
+              <option value="local">Local Market Guide</option>
+              <option value="tips">Tips & Advice</option>
+              <option value="explainer">Explainer / What Is</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Additional Notes (optional)</label>
+            <textarea id="notesInput" placeholder="Any specific points to include, keywords to target, or angle to take..."></textarea>
+          </div>
+
+          <button class="generate-btn" id="generateBtn" onclick="generatePost()">Generate Blog Post with AI →</button>
+        </div>
+
+        <!-- RIGHT — PREVIEW -->
+        <div class="preview-panel" id="previewPanel">
+          <h2>Preview</h2>
+
+          <div class="preview-placeholder" id="previewPlaceholder">
+            <h3>Your post will appear here</h3>
+            <p>Choose a topic from the suggestions or type your own, then click Generate. Claude will write a full SEO-optimized post in about 15 seconds.</p>
+          </div>
+
+          <div class="generating-state" id="generatingState" style="display:none;">
+            <div class="generating-dots"><span></span><span></span><span></span></div>
+            <p id="generatingMsg">Researching topic and writing post...</p>
+          </div>
+
+          <div class="post-preview" id="postPreview">
+            <div class="post-preview-title" id="previewTitle"></div>
+            <div class="post-meta-row">
+              <span class="post-meta-tag" id="previewCategory"></span>
+              <span class="post-meta-tag" id="previewReadTime"></span>
+              <span class="post-meta-tag" id="previewState"></span>
+            </div>
+            <div class="post-meta-row">
+              <span style="font-size:0.75rem;color:var(--text-muted);" id="previewSEOTitle">SEO Title: </span>
+            </div>
+            <div class="post-meta-row">
+              <span style="font-size:0.75rem;color:var(--text-muted);" id="previewMetaDesc">Meta: </span>
+            </div>
+            <div class="post-content" id="previewContent"></div>
+            <div class="post-actions">
+              <button class="publish-btn" onclick="publishPost()">✓ Publish to Blog</button>
+              <button class="edit-btn" onclick="editPost()">Edit</button>
+              <button class="discard-btn" onclick="discardPost()">Discard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTS TAB -->
+    <div id="postsTab" style="display:none;">
+      <div class="posts-header">
+        <h2>All Blog Posts</h2>
+        <span class="posts-count" id="postsCount">0 posts</span>
+      </div>
+      <div class="post-list" id="postList"></div>
+      <div class="empty-posts" id="emptyPosts">
+        <h3>No posts yet</h3>
+        <p>Generate your first post using the Generate tab!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== CONFIG =====
+const ADMIN_PASSWORD = 'FixerUpper2026!';
+
+// ===== LOGIN =====
+function checkPassword(){
+  const pw = document.getElementById('passwordInput').value;
+  if(pw === ADMIN_PASSWORD){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('adminScreen').style.display='block';
+    loadPosts();
+  } else {
+    document.getElementById('loginError').style.display='block';
+    document.getElementById('passwordInput').value='';
+  }
+}
+function logout(){
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('adminScreen').style.display='none';
+  document.getElementById('passwordInput').value='';
+}
+
+// ===== TABS =====
+function switchTab(tab, panelId){
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('generateTab').style.display='none';
+  document.getElementById('postsTab').style.display='none';
+  document.getElementById(panelId).style.display='block';
+  if(panelId==='postsTab') loadPosts();
+}
+
+// ===== QUICK TOPICS =====
+function setTopic(topic){
+  document.getElementById('topicInput').value=topic;
+}
+
+// ===== GENERATE POST =====
+let currentPost = null;
+
+async function generatePost(){
+  const topic = document.getElementById('topicInput').value.trim();
+  const state = document.getElementById('stateInput').value;
+  const type = document.getElementById('typeInput').value;
+  const notes = document.getElementById('notesInput').value.trim();
+
+  if(!topic){ alert('Please enter a blog post topic.'); return; }
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  document.getElementById('previewPlaceholder').style.display='none';
+  document.getElementById('postPreview').style.display='none';
+  document.getElementById('generatingState').style.display='block';
+
+  const msgs = [
+    'Researching topic and writing post...',
+    'Optimizing for SEO keywords...',
+    'Adding state-specific content...',
+    'Formatting headings and structure...',
+    'Almost done...'
+  ];
+  let msgIdx = 0;
+  const msgInterval = setInterval(()=>{
+    msgIdx = (msgIdx+1) % msgs.length;
+    document.getElementById('generatingMsg').textContent = msgs[msgIdx];
+  }, 3000);
+
+  const systemPrompt = `You are an expert SEO content writer for FixerUpperFinds.com — a property search platform specializing in fixer-upper, cosmetic update, and undervalued homes across MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, and TX. The site connects home buyers with renovation financing through a licensed renovation loan advisor.
+
+Write a complete, SEO-optimized blog post based on the topic provided. 
+
+RESPOND ONLY IN THIS EXACT JSON FORMAT — no other text:
+{
+  "title": "The exact blog post title (compelling, SEO-rich)",
+  "seoTitle": "SEO title tag (under 60 chars)",
+  "metaDescription": "Meta description (under 155 chars, include call to action)",
+  "category": "One of: Buying Guide, Loan Programs, Local Markets, Renovation Tips, Equity Building",
+  "readTime": "X min read",
+  "content": "The full blog post content (800-1000 words). Use markdown-style headers with ## for H2 and ### for H3. Write naturally, informatively, and helpfully. Include specific details, practical advice, and relevant statistics where appropriate. End with a call to action to search properties at FixerUpperFinds.com or apply for renovation financing."
+}
+
+Guidelines:
+- Write for first-time buyers and move-up buyers interested in below-market properties
+- Include relevant loan program information naturally (FHA 203k Limited up to $75K, FHA 203k Standard for $75K+, HomeStyle, CHOICERenovation, RenoExpress, VA Renovation, USDA Renovation)
+- Mention specific cities/neighborhoods when state is provided
+- Target long-tail keywords naturally throughout
+- Never mention specific lender names or rate guarantees
+- End every post with a CTA to search at FixerUpperFinds.com`;
+
+  const userMsg = `Write a blog post about: ${topic}${state ? ` (focused on ${state})` : ''}
+Post type: ${type}
+${notes ? `Additional notes: ${notes}` : ''}`;
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        messages: [{role:'user', content: userMsg}],
+        system: systemPrompt
+      })
+    });
+    const data = await res.json();
+    clearInterval(msgInterval);
+
+    let postData;
+    try {
+      const clean = data.reply.replace(/```json|```/g,'').trim();
+      postData = JSON.parse(clean);
+    } catch(e) {
+      // Try to extract JSON from response
+      const match = data.reply.match(/\{[\s\S]*\}/);
+      if(match) postData = JSON.parse(match[0]);
+      else throw new Error('Could not parse response');
+    }
+
+    currentPost = {
+      ...postData,
+      id: Date.now(),
+      topic: topic,
+      state: state,
+      type: type,
+      status: 'draft',
+      createdAt: new Date().toISOString(),
+      slug: postData.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+    };
+
+    // Show preview
+    document.getElementById('generatingState').style.display='none';
+    document.getElementById('postPreview').style.display='block';
+    document.getElementById('previewTitle').textContent = postData.title;
+    document.getElementById('previewCategory').textContent = postData.category;
+    document.getElementById('previewReadTime').textContent = postData.readTime;
+    document.getElementById('previewState').textContent = state || 'All States';
+    document.getElementById('previewSEOTitle').textContent = 'SEO Title: ' + postData.seoTitle;
+    document.getElementById('previewMetaDesc').textContent = 'Meta: ' + postData.metaDescription;
+    document.getElementById('previewContent').textContent = postData.content;
+
+  } catch(e) {
+    clearInterval(msgInterval);
+    document.getElementById('generatingState').style.display='none';
+    document.getElementById('previewPlaceholder').style.display='block';
+    document.getElementById('previewPlaceholder').innerHTML='<h3 style="color:var(--red)">Generation failed</h3><p>Please try again. Make sure your site is running correctly.</p>';
+  }
+
+  btn.disabled = false;
+}
+
+// ===== PUBLISH =====
+async function publishPost(){
+  if(!currentPost) return;
+  currentPost.status = 'published';
+  currentPost.publishedAt = new Date().toISOString();
+
+  // Save to storage
+  const posts = getPosts();
+  const existing = posts.findIndex(p=>p.id===currentPost.id);
+  if(existing>=0) posts[existing]=currentPost;
+  else posts.unshift(currentPost);
+  savePosts(posts);
+
+  showToast('✓ Post published successfully!');
+  discardPost();
+  switchTab(document.querySelectorAll('.admin-tab')[1], 'postsTab');
+}
+
+function editPost(){
+  if(!currentPost) return;
+  const content = document.getElementById('previewContent');
+  content.contentEditable = 'true';
+  content.style.border = '1.5px solid var(--amber)';
+  content.style.borderRadius = '8px';
+  content.style.padding = '0.75rem';
+  content.focus();
+  showToast('Editing mode — click anywhere in the content to edit');
+}
+
+function discardPost(){
+  currentPost = null;
+  document.getElementById('postPreview').style.display='none';
+  document.getElementById('previewPlaceholder').style.display='block';
+  document.getElementById('previewPlaceholder').innerHTML='<h3>Your post will appear here</h3><p>Choose a topic from the suggestions or type your own, then click Generate.</p>';
+  document.getElementById('topicInput').value='';
+  document.getElementById('notesInput').value='';
+}
+
+// ===== POSTS LIST =====
+function getPosts(){
+  try { return JSON.parse(localStorage.getItem('fuf_posts')||'[]'); }
+  catch(e){ return []; }
+}
+function savePosts(posts){
+  localStorage.setItem('fuf_posts', JSON.stringify(posts));
+}
+
+function loadPosts(){
+  const posts = getPosts();
+  const list = document.getElementById('postList');
+  const empty = document.getElementById('emptyPosts');
+  const count = document.getElementById('postsCount');
+
+  count.textContent = posts.length + ' post' + (posts.length!==1?'s':'');
+
+  if(posts.length===0){
+    list.innerHTML='';
+    empty.style.display='block';
+    return;
+  }
+  empty.style.display='none';
+  list.innerHTML = posts.map(p=>`
+    <div class="post-item" id="post-${p.id}">
+      <div class="post-item-info">
+        <h3>${p.title}</h3>
+        <p>${p.metaDescription}</p>
+        <div class="post-item-meta">
+          <span class="post-status ${p.status==='published'?'status-published':'status-draft'}">${p.status==='published'?'✓ Published':'Draft'}</span>
+          <span class="post-meta-tag">${p.category||'Guide'}</span>
+          <span class="post-meta-tag">${p.readTime||'5 min read'}</span>
+          ${p.state?`<span class="post-meta-tag">${p.state}</span>`:''}
+          <span class="post-meta-tag">${new Date(p.createdAt).toLocaleDateString()}</span>
+        </div>
+      </div>
+      <div class="post-item-actions">
+        <button class="btn-sm" onclick="viewPost(${p.id})">View</button>
+        <button class="btn-sm" onclick="toggleStatus(${p.id})">${p.status==='published'?'Unpublish':'Publish'}</button>
+        <button class="btn-sm danger" onclick="deletePost(${p.id})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleStatus(id){
+  const posts = getPosts();
+  const post = posts.find(p=>p.id===id);
+  if(!post) return;
+  post.status = post.status==='published'?'draft':'published';
+  savePosts(posts);
+  loadPosts();
+  showToast(post.status==='published'?'✓ Post published':'Post unpublished');
+}
+
+function deletePost(id){
+  if(!confirm('Delete this post? This cannot be undone.')) return;
+  const posts = getPosts().filter(p=>p.id!==id);
+  savePosts(posts);
+  loadPosts();
+  showToast('Post deleted');
+}
+
+function viewPost(id){
+  const post = getPosts().find(p=>p.id===id);
+  if(!post) return;
+  const win = window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>${post.title}</title>
+  <style>body{font-family:Georgia,serif;max-width:760px;margin:3rem auto;padding:0 2rem;line-height:1.8;color:#1a1a18;}
+  h1{font-size:2rem;margin-bottom:0.5rem;line-height:1.2;}
+  h2{font-size:1.4rem;margin:2rem 0 0.75rem;color:#1c3a2a;}
+  h3{font-size:1.1rem;margin:1.5rem 0 0.5rem;color:#1c3a2a;}
+  p{margin-bottom:1rem;}</style></head>
+  <body><h1>${post.title}</h1>
+  <p style="color:#888;font-size:0.85rem;">${post.category} · ${post.readTime} · ${new Date(post.publishedAt||post.createdAt).toLocaleDateString()}</p>
+  <hr style="margin:1.5rem 0;border:none;border-top:1px solid #ddd;">
+  ${post.content.replace(/## (.+)/g,'<h2>$1</h2>').replace(/### (.+)/g,'<h3>$1</h3>').replace(/\n\n/g,'</p><p>').replace(/^/,'<p>').replace(/$/,'</p>')}
+  </body></html>`);
+}
+
+// ===== TOAST =====
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 <title>Fixer Upper Homes For Sale | Search Undervalued Homes — FixerUpperFinds</title>
 <meta name="description" content="Search daily fixer-upper and undervalued home listings in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL & TX. Find below-market properties and build instant equity. Free search — no agent required.">
 <meta name="keywords" content="fixer upper homes for sale, undervalued homes, below market homes, renovation homes, fixer upper Maryland, fixer upper Virginia, fixer upper DC, fixer upper Pennsylvania, fixer upper North Carolina, fixer upper West Virginia, fixer upper New Jersey, fixer upper Delaware, fixer upper Massachusetts, fixer upper New Hampshire, fixer upper Illinois, fixer upper Texas, cosmetic update homes, renovation loan homes, FHA 203k homes, cheap homes equity, investment properties renovation">
-<meta name="robots" content="index, follow">`n<meta name="google-site-verification" content="vh3jWln3vTjNXCG1AWVfBF_1CIOHFGtPjZprx4uS-I0">
+<meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="vh3jWln3vTjNXCG1AWVfBF_1CIOHFGtPjZprx4uS-I0">
 <meta name="author" content="FixerUpperFinds">
 <link rel="canonical" href="https://www.fixerupperfinds.com">
@@ -356,6 +356,45 @@
   .usda-eligible{position:absolute;bottom:10px;left:10px;background:rgba(28,107,60,0.92);color:#fff;font-size:0.65rem;font-weight:800;padding:4px 8px;border-radius:5px;letter-spacing:0.03em;}
   .usda-ineligible{position:absolute;bottom:10px;left:10px;background:rgba(80,80,80,0.7);color:#ddd;font-size:0.65rem;font-weight:700;padding:4px 8px;border-radius:5px;}
 
+
+  /* BLOG SECTION */
+  .blog-section{padding:5rem 2rem;background:var(--white);}
+  .blog-inner{max-width:1180px;margin:0 auto;}
+  .blog-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;}
+  .blog-title{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--forest);margin-bottom:0.75rem;line-height:1.2;}
+  .blog-sub{color:var(--text-muted);font-size:1rem;max-width:560px;line-height:1.6;margin-bottom:2.5rem;}
+  .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
+  .blog-card{background:var(--cream);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;}
+  .blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(28,58,42,0.12);}
+  .blog-card-top{height:140px;background:linear-gradient(135deg,var(--forest),var(--forest-mid));display:flex;align-items:center;justify-content:center;padding:1.5rem;position:relative;}
+  .blog-card-top h3{font-family:'Fraunces',serif;color:var(--white);font-size:1.05rem;line-height:1.3;text-align:center;}
+  .blog-card-category{position:absolute;top:10px;left:10px;background:rgba(212,130,42,0.9);color:var(--white);font-size:0.65rem;font-weight:800;padding:3px 8px;border-radius:4px;letter-spacing:0.05em;text-transform:uppercase;}
+  .blog-card-body{padding:1.25rem;}
+  .blog-card-excerpt{font-size:0.83rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;}
+  .blog-card-meta{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--text-muted);}
+  .blog-read-more{color:var(--amber);font-weight:700;font-size:0.8rem;text-decoration:none;}
+  .blog-read-more:hover{color:var(--forest);}
+
+  /* BLOG POST MODAL */
+  .blog-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:800;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
+  .blog-modal-overlay.open{display:flex;}
+  .blog-modal{background:var(--white);border-radius:18px;padding:3rem;max-width:760px;width:100%;position:relative;margin:auto;}
+  .blog-modal-close{position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-muted);}
+  .blog-modal-category{font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);margin-bottom:0.5rem;}
+  .blog-modal h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--forest);margin-bottom:0.75rem;line-height:1.2;}
+  .blog-modal-meta{font-size:0.8rem;color:var(--text-muted);margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+  .blog-modal-content{font-size:0.95rem;line-height:1.85;color:var(--text);}
+  .blog-modal-content h2{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--forest);margin:2rem 0 0.75rem;}
+  .blog-modal-content h3{font-size:1.05rem;font-weight:700;color:var(--forest);margin:1.5rem 0 0.5rem;}
+  .blog-modal-content p{margin-bottom:1rem;}
+  .blog-modal-cta{background:var(--amber-pale);border:1px solid var(--amber);border-radius:12px;padding:1.5rem;margin-top:2rem;text-align:center;}
+  .blog-modal-cta p{color:var(--forest);font-weight:600;margin-bottom:1rem;font-size:0.95rem;}
+  .blog-modal-cta-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;}
+  .blog-modal-cta-btn{background:var(--forest);color:var(--white);padding:0.65rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:700;transition:background 0.2s;}
+  .blog-modal-cta-btn:hover{background:var(--amber);}
+  .blog-modal-cta-btn.outline{background:transparent;border:1.5px solid var(--forest);color:var(--forest);}
+  .blog-modal-cta-btn.outline:hover{background:var(--forest);color:var(--white);}
+
 </style>
 </head>
 <body>
@@ -371,6 +410,7 @@
     <a href="#calculator">Equity Calculator</a>
     <a href="#ai-advisor">AI Advisor</a>
     <a href="#loan-programs">Loan Programs</a>
+    <a href="#blog">Blog</a>
     <a href="#how">How It Works</a>
     <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="nav-cta">Apply for a Renovation Loan →</a>
   </div>
@@ -727,6 +767,38 @@
   </div>
 </section>
 
+
+<!-- BLOG -->
+<section id="blog" class="blog-section">
+  <div class="blog-inner">
+    <div class="blog-label">Buyer Resources</div>
+    <h2 class="blog-title">Fixer-Upper Guides & Renovation Loan Tips</h2>
+    <p class="blog-sub">Everything you need to know about finding undervalued homes, estimating equity, and financing your renovation — in plain English.</p>
+    <div class="blog-grid" id="blogGrid"></div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <button style="background:var(--cream-dark);color:var(--forest);border:1.5px solid var(--border);padding:0.85rem 2rem;border-radius:8px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='var(--forest)';this.style.color='white'" onmouseout="this.style.background='var(--cream-dark)';this.style.color='var(--forest)'" onclick="loadMorePosts()">Load More Articles</button>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG POST MODAL -->
+<div class="blog-modal-overlay" id="blogModalOverlay" onclick="closeBlogModal(event)">
+  <div class="blog-modal">
+    <button class="blog-modal-close" onclick="document.getElementById('blogModalOverlay').classList.remove('open')">✕</button>
+    <div class="blog-modal-category" id="bmCategory"></div>
+    <h1 id="bmTitle"></h1>
+    <div class="blog-modal-meta" id="bmMeta"></div>
+    <div class="blog-modal-content" id="bmContent"></div>
+    <div class="blog-modal-cta">
+      <p>Ready to find your fixer-upper and build instant equity?</p>
+      <div class="blog-modal-cta-btns">
+        <a href="#listings" class="blog-modal-cta-btn" onclick="document.getElementById('blogModalOverlay').classList.remove('open')">Search Properties →</a>
+        <a href="https://mobile.fairwaynow.com/dr/c/hre8e" target="_blank" class="blog-modal-cta-btn outline">Apply for Financing →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FINANCING CTA -->
 <section class="financing-section">
   <div class="financing-inner">
@@ -1045,6 +1117,247 @@ setInterval(()=>{
   const m=Math.floor(Math.random()*15)+1;
   document.getElementById('lastUpdated').textContent='Updated '+m+' minute'+(m>1?'s':'')+' ago';
 },60000);
+
+// ===== BLOG =====
+const starterPosts = [
+  {
+    id:'post-1',
+    title:'How to Buy a Fixer Upper Home in Maryland 2026',
+    category:'Buying Guide',
+    readTime:'6 min read',
+    state:'Maryland',
+    excerpt:'Maryland offers some of the best opportunities for fixer-upper buyers in the mid-Atlantic. From Frederick to Baltimore, undervalued homes are hiding in plain sight — here's how to find and finance them.',
+    content:`## Why Maryland is a Great Market for Fixer-Uppers
+
+Maryland's diverse housing market — spanning from urban Baltimore rowhouses to suburban Frederick colonials to rural Western Maryland properties — creates exceptional opportunities for buyers willing to put in some work.
+
+The state's proximity to DC, strong job market, and rising home values mean that buying a below-market fixer-upper today can translate into significant equity in just a few years.
+
+## Where to Search for Fixer-Uppers in Maryland
+
+Some of the best markets for undervalued homes in Maryland include:
+
+**Frederick County** — One of the fastest-growing counties in Maryland with strong appreciation. Cosmetic updaters and dated colonials frequently hit the market 15-20% below comparable updated homes.
+
+**Baltimore City and County** — Rowhouses and townhomes with strong bones but dated interiors are common. Many qualify for FHA 203k financing.
+
+**Hagerstown and Washington County** — Western Maryland offers some of the lowest entry prices in the state with strong USDA renovation loan eligibility in surrounding areas.
+
+**Prince George's County** — Close to DC with more affordable price points than Montgomery County. Great for cosmetic updaters.
+
+## How to Finance a Fixer-Upper in Maryland
+
+The best loan programs for Maryland fixer-uppers include:
+
+**FHA 203k Limited** — Perfect for cosmetic updates up to $75,000. Minimum 3.5% down, 580+ credit score. Great for first-time buyers.
+
+**FHA 203k Standard** — For major renovations over $75,000 including structural work. Same 3.5% down requirement.
+
+**HomeStyle Renovation** — Conventional loan with 3-5% down. No FHA fees, great for buyers with 620+ credit.
+
+**USDA Renovation** — Zero down payment available in eligible rural and suburban areas of Maryland including parts of Frederick, Washington, and Carroll counties.
+
+## The Equity Opportunity
+
+A typical Maryland fixer-upper scenario might look like this: Purchase a 3-bedroom home in Frederick for $220,000 that needs $35,000 in cosmetic updates. Comparable updated homes in the neighborhood sell for $310,000. Your total acquisition cost is $255,000 — giving you approximately $55,000 in instant equity at closing.
+
+That's the power of buying below market and financing the renovation into your mortgage.
+
+## Next Steps
+
+Search current fixer-upper and undervalued listings in Maryland on FixerUpperFinds.com, use our equity calculator to run your numbers, and apply with a renovation loan advisor when you're ready to move forward.`,
+    publishedAt: new Date(Date.now() - 2*24*60*60*1000).toISOString()
+  },
+  {
+    id:'post-2',
+    title:'FHA 203k vs HomeStyle Renovation Loan — Which Is Right for You?',
+    category:'Loan Programs',
+    readTime:'7 min read',
+    state:'',
+    excerpt:'Both loans let you wrap your purchase price and renovation costs into one mortgage — but they work differently. Here's a plain-English comparison to help you choose.',
+    content:`## The Big Picture
+
+Both the FHA 203k and Fannie Mae HomeStyle are renovation loans that combine your purchase price and renovation budget into a single mortgage. You close once, renovate, and move in — no second loan, no out-of-pocket repair costs before moving.
+
+But they serve different borrower profiles. Here's how to figure out which one fits you.
+
+## FHA 203k — Best For First-Time Buyers and Lower Credit Scores
+
+The FHA 203k comes in two versions:
+
+**Limited (formerly Streamline)** — For cosmetic and non-structural repairs up to $75,000. Think new kitchen, flooring, HVAC, roofing, windows. No HUD consultant required. Faster to close.
+
+**Standard** — For major renovations over $75,000 including structural work, additions, foundation repairs, full gut renovations. Requires a HUD-approved 203k consultant to oversee the project.
+
+**Key FHA 203k requirements:**
+- Minimum 3.5% down payment
+- 580+ credit score
+- Primary residence only
+- FHA loan limits apply by county
+- Upfront MIP of 1.75% plus annual MIP of 0.55%
+
+## HomeStyle Renovation — Best For Stronger Credit and Higher-Value Homes
+
+Fannie Mae's HomeStyle is a conventional renovation loan with more flexibility in some areas:
+
+**Key HomeStyle requirements:**
+- 3-5% minimum down payment
+- 620+ credit score
+- Investment properties and second homes allowed
+- No FHA mortgage insurance fees — just PMI if under 20% down, which drops off at 80% LTV
+- Any renovation type including luxury upgrades
+- Conforming loan limits apply
+
+## Side-by-Side Comparison
+
+**Down payment:** FHA 203k — 3.5% minimum. HomeStyle — 3-5% minimum.
+
+**Credit score:** FHA 203k — 580+. HomeStyle — 620+.
+
+**Mortgage insurance:** FHA 203k — permanent MIP (unless you put 10%+ down). HomeStyle — PMI drops off at 80% LTV.
+
+**Property types:** FHA 203k — primary residence only. HomeStyle — primary, second home, investment.
+
+**Renovation limit:** FHA 203k Limited — $75K. FHA 203k Standard — unlimited. HomeStyle — up to conforming loan limit.
+
+## Which Should You Choose?
+
+Choose **FHA 203k** if you have a lower credit score, are a first-time buyer, have less than 10% to put down, or are buying a home that needs major structural work.
+
+Choose **HomeStyle** if you have 620+ credit, want to avoid permanent FHA fees, are buying an investment property, or are financing a higher-value renovation.
+
+Not sure? Apply with a renovation loan advisor who can run both scenarios side by side with your specific numbers.`,
+    publishedAt: new Date(Date.now() - 5*24*60*60*1000).toISOString()
+  },
+  {
+    id:'post-3',
+    title:'How to Build Instant Equity Buying a Fixer-Upper Home',
+    category:'Equity Building',
+    readTime:'5 min read',
+    state:'',
+    excerpt:'The biggest wealth-building secret in real estate isn't timing the market — it's buying below market value on day one. Here's exactly how fixer-upper buyers create instant equity.',
+    content:`## What Is Instant Equity?
+
+Instant equity is the difference between what your home is worth after renovation and what you paid to acquire and renovate it. Unlike traditional homebuying where your equity grows slowly as you pay down your mortgage, fixer-upper buyers can walk away from closing with tens of thousands in equity already built in.
+
+## The Three Types of Below-Market Homes
+
+**Full Renovation Properties** — Homes needing major structural or systems work. Highest discount from market value, most work involved. Often 25-40% below comparable renovated homes.
+
+**Cosmetic Updaters** — Solid homes with dated kitchens, bathrooms, flooring, or fixtures. 10-20% below market. Moderate renovation budget. Best risk-adjusted equity play for most buyers.
+
+**Undervalued / Outdated** — Well-maintained homes that just look dated. Minimal work needed, 8-15% below market. Fastest path to equity with the least hassle.
+
+## A Real Equity Example
+
+Here's how instant equity works in practice:
+
+- Purchase price: $185,000
+- Renovation budget: $35,000 (new kitchen, bathrooms, flooring)
+- Total acquisition cost: $220,000
+- After Renovation Value (ARV): $285,000
+- **Instant equity: $65,000**
+
+That's $65,000 in equity on day one — before your home even appreciates a dollar.
+
+## How Renovation Loans Make This Possible
+
+The key to this strategy is renovation financing. Programs like FHA 203k, HomeStyle, CHOICERenovation, VA Renovation, and USDA Renovation let you finance both the purchase AND the renovation in a single mortgage.
+
+This means you don't need $35,000 cash to renovate before moving in. The renovation budget is wrapped into your mortgage, drawn in stages as work is completed.
+
+## What Renovation Projects Build the Most Equity?
+
+Not all renovations are equal. The highest ROI projects are typically:
+
+1. **Kitchen updates** — New cabinets, countertops, appliances. Return 70-80% of cost in added value.
+2. **Bathroom remodels** — Updated fixtures, tile, vanities. Return 60-70% of cost.
+3. **Flooring** — Hardwood or LVP throughout. Return 70-80% of cost.
+4. **Curb appeal** — Paint, landscaping, front door. High visibility, lower cost.
+5. **HVAC and mechanical** — Doesn't add visible value but protects your investment.
+
+## Getting Started
+
+Use the FixerUpperFinds equity calculator to model your numbers before you buy. Enter the purchase price, estimated renovation cost, and ARV to see your instant equity position instantly. When you're ready to move forward, apply with a renovation loan advisor.`,
+    publishedAt: new Date(Date.now() - 8*24*60*60*1000).toISOString()
+  }
+];
+
+function renderBlogPosts(posts){
+  const grid = document.getElementById('blogGrid');
+  grid.innerHTML = '';
+  posts.forEach(post => {
+    const div = document.createElement('div');
+    div.className = 'blog-card';
+    div.onclick = () => openBlogPost(post);
+    div.innerHTML = `
+      <div class="blog-card-top">
+        <div class="blog-card-category">${post.category}</div>
+        <h3>${post.title}</h3>
+      </div>
+      <div class="blog-card-body">
+        <p class="blog-card-excerpt">${post.excerpt}</p>
+        <div class="blog-card-meta">
+          <span>${post.readTime}${post.state?' · '+post.state:''}</span>
+          <span class="blog-read-more">Read More →</span>
+        </div>
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+function openBlogPost(post){
+  document.getElementById('bmCategory').textContent = post.category;
+  document.getElementById('bmTitle').textContent = post.title;
+  document.getElementById('bmMeta').textContent = post.readTime + (post.state?' · '+post.state:'') + ' · ' + new Date(post.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const content = post.content
+    .replace(/## (.+)/g,'<h2>$1</h2>')
+    .replace(/### (.+)/g,'<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .split('
+
+').map(p=>p.startsWith('<h')?p:'<p>'+p+'</p>').join('');
+  document.getElementById('bmContent').innerHTML = content;
+  document.getElementById('blogModalOverlay').classList.add('open');
+  window.scrollTo(0,0);
+}
+
+function closeBlogModal(e){
+  if(e.target===document.getElementById('blogModalOverlay'))
+    document.getElementById('blogModalOverlay').classList.remove('open');
+}
+
+function loadMorePosts(){
+  // Will load from localStorage posts when admin publishes them
+  const saved = [];
+  try { 
+    const all = JSON.parse(localStorage.getItem('fuf_posts')||'[]');
+    all.filter(p=>p.status==='published').forEach(p=>saved.push(p));
+  } catch(e){}
+  if(saved.length===0){
+    showToastBlog('No additional posts yet — check back soon!');
+  } else {
+    renderBlogPosts([...starterPosts, ...saved]);
+  }
+}
+
+function showToastBlog(msg){
+  // Simple alert fallback
+  alert(msg);
+}
+
+// Load published posts from admin + starter posts
+function initBlog(){
+  let posts = [...starterPosts];
+  try {
+    const saved = JSON.parse(localStorage.getItem('fuf_posts')||'[]');
+    const published = saved.filter(p=>p.status==='published');
+    posts = [...published, ...posts];
+  } catch(e){}
+  renderBlogPosts(posts.slice(0,6));
+}
+initBlog();
+
 </script>
 
 
@@ -1154,4 +1467,3 @@ function showDisclaimer(){document.getElementById('disclaimerOverlay').classList
 
 </body>
 </html>
- 
