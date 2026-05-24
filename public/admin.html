@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,128 +6,114 @@
 <title>FixerUpperFinds Blog Admin</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
-:root{--forest:#1c3a2a;--amber:#d4822a;--amber-light:#f0a84a;--cream:#faf7f2;--cream-dark:#f2ede4;--border:#ddd6ca;--text:#1a1a18;--muted:#6b6560;--white:#ffffff;--green:#1c6b3a;--red:#c0392b;}
+:root{--forest:#1c3a2a;--amber:#d4822a;--al:#f0a84a;--cream:#faf7f2;--cd:#f2ede4;--border:#ddd6ca;--text:#1a1a18;--muted:#6b6560;--white:#fff;--green:#1c6b3a;--red:#c0392b;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Arial,sans-serif;background:var(--cream);color:var(--text);}
 .login{display:flex;align-items:center;justify-content:center;min-height:100vh;}
-.login-box{background:var(--white);border-radius:16px;padding:3rem;max-width:400px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.1);text-align:center;}
-.logo{font-size:1.5rem;font-weight:bold;color:var(--forest);margin-bottom:0.5rem;}
+.lbox{background:var(--white);border-radius:16px;padding:3rem;max-width:400px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.1);text-align:center;}
+.logo{font-size:1.5rem;font-weight:700;color:var(--forest);margin-bottom:.5rem;}
 .logo span{color:var(--amber);}
-.sub{font-size:0.85rem;color:var(--muted);margin-bottom:2rem;}
-input[type=password]{width:100%;padding:0.85rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;margin-bottom:1rem;outline:none;}
-.btn{width:100%;background:var(--forest);color:var(--white);border:none;padding:0.9rem;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+.sub{font-size:.85rem;color:var(--muted);margin-bottom:2rem;}
+input[type=password]{width:100%;padding:.85rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;margin-bottom:1rem;outline:none;}
+.btn{width:100%;background:var(--forest);color:var(--white);border:none;padding:.9rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;}
 .btn:hover{background:var(--amber);}
-.err{color:var(--red);font-size:0.85rem;margin-top:0.5rem;display:none;}
+.err{color:var(--red);font-size:.85rem;margin-top:.5rem;display:none;}
 .admin{display:none;}
 nav{background:var(--forest);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;border-bottom:3px solid var(--amber);}
-.nav-logo{color:var(--white);font-weight:bold;font-size:1.1rem;}
-.nav-logo span{color:var(--amber-light);}
-.nav-links{display:flex;gap:1rem;align-items:center;}
-.nav-links a{color:#aabfb0;text-decoration:none;font-size:0.85rem;}
-.logout{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.2);padding:0.4rem 1rem;border-radius:6px;font-size:0.82rem;cursor:pointer;}
+.nlogo{color:var(--white);font-weight:700;font-size:1.1rem;}
+.nlogo span{color:var(--al);}
+.nlinks{display:flex;gap:1rem;align-items:center;}
+.nlinks a{color:#aabfb0;text-decoration:none;font-size:.85rem;}
+.lout{background:rgba(255,255,255,.1);color:var(--white);border:1px solid rgba(255,255,255,.2);padding:.4rem 1rem;border-radius:6px;font-size:.82rem;cursor:pointer;}
 .body{max-width:1100px;margin:0 auto;padding:2rem;}
 .tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:2rem;}
-.tab{padding:0.85rem 1.5rem;cursor:pointer;font-size:0.875rem;font-weight:bold;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab{padding:.85rem 1.5rem;cursor:pointer;font-size:.875rem;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;}
 .tab.active{color:var(--forest);border-bottom-color:var(--amber);}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
 .panel{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
-.panel h2{font-size:1.1rem;font-weight:bold;color:var(--forest);margin-bottom:0.5rem;}
-.panel p{font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;}
+.panel h2{font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:.5rem;}
+.panel p{font-size:.82rem;color:var(--muted);margin-bottom:1.25rem;}
 .field{margin-bottom:1rem;}
-.field label{display:block;font-size:0.75rem;font-weight:bold;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
-.field input,.field select,.field textarea{width:100%;padding:0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.9rem;font-family:Arial,sans-serif;outline:none;background:var(--cream);}
+.field label{display:block;font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
+.field input,.field select,.field textarea{width:100%;padding:.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:.9rem;outline:none;background:var(--cream);}
 .field textarea{min-height:70px;resize:vertical;}
-.topics{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
-.topic{background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);font-size:0.72rem;font-weight:bold;padding:4px 10px;border-radius:20px;cursor:pointer;}
-.topic:hover{background:var(--forest);color:var(--white);}
-.gen-btn{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.85rem;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;margin-top:0.5rem;}
-.gen-btn:disabled{background:#ccc;cursor:not-allowed;}
-.placeholder{text-align:center;padding:2rem;color:var(--muted);}
-.generating{display:none;text-align:center;padding:2rem;}
+.topics{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;}
+.tp{background:var(--cd);border:1px solid var(--border);color:var(--forest);font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;}
+.tp:hover{background:var(--forest);color:var(--white);}
+.gbtn{width:100%;background:var(--amber);color:var(--white);border:none;padding:.85rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:.5rem;}
+.gbtn:disabled{background:#ccc;cursor:not-allowed;}
+.ph{text-align:center;padding:2rem;color:var(--muted);}
+.gening{display:none;text-align:center;padding:2rem;}
 .dots{display:flex;gap:8px;justify-content:center;margin-bottom:1rem;}
-.dot{width:10px;height:10px;border-radius:50%;background:var(--amber);animation:bounce 1.2s infinite;}
-.dot:nth-child(2){animation-delay:0.2s;}
-.dot:nth-child(3){animation-delay:0.4s;}
-@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-8px);opacity:1}}
-.preview{display:none;}
-.preview-title{font-size:1.2rem;font-weight:bold;color:var(--forest);margin-bottom:0.5rem;}
-.tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;}
-.tag{font-size:0.7rem;font-weight:bold;padding:3px 8px;border-radius:4px;background:var(--cream-dark);color:var(--muted);}
-.content-box{font-size:0.85rem;line-height:1.7;max-height:350px;overflow-y:auto;border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;white-space:pre-wrap;}
-.actions{display:flex;gap:0.75rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;}
-.pub-btn{flex:1;background:var(--forest);color:var(--white);border:none;padding:0.75rem;border-radius:8px;font-size:0.9rem;font-weight:bold;cursor:pointer;}
-.pub-btn:hover{background:var(--amber);}
-.disc-btn{background:transparent;color:var(--muted);border:1.5px solid var(--border);padding:0.75rem 1rem;border-radius:8px;font-size:0.9rem;cursor:pointer;}
-.posts-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
-.posts-hdr h2{font-size:1.3rem;font-weight:bold;color:var(--forest);}
-.post-list{display:flex;flex-direction:column;gap:1rem;}
-.post-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
-.post-item h3{font-size:0.95rem;font-weight:bold;color:var(--forest);margin-bottom:0.25rem;}
-.post-item p{font-size:0.8rem;color:var(--muted);}
-.item-tags{display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;}
-.spub{background:#e8f5ee;color:var(--green);font-size:0.68rem;font-weight:bold;padding:3px 8px;border-radius:4px;}
-.sdraft{background:#fff3e0;color:#7a4a00;font-size:0.68rem;font-weight:bold;padding:3px 8px;border-radius:4px;}
-.item-btns{display:flex;gap:0.5rem;flex-shrink:0;}
-.ibtn{padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:bold;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--forest);font-family:Arial,sans-serif;}
-.ibtn:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--amber);animation:bn 1.2s infinite;}
+.dot:nth-child(2){animation-delay:.2s;}
+.dot:nth-child(3){animation-delay:.4s;}
+@keyframes bn{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-8px);opacity:1}}
+.pv{display:none;}
+.pvt{font-size:1.2rem;font-weight:700;color:var(--forest);margin-bottom:.5rem;}
+.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.tag{font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:4px;background:var(--cd);color:var(--muted);}
+.cbox{font-size:.85rem;line-height:1.7;max-height:350px;overflow-y:auto;border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem;white-space:pre-wrap;}
+.acts{display:flex;gap:.75rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;}
+.pbtn{flex:1;background:var(--forest);color:var(--white);border:none;padding:.75rem;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;}
+.pbtn:hover{background:var(--amber);}
+.dbtn{background:transparent;color:var(--muted);border:1.5px solid var(--border);padding:.75rem 1rem;border-radius:8px;font-size:.9rem;cursor:pointer;}
+.phdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.phdr h2{font-size:1.3rem;font-weight:700;color:var(--forest);}
+.plist{display:flex;flex-direction:column;gap:1rem;}
+.pi{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
+.pi h3{font-size:.95rem;font-weight:700;color:var(--forest);margin-bottom:.25rem;}
+.pi p{font-size:.8rem;color:var(--muted);}
+.itags{display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;}
+.spub{background:#e8f5ee;color:var(--green);font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:4px;}
+.sdraft{background:#fff3e0;color:#7a4a00;font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:4px;}
+.ibtns{display:flex;gap:.5rem;flex-shrink:0;}
+.ib{padding:.4rem .85rem;border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--forest);}
+.ib:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
 .idel:hover{background:var(--red);border-color:var(--red);color:var(--white);}
 .empty{text-align:center;padding:3rem;color:var(--muted);}
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--forest);color:var(--white);padding:1rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:bold;box-shadow:0 8px 30px rgba(0,0,0,0.2);transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:999;}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--forest);color:var(--white);padding:1rem 1.5rem;border-radius:10px;font-size:.875rem;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.2);transform:translateY(100px);opacity:0;transition:all .3s;z-index:999;}
 .toast.show{transform:translateY(0);opacity:1;}
 @media(max-width:768px){.grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<div class="login" id="loginDiv">
-  <div class="login-box">
+<div class="login" id="LD">
+  <div class="lbox">
     <div class="logo">Fixer<span>Upper</span>Finds</div>
     <div class="sub">Blog Admin</div>
-    <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="btn" onclick="doLogin()">Sign In</button>
-    <div class="err" id="loginErr">Incorrect password.</div>
+    <input type="password" id="PW" placeholder="Enter password">
+    <button class="btn" id="LB">Sign In</button>
+    <div class="err" id="LE">Incorrect password.</div>
   </div>
 </div>
 
-<div class="admin" id="adminDiv">
+<div class="admin" id="AD">
   <nav>
-    <div class="nav-logo">Fixer<span>Upper</span>Finds <span style="font-size:0.8rem;font-weight:normal;">Admin</span></div>
-    <div class="nav-links">
+    <div class="nlogo">Fixer<span>Upper</span>Finds <span style="font-size:.8rem;font-weight:400;">Admin</span></div>
+    <div class="nlinks">
       <a href="https://fixerupperfinds.com" target="_blank">View Site</a>
-      <button class="logout" onclick="doLogout()">Log Out</button>
+      <button class="lout" id="LOB">Log Out</button>
     </div>
   </nav>
   <div class="body">
     <div class="tabs">
-      <div class="tab active" onclick="showTab(this,'writeDiv')">Write Post</div>
-      <div class="tab" onclick="showTab(this,'postsDiv')">All Posts</div>
+      <div class="tab active" id="T1">Write Post</div>
+      <div class="tab" id="T2">All Posts</div>
     </div>
-
-    <div id="writeDiv">
+    <div id="WD">
       <div class="grid">
         <div class="panel">
           <h2>AI Blog Post Generator</h2>
           <p>Pick a topic or type your own. Claude writes a full post in seconds.</p>
           <div class="field">
             <label>Quick Topics</label>
-            <div class="topics">
-              <span class="topic" onclick="setTopic('How to Buy a Fixer Upper in Maryland 2026')">MD Fixer Upper</span>
-              <span class="topic" onclick="setTopic('FHA 203k vs HomeStyle Loan')">FHA 203k vs HomeStyle</span>
-              <span class="topic" onclick="setTopic('Best Fixer Upper Homes Northern Virginia 2026')">VA Fixer Uppers</span>
-              <span class="topic" onclick="setTopic('How the VA Renovation Loan Works for Veterans')">VA Reno Loan</span>
-              <span class="topic" onclick="setTopic('USDA Renovation Loan Eligible Areas Maryland Virginia')">USDA Areas</span>
-              <span class="topic" onclick="setTopic('How to Build Equity Buying a Fixer Upper')">Build Equity</span>
-              <span class="topic" onclick="setTopic('Best Renovation Projects That Add Home Value 2026')">ROI Renovations</span>
-              <span class="topic" onclick="setTopic('Fixer Upper Homes for Sale Frederick Maryland')">Frederick MD</span>
-              <span class="topic" onclick="setTopic('How to Estimate After Renovation Value ARV')">Estimate ARV</span>
-              <span class="topic" onclick="setTopic('RenoExpress Fastest Renovation Loan Explained')">RenoExpress</span>
-              <span class="topic" onclick="setTopic('Fixer Upper Homes Washington DC Metro Area')">DC Metro</span>
-              <span class="topic" onclick="setTopic('CHOICERenovation vs HomeStyle Loan Comparison')">CHOICEReno vs HomeStyle</span>
-            </div>
+            <div class="topics" id="TPCS"></div>
           </div>
-          <div class="field"><label>Topic</label><input type="text" id="topicIn" placeholder="e.g. Fixer uppers in Frederick MD"></div>
-          <div class="field"><label>State (optional)</label>
-            <select id="stateIn">
+          <div class="field"><label>Topic</label><input type="text" id="TIN" placeholder="e.g. Fixer uppers in Frederick MD"></div>
+          <div class="field"><label>State</label>
+            <select id="SIN">
               <option value="">No specific state</option>
               <option>Maryland</option><option>Washington DC</option><option>Virginia</option>
               <option>West Virginia</option><option>Pennsylvania</option><option>New Jersey</option>
@@ -135,140 +121,169 @@ nav{background:var(--forest);height:60px;display:flex;align-items:center;justify
               <option>New Hampshire</option><option>Illinois</option><option>Texas</option>
             </select>
           </div>
-          <div class="field"><label>Post Type</label>
-            <select id="typeIn">
-              <option value="guide">How-To Guide</option>
-              <option value="comparison">Loan Comparison</option>
-              <option value="local">Local Market</option>
-              <option value="tips">Tips and Advice</option>
-              <option value="explainer">Explainer</option>
-            </select>
-          </div>
-          <div class="field"><label>Notes (optional)</label><textarea id="notesIn" placeholder="Any specific points..."></textarea></div>
-          <button class="gen-btn" id="genBtn" onclick="doGenerate()">Generate Post with AI</button>
+          <div class="field"><label>Notes</label><textarea id="NIN" placeholder="Any specific points..."></textarea></div>
+          <button class="gbtn" id="GB">Generate Post with AI</button>
         </div>
-        <div class="panel" id="previewPanel">
+        <div class="panel">
           <h2>Preview</h2>
-          <div class="placeholder" id="ph"><p>Generate a post to see the preview here.</p></div>
-          <div class="generating" id="genDiv">
+          <div class="ph" id="PH"><p>Generate a post to see preview here.</p></div>
+          <div class="gening" id="GD">
             <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-            <p id="genMsg">Writing your post...</p>
+            <p id="GM">Writing your post...</p>
           </div>
-          <div class="preview" id="pvDiv">
-            <div class="preview-title" id="pvTitle"></div>
-            <div class="tags"><span class="tag" id="pvCat"></span><span class="tag" id="pvTime"></span><span class="tag" id="pvState"></span></div>
-            <div style="font-size:0.75rem;color:var(--muted);" id="pvSEO"></div>
-            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem;" id="pvMeta"></div>
-            <div class="content-box" id="pvContent"></div>
-            <div class="actions">
-              <button class="pub-btn" onclick="doPublish()">Publish to Blog</button>
-              <button class="disc-btn" onclick="doDiscard()">Discard</button>
+          <div class="pv" id="PV">
+            <div class="pvt" id="PVTITLE"></div>
+            <div class="tags"><span class="tag" id="PVCAT"></span><span class="tag" id="PVTIME"></span><span class="tag" id="PVSTATE"></span></div>
+            <div style="font-size:.75rem;color:var(--muted);" id="PVSEO"></div>
+            <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;" id="PVMETA"></div>
+            <div class="cbox" id="PVCONTENT"></div>
+            <div class="acts">
+              <button class="pbtn" id="PUBBTN">Publish to Blog</button>
+              <button class="dbtn" id="DISCBTN">Discard</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div id="postsDiv" style="display:none;">
-      <div class="posts-hdr"><h2>All Posts</h2><span id="postCount" style="font-size:0.82rem;color:var(--muted);"></span></div>
-      <div id="postList"></div>
-      <div id="emptyDiv" class="empty"><p>No posts yet. Write your first post!</p></div>
+    <div id="PD" style="display:none;">
+      <div class="phdr"><h2>All Posts</h2><span id="PC" style="font-size:.82rem;color:var(--muted);"></span></div>
+      <div id="PL"></div>
+      <div id="PE" class="empty"><p>No posts yet.</p></div>
     </div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="TOAST"></div>
 
 <script>
-var PW = 'FixerUpper2026!';
+var PASS = 'FixerUpper2026!';
+var NL = String.fromCharCode(10);
 var curPost = null;
 
+var TOPICS = [
+  ['How to Buy a Fixer Upper in Maryland 2026','MD Fixer Upper'],
+  ['FHA 203k vs HomeStyle Loan','FHA 203k vs HomeStyle'],
+  ['Best Fixer Upper Homes Northern Virginia 2026','VA Fixer Uppers'],
+  ['How the VA Renovation Loan Works for Veterans','VA Reno Loan'],
+  ['USDA Renovation Loan Eligible Areas Maryland Virginia','USDA Areas'],
+  ['How to Build Equity Buying a Fixer Upper','Build Equity'],
+  ['Best Renovation Projects That Add Home Value 2026','ROI Renovations'],
+  ['Fixer Upper Homes for Sale Frederick Maryland','Frederick MD'],
+  ['How to Estimate After Renovation Value ARV','Estimate ARV'],
+  ['RenoExpress Fastest Renovation Loan Explained','RenoExpress'],
+  ['Fixer Upper Homes Washington DC Metro Area','DC Metro'],
+  ['CHOICERenovation vs HomeStyle Loan Comparison','CHOICEReno vs HomeStyle']
+];
+
+function init() {
+  document.getElementById('LB').onclick = doLogin;
+  document.getElementById('LOB').onclick = doLogout;
+  document.getElementById('T1').onclick = function() { switchTab(0); };
+  document.getElementById('T2').onclick = function() { switchTab(1); };
+  document.getElementById('GB').onclick = doGenerate;
+  document.getElementById('PUBBTN').onclick = doPublish;
+  document.getElementById('DISCBTN').onclick = doDiscard;
+  document.getElementById('PW').onkeydown = function(e) {
+    if (e.key === 'Enter') doLogin();
+  };
+  var tpcs = document.getElementById('TPCS');
+  TOPICS.forEach(function(t) {
+    var s = document.createElement('span');
+    s.className = 'tp';
+    s.textContent = t[1];
+    s.onclick = function() { document.getElementById('TIN').value = t[0]; };
+    tpcs.appendChild(s);
+  });
+}
+
 function doLogin() {
-  if (document.getElementById('pwInput').value === PW) {
-    document.getElementById('loginDiv').style.display = 'none';
-    document.getElementById('adminDiv').style.display = 'block';
+  var pw = document.getElementById('PW').value;
+  if (pw === PASS) {
+    document.getElementById('LD').style.display = 'none';
+    document.getElementById('AD').style.display = 'block';
     loadPosts();
   } else {
-    document.getElementById('loginErr').style.display = 'block';
-    document.getElementById('pwInput').value = '';
+    document.getElementById('LE').style.display = 'block';
+    document.getElementById('PW').value = '';
   }
 }
 
 function doLogout() {
-  document.getElementById('loginDiv').style.display = 'flex';
-  document.getElementById('adminDiv').style.display = 'none';
+  document.getElementById('LD').style.display = 'flex';
+  document.getElementById('AD').style.display = 'none';
 }
 
-function showTab(el, divId) {
-  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-  el.classList.add('active');
-  document.getElementById('writeDiv').style.display = 'none';
-  document.getElementById('postsDiv').style.display = 'none';
-  document.getElementById(divId).style.display = 'block';
-  if (divId === 'postsDiv') loadPosts();
+function switchTab(idx) {
+  document.getElementById('T1').classList.toggle('active', idx === 0);
+  document.getElementById('T2').classList.toggle('active', idx === 1);
+  document.getElementById('WD').style.display = idx === 0 ? 'block' : 'none';
+  document.getElementById('PD').style.display = idx === 1 ? 'block' : 'none';
+  if (idx === 1) loadPosts();
 }
-
-function setTopic(t) { document.getElementById('topicIn').value = t; }
 
 function showToast(msg) {
-  var t = document.getElementById('toast');
+  var t = document.getElementById('TOAST');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
 
 function doGenerate() {
-  var topic = document.getElementById('topicIn').value.trim();
-  var state = document.getElementById('stateIn').value;
-  var notes = document.getElementById('notesIn').value.trim();
+  var topic = document.getElementById('TIN').value.trim();
+  var state = document.getElementById('SIN').value;
+  var notes = document.getElementById('NIN').value.trim();
   if (!topic) { alert('Please enter a topic.'); return; }
 
-  var btn = document.getElementById('genBtn');
-  btn.disabled = true;
-  document.getElementById('ph').style.display = 'none';
-  document.getElementById('pvDiv').style.display = 'none';
-  document.getElementById('genDiv').style.display = 'block';
+  document.getElementById('GB').disabled = true;
+  document.getElementById('PH').style.display = 'none';
+  document.getElementById('PV').style.display = 'none';
+  document.getElementById('GD').style.display = 'block';
 
   var mi = 0;
-  var msgs = ['Writing your post...', 'Optimizing for SEO...', 'Adding details...', 'Almost done...'];
+  var msgs = ['Writing your post...','Optimizing for SEO...','Adding details...','Almost done...'];
   var timer = setInterval(function() {
     mi = (mi + 1) % msgs.length;
-    document.getElementById('genMsg').textContent = msgs[mi];
+    document.getElementById('GM').textContent = msgs[mi];
   }, 3000);
 
-  var sys = 'You are a blog writer for FixerUpperFinds.com, a home search site for fixer-uppers in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL, TX. Write a blog post and respond using ONLY these exact plain text labels. Do not use JSON. Do not use curly braces. Do not use backticks or code blocks. Start your response with TITLE: on the first line.';
-  sys += ' Format: TITLE: [title] SEO_TITLE: [under 60 chars] META: [under 155 chars] CATEGORY: [Buying Guide or Loan Programs or Local Markets or Renovation Tips or Equity Building] READ_TIME: [X min read] CONTENT: [full post 600-800 words, use ## for section headers]';
+  var sys = [
+    'You are a blog writer for FixerUpperFinds.com covering fixer-upper homes in MD DC VA WV PA NJ NC DE MA NH IL TX.',
+    'Write a complete blog post. Use ONLY these plain text labels in your response.',
+    'Do NOT use JSON. Do NOT use curly braces. Start with TITLE: on line 1.',
+    'Format your response exactly like this:',
+    'TITLE: the post title here',
+    'SEO_TITLE: short title under 60 chars',
+    'META: meta description under 155 chars',
+    'CATEGORY: one of Buying Guide or Loan Programs or Local Markets or Renovation Tips or Equity Building',
+    'READ_TIME: X min read',
+    'CONTENT:',
+    'full blog post content here 600 to 800 words using ## before section headings'
+  ].join(' ');
 
-  var msg = 'Write a blog post about: ' + topic;
-  if (state) msg += ' in ' + state;
-  if (notes) msg += '. Notes: ' + notes;
+  var userMsg = 'Write a blog post about: ' + topic;
+  if (state) userMsg = userMsg + ' in ' + state;
+  if (notes) userMsg = userMsg + '. Notes: ' + notes;
 
   fetch('/api/chat', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      messages: [{role: 'user', content: msg}],
-      system: sys,
-      max_tokens: 2000
-    })
+    body: JSON.stringify({messages: [{role: 'user', content: userMsg}], system: sys, max_tokens: 2000})
   }).then(function(r) {
     return r.json();
   }).then(function(data) {
     clearInterval(timer);
     var raw = data.reply || '';
-
     var pTitle = topic;
     var pSEO = topic.substring(0, 60);
-    var pMeta = topic + ' - FixerUpperFinds guide.';
+    var pMeta = topic + ' - FixerUpperFinds.';
     var pCat = 'Buying Guide';
     var pTime = '6 min read';
     var pLines = [];
-    var inContent = false;
-
-    var allLines = raw.split('\n');
-    for (var i = 0; i < allLines.length; i++) {
-      var ln = allLines[i];
-      if (inContent) {
+    var inC = false;
+    var allL = raw.split(NL);
+    for (var i = 0; i < allL.length; i++) {
+      var ln = allL[i];
+      if (inC) {
         pLines.push(ln);
       } else if (ln.indexOf('TITLE:') === 0) {
         pTitle = ln.substring(6).trim();
@@ -281,14 +296,12 @@ function doGenerate() {
       } else if (ln.indexOf('READ_TIME:') === 0) {
         pTime = ln.substring(10).trim();
       } else if (ln.indexOf('CONTENT:') === 0) {
-        inContent = true;
+        inC = true;
         var rest = ln.substring(8).trim();
         if (rest) pLines.push(rest);
       }
     }
-
-    var pContent = pLines.join('
-').trim();
+    var pContent = pLines.join(NL).trim();
     if (!pContent) pContent = raw;
 
     curPost = {
@@ -305,22 +318,22 @@ function doGenerate() {
       slug: pTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     };
 
-    document.getElementById('genDiv').style.display = 'none';
-    document.getElementById('pvDiv').style.display = 'block';
-    document.getElementById('pvTitle').textContent = pTitle;
-    document.getElementById('pvCat').textContent = pCat;
-    document.getElementById('pvTime').textContent = pTime;
-    document.getElementById('pvState').textContent = state || 'All States';
-    document.getElementById('pvSEO').textContent = 'SEO: ' + pSEO;
-    document.getElementById('pvMeta').textContent = 'Meta: ' + pMeta;
-    document.getElementById('pvContent').textContent = pContent;
-    btn.disabled = false;
+    document.getElementById('GD').style.display = 'none';
+    document.getElementById('PV').style.display = 'block';
+    document.getElementById('PVTITLE').textContent = pTitle;
+    document.getElementById('PVCAT').textContent = pCat;
+    document.getElementById('PVTIME').textContent = pTime;
+    document.getElementById('PVSTATE').textContent = state || 'All States';
+    document.getElementById('PVSEO').textContent = 'SEO: ' + pSEO;
+    document.getElementById('PVMETA').textContent = 'Meta: ' + pMeta;
+    document.getElementById('PVCONTENT').textContent = pContent;
+    document.getElementById('GB').disabled = false;
   }).catch(function(e) {
     clearInterval(timer);
-    document.getElementById('genDiv').style.display = 'none';
-    document.getElementById('ph').style.display = 'block';
-    document.getElementById('ph').innerHTML = '<p style="color:red">Error: ' + e.message + '</p>';
-    btn.disabled = false;
+    document.getElementById('GD').style.display = 'none';
+    document.getElementById('PH').style.display = 'block';
+    document.getElementById('PH').innerHTML = '<p style="color:red">Error: ' + e.message + '</p>';
+    document.getElementById('GB').disabled = false;
   });
 }
 
@@ -330,73 +343,66 @@ function doPublish() {
   curPost.publishedAt = new Date().toISOString();
   fetch('/api/posts', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json', 'x-admin-key': PW},
+    headers: {'Content-Type': 'application/json', 'x-admin-key': PASS},
     body: JSON.stringify(curPost)
-  }).then(function(r) {
-    return r.json();
-  }).then(function(d) {
-    if (d.success) {
-      showToast('Post published and live on site!');
-      doDiscard();
-      showTab(document.querySelectorAll('.tab')[1], 'postsDiv');
-    } else {
-      showToast('Error: ' + (d.error || 'Unknown'));
-    }
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    if (d.success) { showToast('Published!'); doDiscard(); switchTab(1); }
+    else showToast('Error: ' + (d.error || 'Unknown'));
   }).catch(function(e) { showToast('Error: ' + e.message); });
 }
 
 function doDiscard() {
   curPost = null;
-  document.getElementById('pvDiv').style.display = 'none';
-  document.getElementById('ph').style.display = 'block';
-  document.getElementById('ph').innerHTML = '<p>Generate a post to see the preview here.</p>';
-  document.getElementById('topicIn').value = '';
-  document.getElementById('notesIn').value = '';
+  document.getElementById('PV').style.display = 'none';
+  document.getElementById('PH').style.display = 'block';
+  document.getElementById('PH').innerHTML = '<p>Generate a post to see preview here.</p>';
+  document.getElementById('TIN').value = '';
+  document.getElementById('NIN').value = '';
 }
 
 function loadPosts() {
-  var list = document.getElementById('postList');
-  var empty = document.getElementById('emptyDiv');
-  var count = document.getElementById('postCount');
+  var list = document.getElementById('PL');
+  var empty = document.getElementById('PE');
+  var count = document.getElementById('PC');
   list.innerHTML = '<p style="text-align:center;padding:2rem;color:var(--muted);">Loading...</p>';
-  fetch('/api/posts/all', {headers: {'x-admin-key': PW}}).then(function(r) {
+  fetch('/api/posts/all', {headers: {'x-admin-key': PASS}}).then(function(r) {
     return r.json();
   }).then(function(d) {
     var posts = d.posts || [];
-    count.textContent = posts.length + ' post' + (posts.length !== 1 ? 's' : '');
+    count.textContent = posts.length + (posts.length !== 1 ? ' posts' : ' post');
     if (!posts.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
     empty.style.display = 'none';
     list.innerHTML = posts.map(function(p) {
-      return '<div class="post-item"><div><h3>' + p.title + '</h3><p>' + (p.metaDescription || '') + '</p>'
-        + '<div class="item-tags"><span class="' + (p.status === 'published' ? 'spub' : 'sdraft') + '">'
-        + (p.status === 'published' ? 'Published' : 'Draft') + '</span>'
+      var pub = p.status === 'published';
+      return '<div class="pi"><div><h3>' + p.title + '</h3><p>' + (p.metaDescription || '') + '</p>'
+        + '<div class="itags"><span class="' + (pub ? 'spub' : 'sdraft') + '">' + (pub ? 'Published' : 'Draft') + '</span>'
         + '<span class="tag">' + (p.category || '') + '</span>'
         + '<span class="tag">' + new Date(p.createdAt).toLocaleDateString() + '</span>'
         + (p.state ? '<span class="tag">' + p.state + '</span>' : '')
-        + '</div></div><div class="item-btns">'
-        + '<button class="ibtn" onclick="togglePost(' + p.id + ')">' + (p.status === 'published' ? 'Unpublish' : 'Publish') + '</button>'
-        + '<button class="ibtn idel" onclick="deletePost(' + p.id + ')">Delete</button>'
+        + '</div></div><div class="ibtns">'
+        + '<button class="ib" onclick="togglePost(' + p.id + ')">' + (pub ? 'Unpublish' : 'Publish') + '</button>'
+        + '<button class="ib idel" onclick="deletePost(' + p.id + ')">Delete</button>'
         + '</div></div>';
     }).join('');
   }).catch(function(e) {
-    list.innerHTML = '<p style="color:red;text-align:center;padding:2rem;">Error: ' + e.message + '</p>';
+    list.innerHTML = '<p style="color:red;padding:2rem;">Error: ' + e.message + '</p>';
   });
 }
 
 function togglePost(id) {
-  fetch('/api/posts/' + id, {method: 'PATCH', headers: {'Content-Type': 'application/json', 'x-admin-key': PW}, body: JSON.stringify({})})
-  .then(function(r) { return r.json(); })
-  .then(function(d) { if (d.success) { loadPosts(); showToast(d.post.status === 'published' ? 'Published!' : 'Unpublished'); } })
-  .catch(function(e) { showToast('Error: ' + e.message); });
+  fetch('/api/posts/' + id, {method:'PATCH', headers:{'Content-Type':'application/json','x-admin-key':PASS}, body:JSON.stringify({})})
+  .then(function(r){return r.json();}).then(function(d){if(d.success){loadPosts();showToast(d.post.status==='published'?'Published!':'Unpublished');}})
+  .catch(function(e){showToast('Error: '+e.message);});
 }
 
 function deletePost(id) {
   if (!confirm('Delete this post?')) return;
-  fetch('/api/posts/' + id, {method: 'DELETE', headers: {'x-admin-key': PW}})
-  .then(function(r) { return r.json(); })
-  .then(function(d) { if (d.success) { loadPosts(); showToast('Deleted'); } })
-  .catch(function(e) { showToast('Error: ' + e.message); });
+  fetch('/api/posts/'+id, {method:'DELETE', headers:{'x-admin-key':PASS}})
+  .then(function(r){return r.json();}).then(function(d){if(d.success){loadPosts();showToast('Deleted');}})
+  .catch(function(e){showToast('Error: '+e.message);});
 }
+
+window.onload = init;
 </script>
 </body>
 </html>
