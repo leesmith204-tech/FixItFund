@@ -944,7 +944,7 @@ const equityPct=Math.round((equity/arvMid)*100);
     <div class="prop-body">
       <div class="prop-addr">${p.addr}</div>
       <div class="prop-city">${p.city} · ${p.zip}</div>
-      <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">Est. ARV $${Math.round(p.price+(p.reno*1.35)/1000)}K+</div></div>
+      <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">Est. ARV $${Math.round((p.price+(p.reno*1.35))/1000)}K - $${Math.round((p.price+(p.reno*1.5))/1000)}K</div></div>
       <div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div>
       <div class="prop-equity-bar">
         <div class="prop-equity-label"><span>Est. Equity Potential*</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
