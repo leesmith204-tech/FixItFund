@@ -344,9 +344,7 @@
   .loan-apply{display:block;text-align:center;background:var(--cream-dark);border:1px solid var(--border);color:var(--forest);padding:0.5rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:background 0.2s;}
   .loan-card:hover .loan-apply{background:var(--amber);color:var(--white);border-color:var(--amber);}
 
-  /* USDA BADGE */
-  .usda-eligible{position:absolute;bottom:10px;left:10px;background:rgba(28,107,60,0.92);color:#fff;font-size:0.65rem;font-weight:800;padding:4px 8px;border-radius:5px;letter-spacing:0.03em;}
-  .usda-ineligible{position:absolute;bottom:10px;left:10px;background:rgba(80,80,80,0.7);color:#ddd;font-size:0.65rem;font-weight:700;padding:4px 8px;border-radius:5px;}
+
 
 
   /* BLOG SECTION */
@@ -386,6 +384,33 @@
   .blog-modal-cta-btn:hover{background:var(--amber);}
   .blog-modal-cta-btn.outline{background:transparent;border:1.5px solid var(--forest);color:var(--forest);}
   .blog-modal-cta-btn.outline:hover{background:var(--forest);color:var(--white);}
+
+
+  /* MINI CALC MODAL */
+  .mini-calc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:600;align-items:center;justify-content:center;padding:1rem;}
+  .mini-calc-overlay.open{display:flex;}
+  .mini-calc{background:var(--forest);border-radius:20px;padding:2rem;max-width:480px;width:100%;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.4);}
+  .mini-calc-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:rgba(255,255,255,0.5);}
+  .mini-calc-close:hover{color:var(--white);}
+  .mini-calc-addr{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.25rem;}
+  .mini-calc-title{font-family:Georgia,serif;color:var(--white);font-size:1.3rem;margin-bottom:1.5rem;line-height:1.3;}
+  .mini-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem;}
+  .mini-field label{display:block;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#6a8a78;margin-bottom:4px;}
+  .mini-field input{width:100%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:0.6rem 0.75rem;border-radius:6px;font-size:0.9rem;outline:none;font-family:Arial,sans-serif;}
+  .mini-field input:focus{border-color:var(--amber-light);}
+  .mini-results{background:rgba(0,0,0,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;}
+  .mini-result-row{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .mini-result-row:last-child{border-bottom:none;}
+  .mini-result-label{font-size:0.8rem;color:#7a9a88;}
+  .mini-result-val{font-size:0.88rem;font-weight:700;color:var(--white);}
+  .mini-result-row.highlight .mini-result-label{color:var(--amber-light);font-weight:600;}
+  .mini-result-row.highlight .mini-result-val{font-family:Georgia,serif;font-size:1.1rem;color:var(--amber-light);}
+  .mini-result-row.green .mini-result-label{color:#6dcfa0;font-weight:600;}
+  .mini-result-row.green .mini-result-val{font-family:Georgia,serif;font-size:1.1rem;color:#6dcfa0;}
+  .mini-rehab-note{font-size:0.7rem;color:#4a6a58;margin-bottom:1rem;line-height:1.5;}
+  .mini-cta{width:100%;background:var(--amber);color:var(--white);border:none;padding:0.85rem;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;transition:background 0.2s;}
+  .mini-cta:hover{background:var(--amber-light);color:var(--forest);}
+  .mini-disclaimer{font-size:0.68rem;color:#3a5a48;margin-top:0.75rem;text-align:center;line-height:1.5;}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -913,7 +938,6 @@ const equityPct=Math.round((equity/arvMid)*100);
       <div class="prop-type-badge ${typeBadge[p.type]}">${typeLabel[p.type]}</div>
       <div class="prop-equity-badge">Est. +$${Math.round(equity/1000)}K equity</div>
       <div class="prop-days">${p.days===1?'🔥 New Today':'Added '+p.days+'d ago'}</div>
-      ${p.usda?'<div class="usda-eligible">✓ USDA Eligible Zone</div>':'<div class="usda-ineligible">Check USDA eligibility</div>'}
     </div>
     <div class="prop-body">
       <div class="prop-addr">${p.addr}</div>
@@ -926,7 +950,7 @@ const equityPct=Math.round((equity/arvMid)*100);
       </div>
       <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
       <div style="display:flex;gap:0.5rem;margin-top:0.25rem;">
-        <button class="prop-cta" style="flex:1;" onclick="loadCalc(${p.price},${p.reno})">Run Numbers</button>
+        <button class="prop-cta" style="flex:1;" onclick="openMiniCalc(p)">Quick Analysis</button>
         <a class="prop-cta" style="flex:2;background:var(--amber);" href="#" onclick="openStrategy('Interested in This Property?','Tell us about this home and a renovation loan specialist will help you figure out financing.');return false;">Schedule Strategy Session →</a>
       </div>
     </div>`;
@@ -1160,6 +1184,74 @@ function submitStrategy() {
     document.getElementById('strategySuccess').style.display = 'block';
   });
 }
+
+// ===== MINI PROPERTY CALCULATOR =====
+var miniCalcProp = null;
+
+function getRehabEstimate(type, sqft) {
+  var rates = {'full-reno': {low:40, high:65}, 'cosmetic': {low:15, high:25}, 'undervalued': {low:8, high:15}};
+  var rate = rates[type] || rates['cosmetic'];
+  var mid = Math.round(sqft * ((rate.low + rate.high) / 2));
+  return mid;
+}
+
+function openMiniCalc(prop) {
+  miniCalcProp = prop;
+  var rehabEst = getRehabEstimate(prop.type, prop.sqft);
+  document.getElementById('mcAddr').textContent = prop.addr + ', ' + prop.city;
+  document.getElementById('mcTitle').textContent = prop.title || 'Property Analysis';
+  document.getElementById('mcPrice').value = prop.price;
+  document.getElementById('mcReno').value = prop.reno || rehabEst;
+  document.getElementById('mcDown').value = 3.5;
+  document.getElementById('mcRate').value = 7.25;
+  var typeLabel = {'full-reno':'Full Renovation','cosmetic':'Cosmetic Update','undervalued':'Undervalued/Outdated'};
+  document.getElementById('mcRehabNote').textContent = 'Est. rehab for a ' + (prop.sqft||0).toLocaleString() + ' sqft ' + (typeLabel[prop.type]||'property') + ': $' + (getRehabEstimate(prop.type,prop.sqft)||0).toLocaleString() + '. Adjust as needed. Actual costs vary by scope and contractor.';
+  updateMiniCalc();
+  document.getElementById('miniCalcOverlay').classList.add('open');
+}
+
+function closeMiniCalc() {
+  document.getElementById('miniCalcOverlay').classList.remove('open');
+}
+
+function fmtMini(n) { return '$' + Math.round(n).toLocaleString(); }
+
+function updateMiniCalc() {
+  var price = parseFloat(document.getElementById('mcPrice').value) || 0;
+  var reno = parseFloat(document.getElementById('mcReno').value) || 0;
+  var downPct = parseFloat(document.getElementById('mcDown').value) || 3.5;
+  var rate = parseFloat(document.getElementById('mcRate').value) || 7.25;
+  var total = price + reno;
+  var down = total * (downPct / 100);
+  var loan = total - down;
+  // ARV range
+  var arvLow = price + (reno * 1.2);
+  var arvHigh = price + (reno * 1.5);
+  var equityLow = arvLow - total;
+  var equityHigh = arvHigh - total;
+  // Monthly payment (30yr fixed, FHA MIP estimate)
+  var mip = loan * 0.0175;
+  var loanWithMIP = loan + mip;
+  var r = rate / 100 / 12;
+  var n = 360;
+  var pi = r > 0 ? loanWithMIP * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1) : loanWithMIP/n;
+  var monthlyMI = (loanWithMIP * 0.0055) / 12;
+  var payment = pi + monthlyMI;
+
+  document.getElementById('mcTotal').textContent = fmtMini(total);
+  document.getElementById('mcLoan').textContent = fmtMini(loan);
+  document.getElementById('mcARV').textContent = fmtMini(arvLow) + ' - ' + fmtMini(arvHigh);
+  document.getElementById('mcEquity').textContent = fmtMini(equityLow) + ' - ' + fmtMini(equityHigh);
+  document.getElementById('mcPayment').textContent = '~' + fmtMini(payment) + '/mo';
+}
+
+function openStrategyFromCalc() {
+  closeMiniCalc();
+  var addr = miniCalcProp ? miniCalcProp.addr + ', ' + miniCalcProp.city : '';
+  openStrategy('Schedule a Free Strategy Session', addr ? 'Interested in ' + addr + '? A renovation loan specialist will review your numbers and reach out within 24 hours.' : 'Tell us about your goals and a renovation loan specialist will reach out within 24 hours.');
+}
+
+
 setInterval(()=>{
   const m=Math.floor(Math.random()*15)+1;
   document.getElementById('lastUpdated').textContent='Updated '+m+' minute'+(m>1?'s':'')+' ago';
@@ -1443,6 +1535,44 @@ initBlog();
   <p>Finance your fixer upper with FHA 203k Limited, FHA 203k Standard, Fannie Mae HomeStyle Renovation, Freddie Mac CHOICERenovation, RenoExpress, VA Renovation Loan, or USDA Renovation Loan. One loan covers purchase price plus renovation costs.</p>
 </section>
 
+
+
+<!-- MINI PROPERTY CALCULATOR -->
+<div class="mini-calc-overlay" id="miniCalcOverlay" onclick="if(event.target===this)closeMiniCalc()">
+  <div class="mini-calc">
+    <button class="mini-calc-close" onclick="closeMiniCalc()">&#x2715;</button>
+    <div class="mini-calc-addr" id="mcAddr">Property Analysis</div>
+    <div class="mini-calc-title" id="mcTitle">Run Your Numbers</div>
+    <div class="mini-calc-grid">
+      <div class="mini-field">
+        <label>Purchase Price ($)</label>
+        <input type="number" id="mcPrice" oninput="updateMiniCalc()">
+      </div>
+      <div class="mini-field">
+        <label>Est. Rehab Cost ($)</label>
+        <input type="number" id="mcReno" oninput="updateMiniCalc()">
+      </div>
+      <div class="mini-field">
+        <label>Down Payment (%)</label>
+        <input type="number" id="mcDown" value="3.5" step="0.5" oninput="updateMiniCalc()">
+      </div>
+      <div class="mini-field">
+        <label>Interest Rate (%)</label>
+        <input type="number" id="mcRate" value="7.25" step="0.125" oninput="updateMiniCalc()">
+      </div>
+    </div>
+    <div class="mini-rehab-note" id="mcRehabNote">Rehab estimate based on property type and square footage. Actual costs vary by scope and contractor.</div>
+    <div class="mini-results">
+      <div class="mini-result-row"><span class="mini-result-label">Total Acquisition Cost</span><span class="mini-result-val" id="mcTotal">-</span></div>
+      <div class="mini-result-row"><span class="mini-result-label">Amount to Finance</span><span class="mini-result-val" id="mcLoan">-</span></div>
+      <div class="mini-result-row highlight"><span class="mini-result-label">Est. ARV Range</span><span class="mini-result-val" id="mcARV">-</span></div>
+      <div class="mini-result-row green"><span class="mini-result-label">Est. Equity Range</span><span class="mini-result-val" id="mcEquity">-</span></div>
+      <div class="mini-result-row green"><span class="mini-result-label">Est. Monthly Payment</span><span class="mini-result-val" id="mcPayment">-</span></div>
+    </div>
+    <button class="mini-cta" onclick="openStrategyFromCalc()">Schedule a Free Strategy Session &#8594;</button>
+    <div class="mini-disclaimer">ARV estimated using renovation multiplier (&#215;1.2 to &#215;1.5). Not a certified appraisal. Monthly payment estimate only &#8212; does not include taxes, insurance, or MIP. Consult a licensed professional before making any financial decisions.</div>
+  </div>
+</div>
 
 <!-- STRATEGY SESSION MODAL -->
 <div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:900;align-items:center;justify-content:center;padding:1rem;" id="strategyOverlay" onclick="if(event.target===this)closeStrategy()">
