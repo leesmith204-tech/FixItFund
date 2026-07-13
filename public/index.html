@@ -860,6 +860,34 @@
 <!-- HUBSPOT -->
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
 <script>
+// EmailJS config
+var EJS_SERVICE = 'service_ct69h7k';
+var EJS_TEMPLATE = 'template_g3e9nfj';
+var EJS_KEY = 'A8NUXCv5WfwgCJ5zE';
+
+function sendStrategyEmail(name, email, phone, state, interest, message, callback) {
+  if (typeof emailjs === 'undefined') {
+    console.error('EmailJS not loaded');
+    if (callback) callback(false);
+    return;
+  }
+  emailjs.init(EJS_KEY);
+  emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
+    name: name,
+    email: email,
+    phone: phone || 'Not provided',
+    state: state || 'Not specified',
+    interest: interest || 'Not specified',
+    message: message || 'No message',
+    reply_to: email
+  }).then(function() {
+    if (callback) callback(true);
+  }, function(err) {
+    console.log('EmailJS error:', JSON.stringify(err));
+    if (callback) callback(false);
+  });
+}
+
 const HS_PORTAL_ID='246283164';
 const HS_FORM_ID='1abc34dc-caa7-4a8a-a64a-32b41cd93133';
 function submitToHubSpot(fields){
