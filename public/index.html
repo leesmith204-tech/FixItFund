@@ -917,6 +917,7 @@ const allProps=[
   {id:7,addr:"312 Constitution Ave",city:"Charles Town, WV",state:"WV",zip:"25414",price:185000,beds:3,baths:1,sqft:1380,reno:38000,days:2,type:"full-reno",usda:true,tags:["REO","USDA Eligible","Below Market"]},
 ];
 const typeLabel={'full-reno':'🔨 Full Renovation','cosmetic':'🎨 Cosmetic Update','undervalued':'💎 Undervalued'};
+var propStore = {};
 const typeBadge={'full-reno':'badge-full','cosmetic':'badge-cosmetic','undervalued':'badge-under'};
 const typeImg={'full-reno':'full-reno','cosmetic':'cosmetic','undervalued':'undervalued'};
 let currentFilter='all';
@@ -928,6 +929,7 @@ function renderProps(list){
   document.getElementById('noResults').style.display=list.length===0?'block':'none';
   document.getElementById('loadMoreBtn').style.display=list.length===0?'none':'block';
   list.forEach(p=>{
+    propStore[p.id] = p;
     const equity=Math.round(p.price+(p.reno*1.35))-p.price-p.reno;
     const arvMid=p.price+(p.reno*1.35);
 const equityPct=Math.round((equity/arvMid)*100);
@@ -950,7 +952,7 @@ const equityPct=Math.round((equity/arvMid)*100);
       </div>
       <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
       <div style="display:flex;gap:0.5rem;margin-top:0.25rem;">
-        <button class="prop-cta" style="flex:1;" onclick="openMiniCalc(p)">Quick Analysis</button>
+        <button class="prop-cta" style="flex:1;" onclick="openMiniCalc(propStore[${p.id}])">Quick Analysis</button>
         <a class="prop-cta" style="flex:2;background:var(--amber);" href="#" onclick="openStrategy('Interested in This Property?','Tell us about this home and a renovation loan specialist will help you figure out financing.');return false;">Schedule Strategy Session →</a>
       </div>
     </div>`;
