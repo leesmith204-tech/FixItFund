@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- PRIMARY SEO -->
 <title>Fixer Upper Homes For Sale | Search Undervalued Homes — FixerUpperFinds</title>
-<meta name="description" content="Search daily fixer-upper and undervalued home listings in MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL & TX. Find below-market properties and build instant equity. Free search — no agent required.">
-<meta name="keywords" content="fixer upper homes for sale, undervalued homes, below market homes, renovation homes, fixer upper Maryland, fixer upper Virginia, fixer upper DC, fixer upper Pennsylvania, fixer upper North Carolina, fixer upper West Virginia, fixer upper New Jersey, fixer upper Delaware, fixer upper Massachusetts, fixer upper New Hampshire, fixer upper Illinois, fixer upper Texas, cosmetic update homes, renovation loan homes, FHA 203k homes, cheap homes equity, investment properties renovation">
+<meta name="description" content="Search daily fixer-upper and undervalued home listings in MD, DC, VA & WV. Find below-market properties and build instant equity. Free search — no agent required.">
+<meta name="keywords" content="fixer upper homes for sale, undervalued homes, below market homes, renovation homes, fixer upper Maryland, fixer upper Virginia, fixer upper DC, fixer upper West Virginia, cosmetic update homes, renovation loan homes, FHA 203k homes, cheap homes equity, investment properties renovation">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="vh3jWln3vTjNXCG1AWVfBF_1CIOHFGtPjZprx4uS-I0">
 <meta name="author" content="FixerUpperFinds">
@@ -53,15 +53,7 @@
     {"@type": "State", "name": "Maryland"},
     {"@type": "State", "name": "Virginia"},
     {"@type": "AdministrativeArea", "name": "Washington DC"},
-    {"@type": "State", "name": "West Virginia"},
-    {"@type": "State", "name": "Pennsylvania"},
-    {"@type": "State", "name": "New Jersey"},
-    {"@type": "State", "name": "North Carolina"},
-    {"@type": "State", "name": "Delaware"},
-    {"@type": "State", "name": "Massachusetts"},
-    {"@type": "State", "name": "New Hampshire"},
-    {"@type": "State", "name": "Illinois"},
-    {"@type": "State", "name": "Texas"}
+    {"@type": "State", "name": "West Virginia"}
   ],
   "knowsAbout": [
     "Fixer Upper Homes",
@@ -429,7 +421,7 @@
   <div class="hero-inner">
     <div class="hero-eyebrow">🏡 Fixer-Uppers · Cosmetic Updates · Undervalued Homes</div>
     <h1>Search Undervalued Homes.<br><em>Build Equity</em> from Day One.</h1>
-    <p class="hero-sub">Browse daily listings of below-market properties across MD, DC, VA, WV, PA, NJ, NC, DE, MA, NH, IL &amp; TX. Find the hidden gem that builds your wealth.</p>
+    <p class="hero-sub">Browse daily listings of below-market properties across Maryland, Washington DC, Virginia &amp; West Virginia. Find the hidden gem that builds your wealth.</p>
 
     <div class="search-box">
       <div class="search-box-title">🔍 Search Properties by Location</div>
@@ -446,14 +438,7 @@
             <option value="DC">Washington DC</option>
             <option value="VA">Virginia</option>
             <option value="WV">West Virginia</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NC">North Carolina</option>
-            <option value="DE">Delaware</option>
-            <option value="MA">Massachusetts</option>
-            <option value="NH">New Hampshire</option>
-            <option value="IL">Illinois</option>
-            <option value="TX">Texas</option>
+
           </select>
         </div>
         <div class="search-field">
@@ -564,10 +549,9 @@
           <label>Update / Renovation Cost ($)</label>
           <input type="number" id="cReno" value="35000" oninput="calcUpdate()">
         </div>
-        <div class="calc-field">
-          <label>After Renovation Value — ARV ($)</label>
-          <input type="number" id="cARV" value="280000" oninput="calcUpdate()">
-          <div class="calc-tip">💡 Tip: Search Zillow for recently sold updated homes nearby to estimate ARV. This is an estimate only — not a certified appraisal.</div>
+        <div class="calc-field" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.75rem 1rem;">
+          <label style="color:var(--amber-light);">Estimated ARV Range (Auto-Calculated)</label>
+          <p style="font-size:0.78rem;color:#6a8a78;margin-top:4px;line-height:1.5;">Based on purchase price + renovation cost × 1.2 (conservative) to × 1.5 (optimistic). Actual ARV requires a certified appraisal.</p>
         </div>
         <div class="calc-field">
           <label>Down Payment (%)</label>
@@ -804,7 +788,7 @@
 <section class="financing-section">
   <div class="financing-inner">
     <h2>Found Your Property? Let's Get You Financed.</h2>
-    <p>FixerUpperFinds is a property search tool. For renovation financing — FHA 203k, HomeStyle, VA Reno, USDA Reno, and CHOICERenovation — apply directly with a licensed renovation loan advisor.</p>
+    <p>FixerUpperFinds is a property search tool. For renovation financing — FHA 203k, HomeStyle, VA Reno, USDA Reno, and CHOICERenovation — apply directly with a licensed renovation loan advisor serving MD, DC, VA &amp; WV.</p>
     <a href="#" onclick="openStrategy('Ready to Finance Your Find?','Schedule a free strategy session with a renovation loan specialist. We respond within 24 hours.');return false;" class="financing-btn">Schedule a Free Strategy Session →</a>
     <div class="financing-note">Licensed Renovation Loan Advisor · Equal Housing Lender</div>
   </div>
@@ -827,7 +811,7 @@
 <footer>
   <div class="footer-logo">Fixer<span>Upper</span>Finds</div>
   Daily listings of fixer-uppers, cosmetic updaters &amp; undervalued homes<br>
-  Covering MD · DC · VA · WV · PA · NJ · NC · DE · MA · NH · IL · TX<br><br>
+  Covering Maryland · Washington DC · Virginia · West Virginia<br><br>
   <a href="#" onclick="openStrategy();return false;">Schedule a Free Strategy Session →</a><br><br>
   Property listings sourced from public records and third-party data providers.<br>
   FixerUpperFinds is a property search platform and is not a lender or real estate brokerage.<br>
@@ -899,13 +883,13 @@ function submitToHubSpot(fields){
 
 // ===== PROPERTIES =====
 const allProps=[
-  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,arv:390000,reno:45000,days:1,type:"cosmetic",usda:false,tags:["New Floors Needed","Kitchen Update","Great Location"]},
-  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,arv:220000,reno:38000,days:2,type:"full-reno",usda:false,tags:["Foreclosure","Priced to Sell","Structural Updates"]},
-  {id:3,addr:"2204 Lincoln Blvd",city:"Pittsburgh, PA",state:"PA",zip:"15219",price:112000,beds:3,baths:1,sqft:1340,arv:195000,reno:42000,days:1,type:"full-reno",usda:true,tags:["REO","Below Market","Motivated Seller"]},
-  {id:4,addr:"315 Ridgecrest Ct",city:"Raleigh, NC",state:"NC",zip:"27601",price:267000,beds:4,baths:2,sqft:2100,arv:365000,reno:28000,days:3,type:"undervalued",usda:false,tags:["Outdated Interior","Below AVM","No Structural Issues"]},
-  {id:5,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,arv:285000,reno:32000,days:1,type:"cosmetic",usda:true,tags:["Cosmetic Only","Great Bones","Below Market"]},
-  {id:6,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,arv:188000,reno:29000,days:2,type:"undervalued",usda:true,tags:["Dated But Solid","Below Market","Low Entry Price"]},
-  {id:7,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,arv:435000,reno:45000,days:1,type:"cosmetic",usda:false,tags:["Dated Kitchen","New Roof 2022","Walk to Water"]},
+  {id:1,addr:"1423 Maple Ridge Dr",city:"Rockville, MD",state:"MD",zip:"20850",price:285000,beds:3,baths:2,sqft:1480,reno:45000,days:1,type:"cosmetic",usda:false,tags:["New Floors Needed","Kitchen Update","Great Location"]},
+  {id:2,addr:"887 Birchwood Ave",city:"Richmond, VA",state:"VA",zip:"23220",price:148500,beds:2,baths:1,sqft:1090,reno:38000,days:2,type:"full-reno",usda:false,tags:["Foreclosure","Priced to Sell","Structural Updates"]},
+  {id:3,addr:"5511 Oak Street",city:"Frederick, MD",state:"MD",zip:"21701",price:198000,beds:3,baths:2,sqft:1620,reno:32000,days:1,type:"cosmetic",usda:true,tags:["Cosmetic Only","Great Bones","Below Market"]},
+  {id:4,addr:"728 Orchard Lane",city:"Martinsburg, WV",state:"WV",zip:"25401",price:122000,beds:2,baths:1,sqft:980,reno:29000,days:2,type:"undervalued",usda:true,tags:["Dated But Solid","Below Market","Low Entry Price"]},
+  {id:5,addr:"941 Sunset Ave",city:"Annapolis, MD",state:"MD",zip:"21401",price:312000,beds:3,baths:2,sqft:1750,reno:45000,days:1,type:"cosmetic",usda:false,tags:["Dated Kitchen","New Roof 2022","Walk to Water"]},
+  {id:6,addr:"4412 Chain Bridge Rd",city:"Fairfax, VA",state:"VA",zip:"22030",price:425000,beds:4,baths:2,sqft:2200,reno:55000,days:1,type:"undervalued",usda:false,tags:["Outdated Interior","Great Bones","Top School District"]},
+  {id:7,addr:"312 Constitution Ave",city:"Charles Town, WV",state:"WV",zip:"25414",price:185000,beds:3,baths:1,sqft:1380,reno:38000,days:2,type:"full-reno",usda:true,tags:["REO","USDA Eligible","Below Market"]},
 ];
 const typeLabel={'full-reno':'🔨 Full Renovation','cosmetic':'🎨 Cosmetic Update','undervalued':'💎 Undervalued'};
 const typeBadge={'full-reno':'badge-full','cosmetic':'badge-cosmetic','undervalued':'badge-under'};
@@ -919,8 +903,9 @@ function renderProps(list){
   document.getElementById('noResults').style.display=list.length===0?'block':'none';
   document.getElementById('loadMoreBtn').style.display=list.length===0?'none':'block';
   list.forEach(p=>{
-    const equity=p.arv-p.price-p.reno;
-    const equityPct=Math.round((equity/p.arv)*100);
+    const equity=Math.round(p.price+(p.reno*1.35))-p.price-p.reno;
+    const arvMid=p.price+(p.reno*1.35);
+const equityPct=Math.round((equity/arvMid)*100);
     const div=document.createElement('div');div.className='prop-card';
     div.setAttribute('data-type',p.type);div.setAttribute('data-state',p.state);div.setAttribute('data-zip',p.zip);div.setAttribute('data-price',p.price);
     div.innerHTML=`<div class="prop-img ${typeImg[p.type]}">
@@ -933,7 +918,7 @@ function renderProps(list){
     <div class="prop-body">
       <div class="prop-addr">${p.addr}</div>
       <div class="prop-city">${p.city} · ${p.zip}</div>
-      <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">ARV $${p.arv.toLocaleString()}</div></div>
+      <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">Est. ARV $${Math.round(p.price+(p.reno*1.35)/1000)}K+</div></div>
       <div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div>
       <div class="prop-equity-bar">
         <div class="prop-equity-label"><span>Est. Equity Potential*</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
@@ -941,7 +926,7 @@ function renderProps(list){
       </div>
       <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
       <div style="display:flex;gap:0.5rem;margin-top:0.25rem;">
-        <button class="prop-cta" style="flex:1;" onclick="loadCalc(${p.price},${p.reno},${p.arv})">Run Numbers</button>
+        <button class="prop-cta" style="flex:1;" onclick="loadCalc(${p.price},${p.reno})">Run Numbers</button>
         <a class="prop-cta" style="flex:2;background:var(--amber);" href="#" onclick="openStrategy('Interested in This Property?','Tell us about this home and a renovation loan specialist will help you figure out financing.');return false;">Schedule Strategy Session →</a>
       </div>
     </div>`;
@@ -1040,28 +1025,33 @@ function fmt(n){return '$'+Math.round(n).toLocaleString();}
 function calcUpdate(){
   const purchase=parseFloat(document.getElementById('cPurchase').value)||0;
   const reno=parseFloat(document.getElementById('cReno').value)||0;
-  const arv=parseFloat(document.getElementById('cARV').value)||0;
   const downPct=parseFloat(document.getElementById('cDown').value)||3.5;
   const total=purchase+reno;
   const downAmt=total*(downPct/100);
   const loan=total-downAmt;
-  const equity=arv-total;
-  const equityPct=arv>0?Math.round((equity/arv)*100):0;
+  // ARV calculated as range
+  const arvLow=purchase+(reno*1.2);
+  const arvHigh=purchase+(reno*1.5);
+  const equityLow=arvLow-total;
+  const equityHigh=arvHigh-total;
+  const equityPctLow=arvLow>0?Math.round((equityLow/arvLow)*100):0;
+  const equityPctHigh=arvHigh>0?Math.round((equityHigh/arvHigh)*100):0;
+  const avgEquityPct=Math.round((equityPctLow+equityPctHigh)/2);
   document.getElementById('rPurchase').textContent=fmt(purchase);
   document.getElementById('rReno').textContent=fmt(reno);
   document.getElementById('rTotal').textContent=fmt(total);
   document.getElementById('rDown').textContent=fmt(downAmt);
   document.getElementById('rLoan').textContent=fmt(loan);
-  document.getElementById('rARV').textContent=fmt(arv);
-  document.getElementById('rEquity').textContent=fmt(equity);
-  document.getElementById('rEquityPct').textContent=equityPct+'%';
-  document.getElementById('rEquityBar').style.width=Math.min(Math.max(equityPct,0),100)+'%';
+  document.getElementById('rARVLow').textContent=fmt(arvLow);
+  document.getElementById('rARVHigh').textContent=fmt(arvHigh);
+  document.getElementById('rEquity').textContent=fmt(equityLow)+' - '+fmt(equityHigh);
+  document.getElementById('rEquityPct').textContent=equityPctLow+'% - '+equityPctHigh+'%';
+  document.getElementById('rEquityBar').style.width=Math.min(Math.max(avgEquityPct,0),100)+'%';
 }
 calcUpdate();
-function loadCalc(price,reno,arv){
+function loadCalc(price,reno){
   document.getElementById('cPurchase').value=price;
   document.getElementById('cReno').value=reno;
-  document.getElementById('cARV').value=arv;
   calcUpdate();
   document.getElementById('calculator').scrollIntoView({behavior:'smooth'});
 }
@@ -1441,31 +1431,14 @@ initBlog();
 <!-- SEO STATE CONTENT — indexed by Google, not visible to users -->
 <section style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;" aria-hidden="true">
   <h2>Fixer Upper Homes for Sale by State</h2>
-  <p>Search fixer upper homes for sale in Maryland, Washington DC, Virginia, West Virginia, Pennsylvania, New Jersey, North Carolina, Delaware, Massachusetts, New Hampshire, Illinois, and Texas.</p>
+  <p>Search fixer upper homes for sale in Maryland, Washington DC, Virginia, and West Virginia.</p>
   <h3>Maryland Fixer Upper Homes</h3>
   <p>Find fixer upper and undervalued homes for sale in Maryland including Frederick, Rockville, Baltimore, Annapolis, Hagerstown, Gaithersburg, Silver Spring, and surrounding areas. Search cosmetic update homes and full renovation properties in MD eligible for FHA 203k and USDA renovation loans.</p>
   <h3>Virginia Fixer Upper Homes</h3>
   <p>Search fixer upper homes in Virginia including Northern Virginia, Richmond, Roanoke, Norfolk, Virginia Beach, Charlottesville, and Winchester. Find below market homes eligible for VA renovation loans and FHA 203k financing.</p>
   <h3>Washington DC Fixer Upper Homes</h3>
   <p>Find undervalued and fixer upper homes in Washington DC and surrounding metro areas. Search cosmetic update properties and full renovation homes in DC eligible for renovation financing.</p>
-  <h3>Pennsylvania Fixer Upper Homes</h3>
-  <p>Search fixer upper homes in Pennsylvania including Philadelphia, Pittsburgh, Harrisburg, Allentown, Lancaster, and Erie. Find below market properties eligible for FHA 203k Standard and Limited renovation loans.</p>
-  <h3>North Carolina Fixer Upper Homes</h3>
-  <p>Find fixer upper and undervalued homes in North Carolina including Raleigh, Charlotte, Durham, Greensboro, Winston-Salem, and Asheville. Search renovation homes eligible for HomeStyle and CHOICERenovation loans.</p>
-  <h3>West Virginia Fixer Upper Homes</h3>
-  <p>Search fixer upper homes in West Virginia including Charleston, Huntington, Morgantown, Martinsburg, and Parkersburg. Many WV properties qualify for USDA renovation loans with zero down payment.</p>
-  <h3>New Jersey Fixer Upper Homes</h3>
-  <p>Find fixer upper and cosmetic update homes in New Jersey including Newark, Jersey City, Trenton, Camden, and Atlantic City. Search below market properties eligible for renovation financing.</p>
-  <h3>Delaware Fixer Upper Homes</h3>
-  <p>Search fixer upper homes in Delaware including Wilmington, Dover, Newark, and Rehoboth Beach. Find undervalued properties eligible for FHA 203k and conventional renovation loans.</p>
-  <h3>Massachusetts Fixer Upper Homes</h3>
-  <p>Find fixer upper and undervalued homes in Massachusetts including Boston, Worcester, Springfield, Lowell, and Cambridge. Search below market renovation properties in MA.</p>
-  <h3>New Hampshire Fixer Upper Homes</h3>
-  <p>Search fixer upper homes in New Hampshire including Manchester, Nashua, Concord, and Portsmouth. Find cosmetic update and undervalued properties eligible for renovation loans.</p>
-  <h3>Illinois Fixer Upper Homes</h3>
-  <p>Find fixer upper and below market homes in Illinois including Chicago, Rockford, Peoria, Springfield, and Aurora. Search renovation properties eligible for FHA 203k and HomeStyle loans.</p>
-  <h3>Texas Fixer Upper Homes</h3>
-  <p>Search fixer upper and undervalued homes in Texas including Houston, Dallas, San Antonio, Austin, Fort Worth, and El Paso. Find cosmetic update and full renovation properties in TX.</p>
+
   <h3>Renovation Loan Programs</h3>
   <p>Finance your fixer upper with FHA 203k Limited, FHA 203k Standard, Fannie Mae HomeStyle Renovation, Freddie Mac CHOICERenovation, RenoExpress, VA Renovation Loan, or USDA Renovation Loan. One loan covers purchase price plus renovation costs.</p>
 </section>
@@ -1495,10 +1468,10 @@ initBlog();
         <label style="display:block;font-size:0.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Target State</label>
         <select id="sfState" style="width:100%;padding:0.7rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;outline:none;background:var(--cream);">
           <option value="">Select a state...</option>
-          <option>Maryland</option><option>Washington DC</option><option>Virginia</option>
-          <option>West Virginia</option><option>Pennsylvania</option><option>New Jersey</option>
-          <option>North Carolina</option><option>Delaware</option><option>Massachusetts</option>
-          <option>New Hampshire</option><option>Illinois</option><option>Texas</option>
+          <option>Maryland</option>
+          <option>Washington DC</option>
+          <option>Virginia</option>
+          <option>West Virginia</option>
         </select>
       </div>
       <div style="margin-bottom:0.75rem;">
