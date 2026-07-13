@@ -930,9 +930,15 @@ function renderProps(list){
   document.getElementById('loadMoreBtn').style.display=list.length===0?'none':'block';
   list.forEach(p=>{
     propStore[p.id] = p;
-    const equity=Math.round(p.price+(p.reno*1.35))-p.price-p.reno;
-    const arvMid=p.price+(p.reno*1.35);
-const equityPct=Math.round((equity/arvMid)*100);
+    const total=p.price+p.reno;
+    const arvLow=Math.round(p.price+(p.reno*1.2));
+    const arvHigh=Math.round(p.price+(p.reno*1.5));
+    const equityLow=arvLow-total;
+    const equityHigh=arvHigh-total;
+    const equityPctLow=Math.round((equityLow/total)*100);
+    const equityPctHigh=Math.round((equityHigh/total)*100);
+    const equity=Math.round((equityLow+equityHigh)/2);
+    const equityPct=Math.round((equityPctLow+equityPctHigh)/2);
     const div=document.createElement('div');div.className='prop-card';
     div.setAttribute('data-type',p.type);div.setAttribute('data-state',p.state);div.setAttribute('data-zip',p.zip);div.setAttribute('data-price',p.price);
     div.innerHTML=`<div class="prop-img ${typeImg[p.type]}">
@@ -947,8 +953,8 @@ const equityPct=Math.round((equity/arvMid)*100);
       <div class="prop-price-row"><div class="prop-price">$${p.price.toLocaleString()}</div><div class="prop-arv">Est. ARV $${Math.round((p.price+(p.reno*1.35))/1000)}K - $${Math.round((p.price+(p.reno*1.5))/1000)}K</div></div>
       <div class="prop-meta"><span>🛏 ${p.beds} bd</span><span>🚿 ${p.baths} ba</span><span>📐 ${p.sqft.toLocaleString()} sqft</span></div>
       <div class="prop-equity-bar">
-        <div class="prop-equity-label"><span>Est. Equity Potential*</span><span>+${equityPct}% · $${equity.toLocaleString()}</span></div>
-        <div class="equity-track"><div class="equity-fill" style="width:${Math.min(equityPct*2,100)}%"></div></div>
+        <div class="prop-equity-label"><span>Est. Equity Potential*</span><span style="font-size:0.78rem;">+${equityPctLow}%-${equityPctHigh}% · $${(equityLow/1000).toFixed(0)}K-$${(equityHigh/1000).toFixed(0)}K</span></div>
+        <div class="equity-track"><div class="equity-fill" style="width:${Math.min(equityPctHigh*2,100)}%"></div></div>
       </div>
       <div class="prop-tags">${p.tags.map(t=>'<span class="prop-tag">'+t+'</span>').join('')}</div>
       <div style="display:flex;gap:0.5rem;margin-top:0.25rem;">
