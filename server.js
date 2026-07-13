@@ -1,5 +1,4 @@
 /**
- * FixItFund — Anthropic API Proxy Server
  * 
  * Keeps your API key server-side so it's never exposed in the browser.
  * Handles CORS, rate limiting, request validation, and error logging.
@@ -14,21 +13,15 @@ const path       = require('path');
 
 const app  = express();
 app.set('trust proxy', 1);
-app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3000;
 
-// ─── Validate env on startup ────────────────────────────────────────────────
 if (!process.env.ANTHROPIC_API_KEY) {
-  console.error('❌  ANTHROPIC_API_KEY is missing from .env — server cannot start.');
   process.exit(1);
 }
 
-// ─── Middleware ──────────────────────────────────────────────────────────────
 
-// Parse JSON bodies (max 50kb — enough for chat history, not file uploads)
 app.use(express.json({ limit: '50kb' }));
 
-// CORS — restrict to your actual domain in production
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000')
   .split(',')
   .map(o => o.trim());
@@ -44,7 +37,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type'],
 }));
 
-// Rate limiting — 30 AI requests per IP per minute (adjust as needed)
 const aiLimiter = rateLimit({
   windowMs: 60 * 1000,          // 1 minute
   max: parseInt(process.env.RATE_LIMIT_PER_MIN || '30'),
@@ -56,15 +48,12 @@ const aiLimiter = rateLimit({
   },
 });
 
-// ─── Serve the static website ─────────────────────────────────────────────
 // Place your fixer_upper_reno_leads.html (and any assets) in a /public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ─── AI Proxy Endpoint ────────────────────────────────────────────────────
 app.post('/api/chat', aiLimiter, async (req, res) => {
   const { messages, system } = req.body;
 
-  // ── Input validation ──────────────────────────────────────────────────────
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({
       error: 'Request must include a non-empty "messages" array.',
@@ -92,7 +81,6 @@ app.post('/api/chat', aiLimiter, async (req, res) => {
     }
   }
 
-  // ── Call Anthropic API ────────────────────────────────────────────────────
   try {
     const payload = {
       model: 'claude-haiku-4-5-20251001',
@@ -164,7 +152,6 @@ app.post('/api/chat', aiLimiter, async (req, res) => {
     });
   }
 });
-// ─── Blog Posts ───────────────────────────────────────────────────────────────
 const POSTS_FILE = path.join(__dirname, 'posts.json');
 const ADMIN_KEY  = process.env.ADMIN_KEY || 'FixerUpper2026!';
 const fs = require('fs');
@@ -207,7 +194,6 @@ app.patch('/api/posts/:id', (req,res) => {
   if(post.status==='published'&&!post.publishedAt) post.publishedAt=new Date().toISOString();
   writePosts(posts) ? res.json({success:true,post}) : res.status(500).json({error:'Update failed'});
 });
-// ─── Health check endpoint ────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   res.json({
     status:  'ok',
@@ -216,20 +202,16 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// ─── 404 fallback (serve index for SPA-style routing) ────────────────────
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// ─── Start server ─────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`✅  FixItFund proxy running on http://localhost:${PORT}`);
   console.log(`    Allowed origins: ${allowedOrigins.join(', ')}`);
   console.log(`    Rate limit: ${process.env.RATE_LIMIT_PER_MIN || 30} requests/min/IP`);
   console.log(`    Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
-// ─── Default system prompt (fallback if client doesn't send one) ──────────
 const DEFAULT_SYSTEM_PROMPT = `You are a friendly, knowledgeable renovation mortgage advisor for FixItFund.
 You specialize in FHA 203(k), Fannie Mae HomeStyle, Freddie Mac CHOICERenovation,
 VA Renovation, and USDA Renovation loans. Help users figure out which loan fits their
