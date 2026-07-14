@@ -64,7 +64,7 @@ async function sbUpsert(post) {
   const res = await fetch(SUPABASE_URL + '/rest/v1/Post', {
     method: 'POST',
     headers: Object.assign({}, sbHeaders(), { 'Prefer': 'resolution=merge-duplicates,return=representation' }),
-    body: JSON.stringify(post)
+    body: JSON.stringify({id:post.id,title:post.title,slug:post.slug,content:post.content,category:post.category,seo_title:post.seoTitle,meta_description:post.metaDescription,read_time:post.readTime,state:post.state,status:post.status,created_at:post.createdAt,published_at:post.publishedAt||null})
   });
   if (!res.ok) {
     const err = await res.text();
