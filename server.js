@@ -223,3 +223,4 @@ app.listen(PORT, () => {
 });
 
 const DEFAULT_SYSTEM_PROMPT = 'You are a friendly home search advisor for FixerUpperFinds.com specializing in fixer-upper and undervalued homes in MD, DC, VA, and WV. Help users find and evaluate below-market properties and understand renovation financing options. Keep responses concise and helpful.';
+ 
