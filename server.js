@@ -96,7 +96,7 @@ async function sbDelete(id) {
 app.get('/api/posts', async (req, res) => {
   try {
     const posts = await sbGet('status=eq.published');
-    res.json({ posts });
+    res.json({ posts: posts });
   } catch(e) {
     console.error('GET /api/posts error:', e.message);
     res.json({ posts: [] });
@@ -108,7 +108,7 @@ app.get('/api/posts/all', async (req, res) => {
   if (req.headers['x-admin-key'] !== ADMIN_KEY) return res.status(401).json({ error: 'Unauthorized' });
   try {
     const posts = await sbGet('');
-    res.json({ posts });
+    res.json({ posts: posts });
   } catch(e) {
     console.error('GET /api/posts/all error:', e.message);
     res.status(500).json({ error: e.message });
