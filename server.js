@@ -57,7 +57,7 @@ async function sbGet(filter) {
   const url = SUPABASE_URL + '/rest/v1/Post?' + (filter || '') + '&order=published_at.desc.nullslast';
   const res = await fetch(url, { headers: sbHeaders() });
   if (!res.ok) throw new Error('Supabase GET failed: ' + res.status);
-  return res.json();
+  const rows = await res.json(); return rows.map(function(r){return {id:r.id,title:r.title,slug:r.slug,content:r.content,category:r.category,seoTitle:r.seo_title,metaDescription:r.meta_description,readTime:r.read_time,state:r.state,status:r.status,createdAt:r.created_at,publishedAt:r.published_at,excerpt:r.content?r.content.split(String.fromCharCode(10)).filter(function(l){return l.trim()&&l.indexOf("##")!==0;}).join(" ").substring(0,160)+"...":""};});
 }
 
 async function sbUpsert(post) {
@@ -70,7 +70,7 @@ async function sbUpsert(post) {
     const err = await res.text();
     throw new Error('Supabase upsert failed: ' + err);
   }
-  return res.json();
+  const rows = await res.json(); return rows.map(function(r){return {id:r.id,title:r.title,slug:r.slug,content:r.content,category:r.category,seoTitle:r.seo_title,metaDescription:r.meta_description,readTime:r.read_time,state:r.state,status:r.status,createdAt:r.created_at,publishedAt:r.published_at,excerpt:r.content?r.content.split(String.fromCharCode(10)).filter(function(l){return l.trim()&&l.indexOf("##")!==0;}).join(" ").substring(0,160)+"...":""};});
 }
 
 async function sbPatch(id, data) {
@@ -80,7 +80,7 @@ async function sbPatch(id, data) {
     body: JSON.stringify(data)
   });
   if (!res.ok) throw new Error('Supabase PATCH failed: ' + res.status);
-  return res.json();
+  const rows = await res.json(); return rows.map(function(r){return {id:r.id,title:r.title,slug:r.slug,content:r.content,category:r.category,seoTitle:r.seo_title,metaDescription:r.meta_description,readTime:r.read_time,state:r.state,status:r.status,createdAt:r.created_at,publishedAt:r.published_at,excerpt:r.content?r.content.split(String.fromCharCode(10)).filter(function(l){return l.trim()&&l.indexOf("##")!==0;}).join(" ").substring(0,160)+"...":""};});
 }
 
 async function sbDelete(id) {
