@@ -54,14 +54,14 @@ function sbHeaders() {
 }
 
 async function sbGet(filter) {
-  const url = SUPABASE_URL + '/rest/v1/Post?' + (filter || '') + '&order=published_at.desc.nullslast';
+  const url = SUPABASE_URL + '/rest/v1/posts?' + (filter || '') + '&order=published_at.desc.nullslast';
   const res = await fetch(url, { headers: sbHeaders() });
   if (!res.ok) throw new Error('Supabase GET failed: ' + res.status);
   return res.json();
 }
 
 async function sbUpsert(post) {
-  const res = await fetch(SUPABASE_URL + '/rest/v1/Post', {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/posts', {
     method: 'POST',
     headers: Object.assign({}, sbHeaders(), { 'Prefer': 'resolution=merge-duplicates,return=representation' }),
     body: JSON.stringify(post)
@@ -74,7 +74,7 @@ async function sbUpsert(post) {
 }
 
 async function sbPatch(id, data) {
-  const res = await fetch(SUPABASE_URL + '/rest/v1/Post?id=eq.' + id, {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/posts?id=eq.' + id, {
     method: 'PATCH',
     headers: sbHeaders(),
     body: JSON.stringify(data)
@@ -84,7 +84,7 @@ async function sbPatch(id, data) {
 }
 
 async function sbDelete(id) {
-  const res = await fetch(SUPABASE_URL + '/rest/v1/Post?id=eq.' + id, {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/posts?id=eq.' + id, {
     method: 'DELETE',
     headers: sbHeaders()
   });
@@ -223,4 +223,3 @@ app.listen(PORT, () => {
 });
 
 const DEFAULT_SYSTEM_PROMPT = 'You are a friendly home search advisor for FixerUpperFinds.com specializing in fixer-upper and undervalued homes in MD, DC, VA, and WV. Help users find and evaluate below-market properties and understand renovation financing options. Keep responses concise and helpful.';
- 
